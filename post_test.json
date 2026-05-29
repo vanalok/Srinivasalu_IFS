@@ -1,0 +1,111 @@
+﻿{
+    "status":  "success",
+    "post":  {
+                 "author":  "f453f3b8-30e5-448e-80db-7da2150ab909",
+                 "mainCategory":  "6894a872361afb873d30f5d9",
+                 "viewCount":  52,
+                 "excerpt":  "Srinivasulu, Indian Forest Service (IFS) to the TEDxABBS stage. He plays a pivotal role in Forest \u0026 Wildlife Conservation, policy making,...",
+                 "timeToRead":  1,
+                 "_id":  "6894b980979ca91c7c3e1dec",
+                 "tags":  [
+
+                          ],
+                 "uuid":  "57287912-8405-43ec-8f1d-c5f02a6d8090",
+                 "featured":  false,
+                 "translationId":  null,
+                 "slug":  "srinivasulu-indian-forest-service-ifs-to-the-tedxabbs-stage",
+                 "coverImage":  "wix:image://v1/f453f3_616a34f4ef764e4985addafaac351bd9~mv2.jpg/f453f3_616a34f4ef764e4985addafaac351bd9~mv2.jpg#originWidth=4032\u0026originHeight=6048",
+                 "plainContent":  "Srinivasulu, Indian Forest Service (IFS) to the TEDxABBS stage. He plays a pivotal role in Forest \u0026 Wildlife Conservation, policy making, biodiversity management and combat climate challenges with sustainable practices. We’re proud to welcome Srinivasulu - Additional Principal Chief Conservator of Forests, Gok, Indian Forest Service",
+                 "commentCount":  0,
+                 "language":  "en",
+                 "publishedDate":  "2025-08-07T14:38:17.662Z",
+                 "pinned":  false,
+                 "categories":  [
+                                    "6894a872361afb873d30f5d9"
+                                ],
+                 "richContent":  {
+                                     "nodes":  [
+                                                   {
+                                                       "type":  "PARAGRAPH",
+                                                       "id":  "msyba383",
+                                                       "nodes":  [
+
+                                                                 ],
+                                                       "paragraphData":  {
+
+                                                                         }
+                                                   },
+                                                   {
+                                                       "type":  "PARAGRAPH",
+                                                       "id":  "gorh2396",
+                                                       "nodes":  [
+
+                                                                 ],
+                                                       "paragraphData":  {
+                                                                             "textStyle":  "@{textAlignment=AUTO}"
+                                                                         }
+                                                   },
+                                                   {
+                                                       "type":  "IMAGE",
+                                                       "id":  "cxv1j427",
+                                                       "nodes":  [
+                                                                     "@{type=CAPTION; id=00xnj429; nodes=System.Object[]}"
+                                                                 ],
+                                                       "imageData":  {
+                                                                         "containerData":  "@{width=; alignment=CENTER; textWrap=True}",
+                                                                         "image":  "@{src=; width=2000; height=1766}",
+                                                                         "caption":  "Srinivasulu, Indian Forest Service (IFS) to the TEDxABBS stage."
+                                                                     }
+                                                   },
+                                                   {
+                                                       "type":  "PARAGRAPH",
+                                                       "id":  "17g9c885",
+                                                       "nodes":  [
+                                                                     "@{type=TEXT; id=; nodes=System.Object[]; textData=}"
+                                                                 ],
+                                                       "paragraphData":  {
+
+                                                                         }
+                                                   },
+                                                   {
+                                                       "paragraphData":  {
+                                                                             "textStyle":  "@{textAlignment=AUTO}"
+                                                                         },
+                                                       "style":  {
+
+                                                                 },
+                                                       "id":  "tmkms888",
+                                                       "nodes":  [
+
+                                                                 ],
+                                                       "type":  "PARAGRAPH"
+                                                   },
+                                                   {
+                                                       "type":  "PARAGRAPH",
+                                                       "id":  "dzrsw889",
+                                                       "nodes":  [
+                                                                     "@{type=TEXT; id=; nodes=System.Object[]; textData=}"
+                                                                 ],
+                                                       "paragraphData":  {
+
+                                                                         }
+                                                   }
+                                               ],
+                                     "documentStyle":  {
+
+                                                       }
+                                 },
+                 "postPageUrl":  "/post/srinivasulu-indian-forest-service-ifs-to-the-tedxabbs-stage",
+                 "coverImageDisplayed":  true,
+                 "title":  "Srinivasulu, IFS to the TEDxABBS stage.",
+                 "lastPublishedDate":  "2025-08-07T14:42:52.728Z",
+                 "internalId":  "6894b980979ca91c7c3e1dec",
+                 "relatedPosts":  [
+
+                                  ],
+                 "hashtags":  [
+
+                              ],
+                 "likeCount":  1
+             }
+}

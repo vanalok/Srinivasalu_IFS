@@ -1,0 +1,667 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Post — Srinivasulu IFS</title>
+  <meta name="description" content="Blog post.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+Kannada:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="design-system.css">
+  <style>
+    .post-cover{
+      position:relative; min-height:60vh; max-height:720px;
+      display:flex; align-items:flex-end;
+      background:#0F1A14 center/cover no-repeat;
+      color:#fff;
+    }
+    .post-cover::after{
+      content:''; position:absolute; inset:0;
+      background:linear-gradient(180deg, rgba(15,26,20,.1) 0%, rgba(15,26,20,.85) 100%);
+    }
+    .post-cover .container{ position:relative; z-index:2; padding:var(--s-16) var(--s-6) var(--s-10); }
+    .post-cover .tag{ background:rgba(255,255,255,.18); color:#fff; backdrop-filter:blur(6px); }
+    .post-cover h1{ color:#fff; max-width:22ch; margin:var(--s-4) 0 var(--s-3); }
+    .post-cover .meta{ display:flex;gap:var(--s-4); flex-wrap:wrap; align-items:center; color:#D8D2C0; font-size:var(--t-13); }
+    .post-cover .meta span{ display:inline-flex; align-items:center; gap:6px; }
+    .post-cover .author{ display:flex; align-items:center; gap:8px; }
+    .post-cover .author img{ width:28px; height:28px; border-radius:50%; object-fit:cover; }
+
+    .post-meta-strip{
+      position:sticky; top:var(--nav-h); z-index:30;
+      background:var(--paper); border-bottom:1px solid var(--line);
+      padding:var(--s-3) 0;
+    }
+    .post-meta-strip .container{ display:flex; align-items:center; gap:var(--s-4); font-size:var(--t-13); color:var(--ink-3); flex-wrap:wrap; }
+    .post-meta-strip a{ color:var(--brand); }
+    .post-meta-strip .actions{ margin-left:auto; display:flex; gap:6px; }
+    .post-meta-strip .sticky-title{ color:var(--ink);font-weight:600; max-width:40ch; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+
+    .post-layout{ display:grid; grid-template-columns:1fr; max-width:760px; margin:0 auto; padding:var(--s-12) var(--s-6) var(--s-16); }
+    .post-content{
+      font-size:var(--t-18); line-height:1.75; color:var(--ink-2);
+    }
+    .post-content > * + *{ margin-top:var(--s-5); }
+    .post-content h2{ font-size:var(--t-32); margin-top:var(--s-10) !important; margin-bottom:var(--s-3); color:var(--ink); }
+    .post-content h3{ font-size:var(--t-24); margin-top:var(--s-8) !important; margin-bottom:var(--s-2); color:var(--ink); }
+    .post-content h4{ font-size:var(--t-20); margin-top:var(--s-6) !important; margin-bottom:var(--s-2); color:var(--ink); }
+    .post-content p{ font-family:var(--f-body); }
+    .post-content p[data-align="center"]{ text-align:center; }
+    .post-content p[data-align="right"]{ text-align:right; }
+    .post-content figure{ margin:var(--s-8) 0 !important; border-radius:var(--r-md); overflow:hidden; }
+    .post-content figure.is-image{ cursor:pointer; }
+    .post-content figure img, .post-content figure video{ width:100%; display:block; }
+    .post-content figcaption{ font-size:var(--t-13); color:var(--ink-3); margin-top:var(--s-2); text-align:center; padding:0 var(--s-3); }
+    .post-content blockquote{
+      border-left:3px solid var(--brand); padding-left:var(--s-5);
+      font-family:var(--f-display); font-size:var(--t-24); color:var(--ink);
+      line-height:1.4; margin:var(--s-8) 0 !important;
+    }
+    .post-content ul, .post-content ol{ padding-left:var(--s-6); }
+    .post-content li{ margin-bottom:var(--s-2); }
+    .post-content iframe{ width:100%; aspect-ratio:16/9; border:0; border-radius:var(--r-md); }
+    .post-content code{ background:var(--paper-2); padding:2px 6px; border-radius:var(--r-xs); font-family:var(--f-mono); font-size:.92em; }
+    .post-content pre{ background:var(--ink); color:var(--paper); padding:var(--s-4); border-radius:var(--r-md); overflow-x:auto; font-family:var(--f-mono); font-size:var(--t-14); line-height:1.55; }
+    .post-content pre code{ background:none; padding:0; color:inherit; }
+    .post-content a{ color:var(--brand); text-decoration:underline; text-decoration-color:var(--line-2); text-underline-offset:3px; }
+    .post-content a:hover{ text-decoration-color:var(--brand); }
+
+    .post-share{
+      display:flex; gap:8px; padding:var(--s-6) 0;
+      margin-top:var(--s-8); border-top:1px solid var(--line); border-bottom:1px solid var(--line);
+      flex-wrap:wrap;
+    }
+    .related{ padding:var(--s-12) 0; background:var(--paper-2); }
+
+    /* Debug panel (?debug=1) */
+    .debug-panel{
+      position:fixed; right:20px; bottom:20px; width:min(440px, 90vw); max-height:60vh; overflow:auto;
+      background:var(--ink); color:#d8d2c0; border-radius:var(--r-md); padding:var(--s-4);
+      font-family:var(--f-mono); font-size:var(--t-12); line-height:1.5;
+      box-shadow:var(--e3); z-index:200;
+    }
+    .debug-panel h5{ font-family:var(--f-body); color:var(--gold); font-size:var(--t-13); margin-bottom:var(--s-2); }
+    .debug-panel pre{ white-space:pre-wrap; word-break:break-word; }
+
+    .post-error{ text-align:center; padding:var(--s-16) var(--s-4); }
+    .post-error [data-lucide]{ width:48px; height:48px; color:var(--line-2); margin:0 auto var(--s-3); }
+  </style>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+<div id="sr-chrome-top"></div>
+
+<main id="main">
+
+  <article id="postArticle">
+    <!-- Cover -->
+    <section class="post-cover" id="postCover">
+      <div class="container">
+        <span class="tag" id="postCat">Post</span>
+        <h1 id="postTitle">Loading…</h1>
+        <div class="meta">
+          <span id="postDate"><i data-lucide="calendar" class="icon-sm"></i> —</span>
+          <span id="postRead"><i data-lucide="clock" class="icon-sm"></i> —</span>
+          <span id="postLang"></span>
+          <span id="postViews"><i data-lucide="eye" class="icon-sm"></i> —</span>
+          <span id="postAuthor" class="author" hidden></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sticky meta strip -->
+    <div class="post-meta-strip">
+      <div class="container">
+        <a href="blog.html"><i data-lucide="arrow-left" class="icon-sm"></i> Back to Blog</a>
+        <span class="sticky-title" id="stickyTitle">—</span>
+        <div class="actions">
+          <button class="btn btn-ghost btn-sm" id="sharePost"><i data-lucide="share-2" class="icon-sm"></i> Share</button>
+          <button class="btn btn-ghost btn-sm" id="likePost"><i data-lucide="heart" class="icon-sm"></i> <span id="likeCount">0</span></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Body -->
+    <div class="post-layout">
+      <div class="post-content" id="postContent">
+        <p>Loading post content…</p>
+      </div>
+
+      <div class="post-share">
+        <button class="btn btn-outline btn-sm" data-share="wa"><i data-lucide="message-circle" class="icon-sm"></i> WhatsApp</button>
+        <button class="btn btn-outline btn-sm" data-share="x"><i data-lucide="twitter" class="icon-sm"></i> X</button>
+        <button class="btn btn-outline btn-sm" data-share="fb"><i data-lucide="facebook" class="icon-sm"></i> Facebook</button>
+        <button class="btn btn-outline btn-sm" data-share="li"><i data-lucide="linkedin" class="icon-sm"></i> LinkedIn</button>
+        <button class="btn btn-outline btn-sm" data-share="copy"><i data-lucide="link" class="icon-sm"></i> Copy link</button>
+      </div>
+    </div>
+  </article>
+
+  <!-- Related -->
+  <section class="related" id="relatedSection" hidden>
+    <div class="container">
+      <div class="section-eyebrow">Continue reading</div>
+      <h2 style="margin-bottom:var(--s-6);">Related posts</h2>
+      <div class="blog-grid" id="relatedGrid"></div>
+    </div>
+  </section>
+
+</main>
+
+<div id="sr-chrome-footer"></div>
+
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+<script src="chrome.js"></script>
+<script src="app.js"></script>
+<script>
+/* =========================================================================
+   POST RENDERER
+   Designed to be defensive against every API response shape encountered.
+
+   Handles wrappers:
+     • { postPage: { post, categories, relatedPosts, ... } }   (full Wix)
+     • { post, categories, relatedPosts }                      (partial unwrap)
+     • { post: {...} }                                         (post-only wrap)
+     • { data: {...above shapes...} }                          (data envelope)
+     • { item: {...} } / { result: {...} } / { payload: {...} }
+     • Bare post object: { id, title, richContent, ... }
+     • [{...}]  (first item of an array)
+
+   Handles media variants:
+     • media.wixMedia.image.url             (78/117)
+     • media.wixMedia.videoV2 + posters     (2/117)
+     • media.embedMedia.thumbnail / video   (34/117 — YouTube)
+     • media.url / media.thumbnail.url / media.src.url (flat fallbacks)
+
+   Categories resolved from any of:
+     postPage.categories / post.categories / post.tags / post.hashtags
+
+   Related posts resolved from any of:
+     postPage.relatedPosts / post.relatedPosts / post.related
+   ========================================================================= */
+
+const API = 'http://localhost:3000/api';
+const DEBUG = new URLSearchParams(location.search).has('debug');
+
+const params = new URLSearchParams(location.search);
+const slug = params.get('slug') || params.get('id');
+
+if (!slug){
+  showError('No post specified.', 'Return to the <a href="blog.html" style="color:var(--brand);">blog</a> to choose one.');
+} else {
+  fetch(`${API}/post/${encodeURIComponent(slug)}`)
+    .then(r => {
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      return r.json();
+    })
+    .then(raw => {
+      window.__rawPostResponse = raw;       // available in console
+      const data = normalize(raw);
+      window.__post = data;                  // available in console
+      if (!data.post || !data.post.title){
+        showError('Could not parse the post.', 'The API responded but the post object could not be located. Open console and inspect <code>window.__rawPostResponse</code>.');
+        if (DEBUG) showDebug(raw, data);
+        return;
+      }
+      renderPost(data);
+      if (DEBUG) showDebug(raw, data);
+    })
+    .catch(err => {
+      showError('Unable to load post.', err.message || 'Network error. Check the API endpoint.');
+    });
+}
+
+/* ---- 1. NORMALIZER ---------------------------------------------------- */
+
+function normalize(raw){
+  if (!raw) return { post:null, categories:[], relatedPosts:[] };
+
+  // Unwrap arrays (some APIs return [item])
+  if (Array.isArray(raw)) raw = raw[0];
+  if (!raw || typeof raw !== 'object') return { post:null, categories:[], relatedPosts:[] };
+
+  // Try common envelope keys in order
+  const envelopes = [
+    raw,
+    raw.data,
+    raw.result,
+    raw.payload,
+    raw.item,
+    raw.response
+  ].filter(Boolean);
+
+  for (const env of envelopes){
+    // Shape A: { postPage: { post, categories, relatedPosts } }
+    if (env.postPage && typeof env.postPage === 'object'){
+      const pp = env.postPage;
+      return {
+        post: pp.post || pp,
+        categories: pp.categories || (pp.post && pp.post.categories) || [],
+        relatedPosts: pp.relatedPosts || (pp.post && pp.post.relatedPosts) || [],
+        owner: (pp.post && pp.post.owner) || env.owner || null
+      };
+    }
+    // Shape B: { post, categories, relatedPosts } at this level
+    if (env.post && typeof env.post === 'object' && (env.post.title || env.post.id)){
+      return {
+        post: env.post,
+        categories: env.categories || env.post.categories || [],
+        relatedPosts: env.relatedPosts || env.post.relatedPosts || [],
+        owner: env.post.owner || env.owner || null
+      };
+    }
+    // Shape C: post object directly at this level
+    if (env.title && (env.id || env.slug)){
+      return {
+        post: env,
+        categories: env.categories || [],
+        relatedPosts: env.relatedPosts || [],
+        owner: env.owner || null
+      };
+    }
+  }
+
+  // Last resort: deep search for a post-like object
+  const found = deepFindPost(raw);
+  return {
+    post: found,
+    categories: (found && found.categories) || [],
+    relatedPosts: (found && found.relatedPosts) || [],
+    owner: (found && found.owner) || null
+  };
+}
+
+function deepFindPost(obj, depth){
+  depth = depth || 0;
+  if (!obj || typeof obj !== 'object' || depth > 5) return null;
+  if (Array.isArray(obj)){
+    for (const item of obj){
+      const r = deepFindPost(item, depth+1);
+      if (r) return r;
+    }
+    return null;
+  }
+  // Heuristic: has title + (id|slug) + (richContent|excerpt|media)
+  if (obj.title && (obj.id || obj.slug) && (obj.richContent || obj.excerpt || obj.media)){
+    return obj;
+  }
+  for (const k in obj){
+    if (!Object.prototype.hasOwnProperty.call(obj, k)) continue;
+    const v = obj[k];
+    if (v && typeof v === 'object'){
+      const r = deepFindPost(v, depth+1);
+      if (r) return r;
+    }
+  }
+  return null;
+}
+
+/* ---- 2. MEDIA RESOLVER ------------------------------------------------ */
+
+function resolveMedia(media){
+  if (!media) return { kind:'none', url:'', poster:'' };
+  if (typeof media === 'string') return { kind:'image', url:media, poster:'' };
+
+  // wixMedia.image
+  const img = media.wixMedia && media.wixMedia.image;
+  if (img){
+    const url = img.url || (img.src && img.src.url) || '';
+    if (url) return { kind:'image', url, poster:'', width:img.width, height:img.height };
+  }
+
+  // wixMedia.videoV2
+  const v2 = media.wixMedia && media.wixMedia.videoV2;
+  if (v2){
+    const poster = (v2.posters && v2.posters[0] && v2.posters[0].url) || '';
+    const url = v2.url || (v2.resolutions && v2.resolutions[0] && v2.resolutions[0].url) || '';
+    return { kind:'video', url, poster };
+  }
+
+  // embedMedia (YouTube / Vimeo etc.)
+  if (media.embedMedia){
+    const em = media.embedMedia;
+    return {
+      kind:'embed',
+      url: (em.video && em.video.url) || '',
+      poster: (em.thumbnail && em.thumbnail.url) || ''
+    };
+  }
+
+  // Flat fallbacks
+  if (media.url) return { kind:'image', url:media.url, poster:'' };
+  if (media.thumbnail && media.thumbnail.url) return { kind:'image', url:media.thumbnail.url, poster:'' };
+  if (media.src && media.src.url) return { kind:'image', url:media.src.url, poster:'' };
+
+  return { kind:'none', url:'', poster:'' };
+}
+
+/* ---- 3. CATEGORY / TAG / OWNER ---------------------------------------- */
+
+function resolveCategoryLabel(post, categoriesList){
+  if (post.categories && post.categories[0]){
+    return post.categories[0].label || post.categories[0].title || post.categories[0].slug || 'Post';
+  }
+  if (post.tags && post.tags[0]){
+    return post.tags[0].label || post.tags[0].title || post.tags[0].slug || 'Post';
+  }
+  if (categoriesList && categoriesList[0]){
+    return categoriesList[0].label || categoriesList[0].title || categoriesList[0].slug || 'Post';
+  }
+  if (post.hashtags && post.hashtags[0]) return '#' + post.hashtags[0];
+  return 'Post';
+}
+
+function resolveOwner(post, ownerFallback){
+  const o = (post && post.owner) || ownerFallback;
+  if (!o) return null;
+  return {
+    name: o.name || o.nickname || o.slug || '',
+    image: (o.image && o.image.url) || (typeof o.image === 'string' ? o.image : '') || ''
+  };
+}
+
+/* ---- 4. RENDER POST --------------------------------------------------- */
+
+function renderPost(data){
+  const p = data.post;
+  const m = resolveMedia(p.media);
+  const owner = resolveOwner(p, data.owner);
+
+  // Title + meta strip
+  document.title = (p.title || 'Post') + ' — Srinivasulu IFS';
+  document.getElementById('postTitle').textContent = p.title || 'Untitled';
+  document.getElementById('stickyTitle').textContent = p.title || '';
+
+  // Category chip
+  document.getElementById('postCat').textContent = resolveCategoryLabel(p, data.categories);
+
+  // Date
+  const date = p.firstPublishedDate || p.publishedDate || p.lastPublishedDate || '';
+  document.getElementById('postDate').innerHTML =
+    `<i data-lucide="calendar" class="icon-sm"></i> ` +
+    (date ? new Date(date).toLocaleDateString('en-IN',{day:'numeric',month:'long',year:'numeric'}) : '—');
+
+  // Reading time
+  document.getElementById('postRead').innerHTML =
+    `<i data-lucide="clock" class="icon-sm"></i> ${(p.minutesToRead || 5)} min read`;
+
+  // Language flag
+  const lang = (p.language || 'en').toLowerCase();
+  document.getElementById('postLang').innerHTML =
+    `<span class="lang-flag ${lang}">${lang === 'kn' ? 'KN' : lang.toUpperCase()}</span>`;
+
+  // Views
+  const views = (p.metrics && p.metrics.views) || (p.postCountInfo && p.postCountInfo.views) || 0;
+  document.getElementById('postViews').innerHTML =
+    `<i data-lucide="eye" class="icon-sm"></i> ${views}`;
+
+  // Likes
+  const likes = (p.metrics && p.metrics.likes) || 0;
+  document.getElementById('likeCount').textContent = likes;
+
+  // Author chip (optional)
+  if (owner && owner.name){
+    const el = document.getElementById('postAuthor');
+    el.hidden = false;
+    el.innerHTML = (owner.image ? `<img src="${escapeAttr(owner.image)}" alt="">` : `<i data-lucide="user" class="icon-sm"></i>`) +
+      `<span>${escapeHtml(owner.name)}</span>`;
+  }
+
+  // Cover image — image, video, or embed thumbnail
+  if (m.kind === 'image' && m.url){
+    document.getElementById('postCover').style.backgroundImage = `url('${m.url.replace(/'/g, "\\'")}')`;
+  } else if ((m.kind === 'video' || m.kind === 'embed') && m.poster){
+    document.getElementById('postCover').style.backgroundImage = `url('${m.poster.replace(/'/g, "\\'")}')`;
+  }
+
+  // Body
+  const out = [];
+  if (p.content && typeof p.content === 'string'){
+    // Some servers return pre-rendered HTML
+    out.push(p.content);
+  } else if (p.richContent && Array.isArray(p.richContent.nodes)){
+    p.richContent.nodes.forEach(n => out.push(renderNode(n)));
+  } else if (p.body && typeof p.body === 'string'){
+    out.push(`<div>${p.body}</div>`);
+  } else if (p.excerpt){
+    out.push(`<p>${escapeHtml(p.excerpt)}</p>`);
+  }
+  const content = out.join('').trim();
+  document.getElementById('postContent').innerHTML = content ||
+    '<p style="color:var(--ink-3);font-style:italic;">No content available for this post.</p>';
+
+  // Make inline images clickable
+  document.querySelectorAll('.post-content figure.is-image').forEach(fig => {
+    fig.addEventListener('click', () => {
+      const img = fig.querySelector('img');
+      if (img && window.PhotoViewer) {
+        window.PhotoViewer.open([{ src: img.src, alt: img.alt || '' }], 0);
+      }
+    });
+  });
+
+  // Related posts
+  renderRelated(data.relatedPosts);
+
+  // Refresh icons after dynamic content
+  window.SrIcons && window.SrIcons();
+}
+
+function renderRelated(list){
+  if (!list || !list.length) return;
+  document.getElementById('relatedSection').hidden = false;
+  const grid = document.getElementById('relatedGrid');
+  grid.innerHTML = list.slice(0,3).map(rp => {
+    const rm = resolveMedia(rp.media);
+    const cat = resolveCategoryLabel(rp, []);
+    const date = rp.firstPublishedDate || rp.lastPublishedDate;
+    const dateStr = date ? new Date(date).toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'}) : '';
+    return `
+      <a class="b-card" href="post.html?slug=${encodeURIComponent(rp.slug || rp.id)}" style="text-decoration:none;color:inherit;">
+        <div class="b-card-img">${rm.url ? `<img src="${escapeAttr(rm.url)}" alt="" loading="lazy">` : ''}</div>
+        <div class="b-card-body">
+          <span class="b-tag">${escapeHtml(cat)}</span>
+          <h3 class="b-card-title">${escapeHtml(rp.title || 'Untitled')}</h3>
+          <p class="b-excerpt">${escapeHtml(rp.excerpt || '')}</p>
+          <div class="b-card-foot">
+            <span class="b-date"><i data-lucide="calendar" class="icon-sm"></i> ${dateStr}</span>
+            <span class="b-read-more">Read <i data-lucide="arrow-right" class="icon-sm"></i></span>
+          </div>
+        </div>
+      </a>`;
+  }).join('');
+}
+
+/* ---- 5. RICH CONTENT NODE RENDERER ------------------------------------ */
+
+function renderNode(n){
+  if (!n || typeof n !== 'object') return '';
+  const type = (n.type || '').toUpperCase();
+  const kids = Array.isArray(n.nodes) ? n.nodes.map(renderNode).join('') : '';
+
+  switch (type){
+    case 'PARAGRAPH': {
+      const align = n.paragraphData && n.paragraphData.textStyle && n.paragraphData.textStyle.textAlignment;
+      const a = align && align !== 'AUTO' ? ` data-align="${String(align).toLowerCase()}"` : '';
+      return `<p${a}>${kids}</p>`;
+    }
+    case 'HEADING': {
+      const lvl = clamp((n.headingData && n.headingData.level) || 2, 1, 6);
+      return `<h${lvl} id="${escapeAttr(n.id || '')}">${kids}</h${lvl}>`;
+    }
+    case 'TEXT': {
+      return renderText(n);
+    }
+    case 'IMAGE': {
+      const im = (n.imageData && n.imageData.image) || {};
+      const src = (im.src && im.src.url) || im.url || '';
+      const cap = (n.imageData && n.imageData.caption) || '';
+      const alt = (n.imageData && n.imageData.altText) || cap || '';
+      if (!src) return '';
+      return `<figure class="is-image"><img src="${escapeAttr(src)}" alt="${escapeAttr(alt)}" loading="lazy">${cap ? `<figcaption>${escapeHtml(cap)}</figcaption>` : ''}</figure>`;
+    }
+    case 'VIDEO': {
+      const vd = n.videoData || {};
+      const src = (vd.video && vd.video.src && vd.video.src.url) || (vd.video && vd.video.url) || '';
+      if (!src) return '';
+      // If it's a YouTube/Vimeo URL, embed via iframe; if a direct file, use <video>
+      if (/youtube\.com|youtu\.be|vimeo\.com/.test(src)){
+        const embed = toEmbedUrl(src);
+        return `<figure><iframe src="${escapeAttr(embed)}" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe></figure>`;
+      }
+      return `<figure><video src="${escapeAttr(src)}" controls preload="metadata"></video></figure>`;
+    }
+    case 'BULLETED_LIST': return `<ul>${kids}</ul>`;
+    case 'ORDERED_LIST':  return `<ol>${kids}</ol>`;
+    case 'LIST_ITEM':     return `<li>${kids}</li>`;
+    case 'BLOCKQUOTE':    return `<blockquote>${kids}</blockquote>`;
+    case 'DIVIDER':       return '<hr style="border:0;border-top:1px solid var(--line);margin:var(--s-8) 0;">';
+    case 'CODE_BLOCK':    return `<pre><code>${escapeHtml(extractText(n))}</code></pre>`;
+    case 'GALLERY': {
+      const items = (n.galleryData && n.galleryData.items) || [];
+      return items.map(it => {
+        const u = (it.image && it.image.src && it.image.src.url) || (it.image && it.image.url) || '';
+        return u ? `<figure class="is-image"><img src="${escapeAttr(u)}" alt="" loading="lazy"></figure>` : '';
+      }).join('');
+    }
+    case 'GIF': {
+      const url = (n.gifData && (n.gifData.original && n.gifData.original.gif)) || (n.gifData && n.gifData.url) || '';
+      return url ? `<figure><img src="${escapeAttr(url)}" alt="" loading="lazy"></figure>` : '';
+    }
+    case 'FILE': {
+      const url = (n.fileData && n.fileData.src && n.fileData.src.url) || '';
+      const name = (n.fileData && n.fileData.name) || 'Download';
+      return url ? `<p><a class="btn btn-outline btn-sm" href="${escapeAttr(url)}" download><i data-lucide="download" class="icon-sm"></i> ${escapeHtml(name)}</a></p>` : '';
+    }
+    case 'LINK_PREVIEW': {
+      const lp = n.linkPreviewData || {};
+      const url = (lp.link && lp.link.url) || '';
+      const title = lp.title || url;
+      if (!url) return '';
+      return `<p><a href="${escapeAttr(url)}" target="_blank" rel="noopener">${escapeHtml(title)}</a></p>`;
+    }
+    case 'HTML': {
+      // Embedded HTML node — sanitize to a minimal degree
+      const html = (n.htmlData && n.htmlData.html) || '';
+      return `<div>${html}</div>`;
+    }
+    case 'EMBED':
+    case 'APP_EMBED': {
+      const url = (n.appEmbedData && n.appEmbedData.itemId) || (n.embedData && n.embedData.src) || '';
+      return url ? `<figure><iframe src="${escapeAttr(url)}" allow="encrypted-media" allowfullscreen></iframe></figure>` : '';
+    }
+    default:
+      // Unknown container type — render children if present, otherwise skip
+      return kids;
+  }
+}
+
+function renderText(n){
+  let t = escapeHtml((n.textData && n.textData.text) || '');
+  const decos = (n.textData && n.textData.decorations) || [];
+  decos.forEach(d => {
+    const dt = (d.type || '').toUpperCase();
+    if (dt === 'BOLD') t = `<strong>${t}</strong>`;
+    else if (dt === 'ITALIC') t = `<em>${t}</em>`;
+    else if (dt === 'UNDERLINE') t = `<u>${t}</u>`;
+    else if (dt === 'STRIKETHROUGH' || dt === 'SPOILER') t = `<s>${t}</s>`;
+    else if (dt === 'CODE') t = `<code>${t}</code>`;
+    else if (dt === 'COLOR'){
+      const fg = (d.colorData && d.colorData.foreground);
+      if (fg) t = `<span style="color:${escapeAttr(fg)}">${t}</span>`;
+    }
+    else if (dt === 'LINK'){
+      const link = d.linkData && d.linkData.link;
+      const url = (link && link.url) || (link && link.href) || '';
+      if (url){
+        const tgt = (link && link.target) === 'BLANK' ? '_blank' : '';
+        t = `<a href="${escapeAttr(url)}"${tgt ? ` target="${tgt}" rel="noopener"`:''}>${t}</a>`;
+      }
+    }
+    else if (dt === 'MENTION'){
+      t = `<span class="mention">${t}</span>`;
+    }
+  });
+  return t;
+}
+
+function extractText(n){
+  if (!n) return '';
+  if (n.textData && n.textData.text) return n.textData.text;
+  if (Array.isArray(n.nodes)) return n.nodes.map(extractText).join('');
+  return '';
+}
+
+function toEmbedUrl(url){
+  // YouTube → embed
+  let m = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([\w-]{11})/);
+  if (m) return `https://www.youtube-nocookie.com/embed/${m[1]}?rel=0`;
+  // Vimeo → embed
+  m = url.match(/vimeo\.com\/(\d+)/);
+  if (m) return `https://player.vimeo.com/video/${m[1]}`;
+  return url;
+}
+
+/* ---- 6. UTILITIES ----------------------------------------------------- */
+
+function escapeHtml(s){
+  return String(s == null ? '' : s)
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+    .replace(/"/g,'&quot;').replace(/'/g,'&#039;');
+}
+function escapeAttr(s){ return escapeHtml(s); }
+function clamp(n, lo, hi){ return Math.max(lo, Math.min(hi, n|0)); }
+
+function showError(title, detail){
+  document.getElementById('postContent').innerHTML = `
+    <div class="post-error">
+      <i data-lucide="alert-triangle"></i>
+      <h3 style="font-family:var(--f-display); font-size:var(--t-24); margin-bottom:var(--s-3);">${escapeHtml(title)}</h3>
+      <p style="color:var(--ink-3);">${detail || ''}</p>
+    </div>`;
+  window.SrIcons && window.SrIcons();
+}
+
+function showDebug(raw, normalized){
+  const panel = document.createElement('div');
+  panel.className = 'debug-panel';
+  panel.innerHTML = `
+    <h5>DEBUG — normalized post</h5>
+    <pre>post.title: ${escapeHtml(normalized.post && normalized.post.title || '—')}
+post.id: ${escapeHtml(normalized.post && normalized.post.id || '—')}
+post.language: ${escapeHtml(normalized.post && normalized.post.language || '—')}
+post.minutesToRead: ${escapeHtml(normalized.post && normalized.post.minutesToRead || '—')}
+categories: ${(normalized.categories || []).length}
+relatedPosts: ${(normalized.relatedPosts || []).length}
+media: ${JSON.stringify(resolveMedia(normalized.post && normalized.post.media))}
+richContent nodes: ${(normalized.post && normalized.post.richContent && normalized.post.richContent.nodes || []).length}</pre>
+    <h5 style="margin-top:12px;">Raw top-level keys</h5>
+    <pre>${escapeHtml(Object.keys(raw || {}).join(', '))}</pre>
+    <p style="margin-top:8px;color:#9D9684;">Full data: window.__rawPostResponse / window.__post</p>`;
+  document.body.appendChild(panel);
+}
+
+/* ---- 7. SHARE BUTTONS ------------------------------------------------- */
+
+document.getElementById('sharePost').addEventListener('click', () => {
+  if (window.SrShare) window.SrShare(document.title, location.href);
+});
+document.querySelectorAll('[data-share]').forEach(b => {
+  b.addEventListener('click', () => {
+    const url = encodeURIComponent(location.href);
+    const t = encodeURIComponent(document.title);
+    const k = b.dataset.share;
+    let target = '';
+    if (k === 'wa') target = `https://wa.me/?text=${t}%20${url}`;
+    else if (k === 'x')  target = `https://twitter.com/intent/tweet?text=${t}&url=${url}`;
+    else if (k === 'fb') target = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
+    else if (k === 'li') target = `https://www.linkedin.com/sharing/share-offsite/?url=${url}`;
+    else if (k === 'copy'){ navigator.clipboard.writeText(location.href); return; }
+    if (target) window.open(target, '_blank', 'noopener,width=600,height=600');
+  });
+});
+</script>
+</body>
+</html>

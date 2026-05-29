@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Videos — Srinivasulu IFS</title>
+  <meta name="description" content="Documentaries, talks, interviews and public-service videos featuring Srinivasulu IFS.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+Kannada:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="design-system.css">
+  <style>
+    .video-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:var(--s-4); }
+    @media (max-width:1024px){ .video-grid{ grid-template-columns:repeat(3,1fr); } }
+    @media (max-width:768px){ .video-grid{ grid-template-columns:repeat(2,1fr); } }
+    @media (max-width:480px){ .video-grid{ grid-template-columns:1fr; } }
+    .video-card{
+      background:var(--surface); border:1px solid var(--line); border-radius:var(--r-md);
+      overflow:hidden; transition:transform var(--d), box-shadow var(--d), border-color var(--d);
+      cursor:pointer; text-align:left; display:flex; flex-direction:column;
+    }
+    .video-card:hover{ transform:translateY(-3px); box-shadow:var(--e2); border-color:var(--line-2); }
+    .video-thumb{
+      position:relative; aspect-ratio:16/9; background:var(--paper-2); overflow:hidden;
+    }
+    .video-thumb img{ width:100%; height:100%; object-fit:cover; transition:transform var(--d-slow); }
+    .video-card:hover .video-thumb img{ transform:scale(1.05); }
+    .video-play{
+      position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+      width:54px; height:54px; border-radius:50%;
+      background:rgba(15,26,20,.78); color:#fff;
+      display:grid; place-items:center;
+      transition:transform var(--d-fast), background var(--d-fast);
+    }
+    .video-card:hover .video-play{ transform:translate(-50%,-50%) scale(1.1); background:var(--brand); }
+    .video-play [data-lucide]{ width:24px; height:24px; margin-left:2px; }
+    .video-lang{
+      position:absolute; bottom:8px; left:8px;
+    }
+    .video-body{ padding:var(--s-4); display:flex; flex-direction:column; gap:6px; flex:1; }
+    .video-title{
+      font-family:var(--f-display); font-size:var(--t-16); font-weight:600;
+      line-height:1.3; color:var(--ink);
+      display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;
+    }
+    .video-meta{ font-size:var(--t-12); color:var(--ink-3); display:flex; gap:8px; margin-top:auto; }
+  </style>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+<div id="sr-chrome-top"></div>
+
+<main id="main">
+
+  <section class="page-hero">
+    <div class="container reveal">
+      <div class="breadcrumb"><a href="index.html">Home</a> <i data-lucide="chevron-right" class="icon-sm"></i> <a href="#">Media</a> <i data-lucide="chevron-right" class="icon-sm"></i> <span>Videos</span></div>
+      <h1>Videos</h1>
+      <p class="lede">Documentaries, talks, interviews and public-service films — across English and Kannada.</p>
+      <div class="page-hero-stats">
+        <div class="page-hero-stat"><div class="num" id="vCount">—</div><div class="lbl">Total videos</div></div>
+        <div class="page-hero-stat"><div class="num" id="vYears">—</div><div class="lbl">Span</div></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="filter-bar">
+    <div class="container" style="display:flex;gap:var(--s-4);align-items:center;width:100%;flex-wrap:wrap;">
+      <div class="filter-chips" id="vFilter">
+        <button class="chip is-active" data-filter="all">All</button>
+        <button class="chip" data-filter="documentary">Documentaries</button>
+        <button class="chip" data-filter="talk">Talks</button>
+        <button class="chip" data-filter="interview">Interviews</button>
+        <button class="chip" data-filter="tedx">TEDx</button>
+        <button class="chip" data-filter="kn">ಕನ್ನಡ</button>
+        <button class="chip" data-filter="en">English</button>
+      </div>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <div class="video-grid" id="videoGrid"></div>
+    </div>
+  </section>
+
+</main>
+
+<div id="sr-chrome-footer"></div>
+
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+<script src="chrome.js"></script>
+<script src="app.js"></script>
+<script>
+fetch('videos.json').then(r => r.json()).then(videos => {
+  // Detect Kannada by title characters
+  videos.forEach(v => {
+    v.isKannada = /[\u0C80-\u0CFF]/.test(v.title);
+    const t = v.title.toLowerCase();
+    if (t.includes('tedx')) v.kind = 'tedx';
+    else if (t.includes('interview') || t.includes('ಸಂದರ್ಶನ')) v.kind = 'interview';
+    else if (t.includes('talk') || t.includes('lecture') || t.includes('keynote')) v.kind = 'talk';
+    else v.kind = 'documentary';
+  });
+
+  document.getElementById('vCount').textContent = videos.length;
+  document.getElementById('vYears').textContent = '2018–2025';
+
+  const grid = document.getElementById('videoGrid');
+  const chips = document.querySelectorAll('#vFilter .chip');
+  let filter = 'all';
+
+  function render(){
+    const list = videos.filter(v => {
+      if (filter === 'all') return true;
+      if (filter === 'kn') return v.isKannada;
+      if (filter === 'en') return !v.isKannada;
+      return v.kind === filter;
+    });
+    if (!list.length){
+      grid.innerHTML = '<div class="empty-state" style="grid-column:1/-1;"><i data-lucide="film"></i><p>No videos in this category.</p></div>';
+      window.SrIcons && window.SrIcons(); return;
+    }
+    grid.innerHTML = list.map((v, i) => `
+      <button class="video-card" data-i="${videos.indexOf(v)}" aria-label="Play: ${v.title.replace(/"/g,'')}">
+        <div class="video-thumb">
+          <img src="https://i.ytimg.com/vi/${v.videoId}/hqdefault.jpg" alt="" loading="lazy">
+          <div class="video-play"><i data-lucide="play"></i></div>
+          <span class="video-lang lang-flag ${v.isKannada?'kn':'en'}">${v.isKannada?'KN':'EN'}</span>
+        </div>
+        <div class="video-body">
+          <div class="video-title">${v.title}</div>
+          <div class="video-meta"><i data-lucide="youtube" class="icon-sm"></i> YouTube · ${v.kind}</div>
+        </div>
+      </button>`).join('');
+    window.SrIcons && window.SrIcons();
+
+    grid.querySelectorAll('.video-card').forEach(el => {
+      el.addEventListener('click', () => {
+        const list = videos.map(v => ({ videoId: v.videoId, title: v.title, url: 'https://www.youtube.com/watch?v=' + v.videoId }));
+        VideoViewer.open(list, parseInt(el.dataset.i, 10));
+      });
+    });
+  }
+
+  chips.forEach(c => c.addEventListener('click', () => {
+    chips.forEach(x => x.classList.remove('is-active'));
+    c.classList.add('is-active');
+    filter = c.dataset.filter; render();
+  }));
+
+  render();
+
+  // Direct deep-link via hash
+  if (location.hash){
+    const id = location.hash.slice(1);
+    const idx = videos.findIndex(v => v.videoId === id);
+    if (idx >= 0){
+      setTimeout(() => {
+        const list = videos.map(v => ({ videoId: v.videoId, title: v.title, url: 'https://www.youtube.com/watch?v=' + v.videoId }));
+        VideoViewer.open(list, idx);
+      }, 300);
+    }
+  }
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Photos — Srinivasulu IFS</title>
+  <meta name="description" content="Photo gallery — field visits, events, family and official engagements.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+Kannada:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="design-system.css">
+  <style>
+    /* View toggle */
+    .view-toggle{
+      display:inline-flex; border:1px solid var(--line); border-radius:var(--r-pill); padding:3px;
+      background:var(--surface);
+    }
+    .view-toggle button{
+      height:30px; padding:0 12px; border-radius:var(--r-pill);
+      font-size:var(--t-13); font-weight:600; color:var(--ink-3);
+      transition:all var(--d-fast);
+      display:inline-flex; align-items:center; gap:6px;
+    }
+    .view-toggle button.is-active{ background:var(--brand); color:#fff; }
+
+    /* Album cards */
+    .album-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:var(--s-4); }
+    @media (max-width:1024px){ .album-grid{ grid-template-columns:repeat(3,1fr); } }
+    @media (max-width:768px){ .album-grid{ grid-template-columns:repeat(2,1fr); } }
+    @media (max-width:480px){ .album-grid{ grid-template-columns:1fr; } }
+    .album-card{
+      position:relative; aspect-ratio:1/1; border-radius:var(--r-md);
+      overflow:hidden; background:var(--paper-2); cursor:pointer;
+      transition:transform var(--d);
+    }
+    .album-card:hover{ transform:translateY(-3px); }
+    .album-card img{ width:100%; height:100%; object-fit:cover; transition:transform var(--d-slow); }
+    .album-card:hover img{ transform:scale(1.05); }
+    .album-card::after{
+      content:''; position:absolute; inset:0;
+      background:linear-gradient(180deg, transparent 45%, rgba(15,26,20,.85));
+    }
+    .album-cap{
+      position:absolute; left:var(--s-4); right:var(--s-4); bottom:var(--s-4);
+      color:#fff; z-index:2;
+    }
+    .album-cap h3{ color:#fff; font-size:var(--t-18); margin-bottom:4px; }
+    .album-cap .count{ font-family:var(--f-mono); font-size:var(--t-12); color:#D8D2C0; }
+
+    /* Masonry tile */
+    .photo-tile{
+      width:100%; border-radius:var(--r-sm); overflow:hidden;
+      cursor:pointer; background:var(--paper-2);
+      transition:transform var(--d), box-shadow var(--d);
+    }
+    .photo-tile:hover{ transform:scale(1.02); box-shadow:var(--e2); }
+    .photo-tile img{ width:100%; display:block; }
+  </style>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+<div id="sr-chrome-top"></div>
+
+<main id="main">
+
+  <section class="page-hero">
+    <div class="container reveal">
+      <div class="breadcrumb"><a href="index.html">Home</a> <i data-lucide="chevron-right" class="icon-sm"></i> <a href="#">Media</a> <i data-lucide="chevron-right" class="icon-sm"></i> <span>Photos</span></div>
+      <h1>Photos</h1>
+      <p class="lede">Visual archive of field visits, events, conferences, family moments and official engagements.</p>
+      <div class="page-hero-stats">
+        <div class="page-hero-stat"><div class="num" id="pCount">—</div><div class="lbl">Total photos</div></div>
+        <div class="page-hero-stat"><div class="num" id="pAlbums">—</div><div class="lbl">Albums</div></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="filter-bar">
+    <div class="container" style="display:flex;gap:var(--s-4);align-items:center;width:100%;flex-wrap:wrap;">
+      <div class="view-toggle" id="viewToggle">
+        <button class="is-active" data-view="albums"><i data-lucide="layout-grid" class="icon-sm"></i> Albums</button>
+        <button data-view="all"><i data-lucide="image" class="icon-sm"></i> All photos</button>
+      </div>
+      <div class="filter-chips" id="catChips" style="display:none;">
+        <button class="chip is-active" data-cat="all">All</button>
+      </div>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <div id="albumsView" class="album-grid"></div>
+      <div id="allView" class="masonry" style="display:none;"></div>
+    </div>
+  </section>
+
+</main>
+
+<div id="sr-chrome-footer"></div>
+
+<!-- Photos data (preserves the original photos.js list) -->
+<script src="photos.js"></script>
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+<script src="chrome.js"></script>
+<script src="app.js"></script>
+<script>
+// Resolve photos array (existing photos.js exposes `photos`)
+const PHOTOS = (typeof photos !== 'undefined') ? photos : [];
+
+// Friendly category names
+const CAT_NAMES = {
+  'family':'Family','kspcb-photos':'KSPCB','academics':'Academics','shimoga':'Shimoga',
+  'honours':'Honours','ayush-photos':'AYUSH','adcl':'ADCL','forestdeptphotos':'Forest Dept',
+  'kali':'Kali Tiger Reserve','chitradurga':'Chitradurga'
+};
+
+// Group by category
+const ALBUMS = {};
+PHOTOS.forEach(p => {
+  ALBUMS[p.category] = ALBUMS[p.category] || [];
+  ALBUMS[p.category].push(p);
+});
+
+document.getElementById('pCount').textContent = PHOTOS.length;
+document.getElementById('pAlbums').textContent = Object.keys(ALBUMS).length;
+
+// Render albums view
+function renderAlbums(){
+  const root = document.getElementById('albumsView');
+  // Sort albums by count desc
+  const cats = Object.keys(ALBUMS).sort((a,b) => ALBUMS[b].length - ALBUMS[a].length);
+  root.innerHTML = cats.map(cat => {
+    const list = ALBUMS[cat];
+    const cover = list[0].src;
+    return `
+      <button class="album-card" data-cat="${cat}" aria-label="Open album: ${CAT_NAMES[cat] || cat}">
+        <img src="${cover}" alt="" loading="lazy">
+        <div class="album-cap">
+          <h3>${CAT_NAMES[cat] || cat}</h3>
+          <div class="count">${list.length} photo${list.length>1?'s':''}</div>
+        </div>
+      </button>`;
+  }).join('');
+
+  root.querySelectorAll('.album-card').forEach(c => {
+    c.addEventListener('click', () => {
+      const cat = c.dataset.cat;
+      const list = ALBUMS[cat].map(p => ({ src:p.src, alt:CAT_NAMES[cat] || cat, category:CAT_NAMES[cat] || cat }));
+      PhotoViewer.open(list, 0);
+    });
+  });
+}
+
+// Render all photos masonry
+function renderAll(cat){
+  const root = document.getElementById('allView');
+  const list = (cat && cat !== 'all') ? ALBUMS[cat] : PHOTOS;
+  root.innerHTML = list.map((p, i) => `
+    <button class="photo-tile" data-i="${i}" aria-label="Open photo">
+      <img src="${p.src}" alt="${CAT_NAMES[p.category] || p.category}" loading="lazy">
+    </button>
+  `).join('');
+
+  root.querySelectorAll('.photo-tile').forEach(t => {
+    t.addEventListener('click', () => {
+      const items = list.map(p => ({ src:p.src, alt:CAT_NAMES[p.category] || p.category, category:CAT_NAMES[p.category] || p.category }));
+      PhotoViewer.open(items, parseInt(t.dataset.i, 10));
+    });
+  });
+}
+
+// Build category chips for "All photos" view
+function buildChips(){
+  const chips = document.getElementById('catChips');
+  const cats = Object.keys(ALBUMS).sort();
+  chips.innerHTML = '<button class="chip is-active" data-cat="all">All</button>' +
+    cats.map(c => `<button class="chip" data-cat="${c}">${CAT_NAMES[c] || c} (${ALBUMS[c].length})</button>`).join('');
+  chips.querySelectorAll('.chip').forEach(ch => {
+    ch.addEventListener('click', () => {
+      chips.querySelectorAll('.chip').forEach(x => x.classList.remove('is-active'));
+      ch.classList.add('is-active');
+      renderAll(ch.dataset.cat);
+    });
+  });
+}
+
+// View toggle
+document.querySelectorAll('#viewToggle button').forEach(b => {
+  b.addEventListener('click', () => {
+    document.querySelectorAll('#viewToggle button').forEach(x => x.classList.remove('is-active'));
+    b.classList.add('is-active');
+    const view = b.dataset.view;
+    document.getElementById('albumsView').style.display = view === 'albums' ? '' : 'none';
+    document.getElementById('allView').style.display = view === 'all' ? '' : 'none';
+    document.getElementById('catChips').style.display = view === 'all' ? '' : 'none';
+    if (view === 'all') renderAll('all');
+  });
+});
+
+renderAlbums();
+buildChips();
+</script>
+</body>
+</html>

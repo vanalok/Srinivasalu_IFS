@@ -1,0 +1,302 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Accomplishments — Srinivasulu IFS</title>
+  <meta name="description" content="Key accomplishments across 12 departments — Karnataka Forest Department, KSPCB, AYUSH, Kali Tiger Reserve and more.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+Kannada:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="design-system.css">
+  <style>
+    .page-hero {
+      padding: var(--s-3) 0 !important;
+    }
+    .page-hero h1 {
+      font-size: var(--t-24) !important;
+      margin-bottom: var(--s-1) !important;
+    }
+    .page-hero .breadcrumb {
+      margin-bottom: var(--s-1) !important;
+    }
+    .page-hero-stat {
+      display: flex;
+      align-items: baseline;
+      gap: var(--s-2);
+    }
+    .page-hero-stat .num {
+      font-size: var(--t-20) !important;
+    }
+    .page-hero-stat .lbl {
+      font-size: var(--t-12) !important;
+      margin-top: 0 !important;
+    }
+    .section {
+      padding: var(--s-3) 0 !important;
+    }
+    .dept-grid {
+      grid-template-columns: repeat(6, 1fr) !important;
+      gap: var(--s-3) !important;
+    }
+    .dept-card {
+      padding: var(--s-2) !important;
+      min-height: 180px !important;
+      justify-content: center !important;
+      align-items: center !important;
+      text-align: center !important;
+    }
+    .dept-logo {
+      width: 72px !important;
+      height: 72px !important;
+      margin-bottom: var(--s-2) !important;
+      padding: 2px !important;
+    }
+    .dept-card h3 {
+      font-size: var(--t-12) !important;
+      margin-bottom: 0 !important;
+      font-weight: 500 !important;
+      line-height: 1.25 !important;
+    }
+    .dept-meta {
+      display: none !important;
+    }
+    .dept-arrow {
+      display: none !important;
+    }
+    .dept-card:hover {
+      transform: none !important;
+    }
+    @media (max-width: 1024px) {
+      .dept-grid { grid-template-columns: repeat(6, 1fr) !important; }
+      .dept-card { min-height: 140px !important; }
+      .dept-logo { width: 44px !important; height: 44px !important; }
+    }
+    @media (max-width: 820px) {
+      .dept-grid { grid-template-columns: repeat(4, 1fr) !important; } /* 3 rows on small tablets */
+    }
+    @media (max-width: 600px) {
+      .dept-grid { grid-template-columns: repeat(3, 1fr) !important; }
+    }
+    @media (max-width: 400px) {
+      .dept-grid { grid-template-columns: repeat(2, 1fr) !important; }
+    }
+  </style>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+<div id="sr-chrome-top"></div>
+
+<main id="main">
+
+  <section class="page-hero">
+    <div class="container reveal">
+      <div class="breadcrumb"><a href="index.html">Home</a> <i data-lucide="chevron-right" class="icon-sm"></i> <span>Accomplishments</span></div>
+      <h1>Accomplishments</h1>
+      <div style="display:flex; gap:var(--s-3); margin-top:var(--s-6); flex-wrap:wrap;">
+        <div class="search-input" style="flex:1; max-width:420px;">
+          <i data-lucide="search" class="icon-sm"></i>
+          <input id="deptSearch" type="search" placeholder="Search across all departments…">
+        </div>
+        <div class="page-hero-stat" style="margin-left:auto;"><div class="num">12</div><div class="lbl">Postings on record</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="dept-grid" id="deptGrid"></div>
+    </div>
+  </section>
+
+</main>
+
+<div id="sr-chrome-footer"></div>
+
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+<script src="chrome.js"></script>
+<script src="app.js"></script>
+<script>
+window.addEventListener('load', () => {
+  const data = window.SR_DEPTS_CV || [];
+  const logos = window.SR_LOGOS || {};
+  const grid = document.getElementById('deptGrid');
+
+  function render(filter){
+    const q = (filter || '').toLowerCase().trim();
+    const list = q ? data.filter(d => d.name.toLowerCase().includes(q) || d.kind.toLowerCase().includes(q)) : data;
+    if (!list.length){
+      grid.innerHTML = '<div class="empty-state" style="grid-column:1/-1;"><i data-lucide="search-x"></i><p>No departments match that search.</p></div>';
+      window.SrIcons && window.SrIcons();
+      return;
+    }
+    grid.innerHTML = list.map(d => `
+      <button class="dept-card" data-slug="${d.slug}" aria-label="${d.name}">
+        <img class="dept-logo" src="${logos[d.slug] || ''}" alt="" loading="lazy">
+        <h3>${d.name}</h3>
+      </button>
+    `).join('');
+    window.SrIcons && window.SrIcons();
+
+    grid.querySelectorAll('.dept-card').forEach(c => {
+      c.addEventListener('click', () => openDept(c.dataset.slug));
+    });
+  }
+
+  document.getElementById('deptSearch').addEventListener('input', e => render(e.target.value));
+  render();
+
+  // Open dept drawer
+  function openDept(slug){
+    const d = data.find(x => x.slug === slug);
+    if (!d) return;
+    const logo = logos[slug];
+
+    // Update URL
+    const url = new URL(location.href);
+    url.searchParams.set('dept', slug);
+    history.replaceState(null,'',url);
+
+    // Render drawer content
+    const html = `
+      <header class="drawer-head">
+        <img class="drawer-head-logo" src="${logo||''}" alt="">
+        <div class="drawer-head-text">
+          <h2>${d.name}</h2>
+          <div class="meta">${d.code} · ${d.period} · ${d.kind}</div>
+        </div>
+        <button class="drawer-close" aria-label="Close"><i data-lucide="x"></i></button>
+      </header>
+      <div class="drawer-tabs">
+        <button class="tab is-active" data-target="ov-${slug}">Overview</button>
+        <button class="tab" data-target="po-${slug}">Posts</button>
+        <button class="tab" data-target="dc-${slug}">Documents</button>
+      </div>
+      <div class="drawer-body">
+        <section class="tab-panel is-active" id="ov-${slug}">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--s-3);margin-bottom:var(--s-5);">
+            <div class="card" style="padding:var(--s-4);"><div class="page-hero-stat"><div class="num" id="cnt-posts-${slug}">—</div><div class="lbl">Posts &amp; updates</div></div></div>
+            <div class="card" style="padding:var(--s-4);"><div class="page-hero-stat"><div class="num" id="cnt-docs-${slug}">—</div><div class="lbl">Documents</div></div></div>
+          </div>
+          <p style="color:var(--ink-2); line-height:1.7;">Service: <strong>${d.period}</strong> · Role: <strong>${d.kind}</strong>. Browse the related posts and documents in the next tabs.</p>
+          <a class="btn btn-primary btn-sm" href="publications.html?dept=${slug}" style="margin-top:var(--s-4);">Documents on this department <i data-lucide="arrow-right" class="icon-sm"></i></a>
+        </section>
+        <section class="tab-panel" id="po-${slug}">
+          <div id="postList-${slug}">
+            <div class="empty">Loading posts…</div>
+          </div>
+        </section>
+        <section class="tab-panel" id="dc-${slug}">
+          <div class="empty">Documents available on the <a href="publications.html?dept=${slug}" style="color:var(--brand);">Publications page</a>.</div>
+        </section>
+      </div>
+    `;
+    DeptDrawer.open(html);
+
+    // Load posts for this dept from blog API
+    loadPosts(slug);
+  }
+
+  const DEPT_MAP = {
+    'kspcb': ['5f685d9f798880001769b5d8', '5f55f4804fa8d200183c946f', '5fd31d3ffd9730001751de07'],
+    'ayush': ['65b5289accb9cf28f47214d3', '65b526619dd3756237b9b7ee'],
+    'karnataka-forest-department': ['5f97fa8fdff7a40017edb91d', '5f55f5abc8940c001755f2ee', '5f685e54e559920017e23d71'],
+    'kali-tiger-reserve': ['5f685e7ce559920017e23da4', '5f55f55ba82e030017925d50'],
+    'nagarhole-national-park': ['5f71c99d8ba8ed001735f4ae'],
+    'kalaburagi': ['5f71b70fef645c0017546304'],
+    'chitradurga': ['5f55f5d45ab2290017dc1d1b'],
+    'shimoga': ['5f71c2b5a1adb500178ffd39'],
+    'academics': ['5f7188fa84bb8700189bea03'],
+    'adcl': ['5fb383bc5cc48c001707e767', '5f55f543ac304100173210eb'],
+    'ecology-environment': ['6894a872361afb873d30f5d9'],
+    'kfcsc': []
+  };
+
+  function loadPosts(slug){
+    const target = document.getElementById('postList-' + slug);
+    const cnt = document.getElementById('cnt-posts-' + slug);
+    if (!target) return;
+    
+    const categoryIds = DEPT_MAP[slug] || [];
+    if (categoryIds.length === 0) {
+      if (cnt) cnt.textContent = 0;
+      target.innerHTML = `<div class="empty">No posts yet for this department.</div>`;
+      return;
+    }
+
+    const fetchPromises = categoryIds.map(id => 
+      fetch(`https://www.srinivasifs.com/_functions/posts?category=${id}&limit=20&page=1`)
+        .then(r => r.ok ? r.json() : { posts: [] })
+    );
+
+    Promise.all(fetchPromises)
+      .then(results => {
+        let combinedPosts = [];
+        results.forEach(res => {
+          if (res.posts) {
+            combinedPosts = combinedPosts.concat(res.posts);
+          }
+        });
+
+        // Deduplicate
+        const seen = new Set();
+        combinedPosts = combinedPosts.filter(p => {
+          const duplicate = seen.has(p.id);
+          seen.add(p.id);
+          return !duplicate;
+        });
+
+        // Sort descending by date
+        combinedPosts.sort((a, b) => new Date(b.publishedDate || 0) - new Date(a.publishedDate || 0));
+
+        if (cnt) cnt.textContent = combinedPosts.length || 0;
+        if (!combinedPosts.length){
+          target.innerHTML = `<div class="empty">No posts yet for this department.</div>`;
+          return;
+        }
+
+        // Helper to convert wix image URI or path to CDN URL
+        function getWixImageUrl(wixUrl) {
+          if (!wixUrl) return 'https://images.unsplash.com/photo-1448375240586-882707db888b?w=600&q=80';
+          if (wixUrl.startsWith('wix:image://v1/')) {
+            const parts = wixUrl.replace('wix:image://v1/', '').split('/');
+            if (parts.length > 0) {
+              return 'https://static.wixstatic.com/media/' + parts[0];
+            }
+          }
+          if (wixUrl.startsWith('http://') || wixUrl.startsWith('https://')) {
+            return wixUrl;
+          }
+          return 'https://static.wixstatic.com/media/' + wixUrl;
+        }
+
+        target.innerHTML = combinedPosts.map(p => {
+          const img = getWixImageUrl(p.coverImage);
+          const date = p.publishedDate ? new Date(p.publishedDate).toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'}) : '';
+          return `
+            <a class="item-card" href="post.html?slug=${p.slug || p.id}">
+              <div class="item-card-img">${img ? `<img src="${img}" alt="" loading="lazy">` : ''}</div>
+              <div class="item-card-body">
+                <div class="item-card-title">${p.title}</div>
+                <div class="item-card-meta">
+                  <span><i data-lucide="calendar" class="icon-sm"></i> ${date}</span>
+                  ${p.timeToRead ? `<span><i data-lucide="clock" class="icon-sm"></i> ${p.timeToRead} min</span>` : ''}
+                  ${p.viewCount ? `<span><i data-lucide="eye" class="icon-sm"></i> ${p.viewCount}</span>` : ''}
+                </div>
+              </div>
+            </a>`;
+        }).join('');
+        window.SrIcons && window.SrIcons();
+      })
+      .catch(() => { target.innerHTML = `<div class="empty">Unable to load posts. Try the <a href="blog.html?cat=${slug}" style="color:var(--brand);">Blog page</a>.</div>`; });
+  }
+
+  // Open from URL param
+  const params = new URLSearchParams(location.search);
+  const depParam = params.get('dept');
+  if (depParam) setTimeout(() => openDept(depParam), 200);
+});
+</script>
+</body>
+</html>

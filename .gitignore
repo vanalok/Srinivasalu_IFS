@@ -1,0 +1,15 @@
+# OS
+Thumbs.db
+.DS_Store
+
+# Editor / IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs / temp
+*.log
+*.tmp
+_*.py
+_webp_mapping.json
