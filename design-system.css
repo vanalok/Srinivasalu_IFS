@@ -360,16 +360,15 @@ h4{ font-size:var(--t-20); }
   background:var(--paper);
   border-bottom:1px solid var(--line);
 }
-.page-hero .breadcrumb{
-  display:flex; align-items:center; gap:var(--s-2);
-  font-size:var(--t-13); color:var(--ink-3); margin-bottom:var(--s-4);
-}
 .page-hero h1{ font-size:clamp(var(--t-40), 5vw, var(--t-56)); margin-bottom:var(--s-3); }
 .page-hero p.lede{ font-size:var(--t-18); color:var(--ink-2); max-width:60ch; }
 .page-hero-stats{ display:flex; flex-wrap:wrap; gap:var(--s-8); margin-top:var(--s-6); }
 .page-hero-stat .num{ font-family:var(--f-display); font-size:var(--t-32); font-weight:700; color:var(--brand); line-height:1; }
 .page-hero-stat .lbl{ font-size:var(--t-13); color:var(--ink-3); margin-top:4px; }
-
+.breadcrumb{
+  display:flex; align-items:center; gap:var(--s-2);
+  font-size:var(--t-13); color:var(--ink-3); margin-bottom:var(--s-4);
+}
 /* home hero */
 .home-hero{
   position:relative; min-height:min(86vh, 760px);
