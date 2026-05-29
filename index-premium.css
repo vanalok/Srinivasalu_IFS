@@ -229,33 +229,36 @@
   background:var(--v-emerald-pale);
   border-top:1px solid rgba(14,46,31,.08); border-bottom:1px solid rgba(14,46,31,.08);
 }
-/* turn the old horizontal-scroll track into a clean wrap-grid */
+/* fixed equal-column grid — 12 cards split evenly into rows */
 .home-v2 .areas-track{
   display:grid;
-  grid-template-columns:repeat(auto-fit, minmax(180px, 1fr));
-  gap:var(--s-4);
+  grid-template-columns:repeat(6, 1fr);    /* 6 × 2 rows on desktop */
+  gap:var(--s-3);
   padding:0;
   overflow:visible;
   scroll-snap-type:none;
   -webkit-mask-image:none; mask-image:none;
 }
+@media (max-width:1100px){ .home-v2 .areas-track{ grid-template-columns:repeat(4, 1fr); } } /* 4 × 3 rows */
+@media (max-width:760px) { .home-v2 .areas-track{ grid-template-columns:repeat(3, 1fr); } } /* 3 × 4 rows */
+@media (max-width:480px) { .home-v2 .areas-track{ grid-template-columns:repeat(2, 1fr); } } /* 2 × 6 rows */
 .home-v2 .areas-track > article{ flex:initial; width:auto; scroll-snap-align:none; }
 .home-v2 .area-card{
   height:100%;
-  border:1px solid rgba(14,46,31,.1); border-radius:var(--r-lg); background:var(--v-paper);
+  border:1px solid rgba(14,46,31,.1); border-radius:var(--r-md); background:var(--v-paper);
   transition:transform var(--d) var(--ease), box-shadow var(--d), border-color var(--d);
 }
-.home-v2 .area-card:hover{ transform:translateY(-4px); border-color:var(--v-gold); box-shadow:var(--e2); }
+.home-v2 .area-card:hover{ transform:translateY(-3px); border-color:var(--v-gold); box-shadow:var(--e2); }
 .home-v2 .area-card-img{
   aspect-ratio:1 / 1; background:#fff;
   border-bottom:1px solid rgba(14,46,31,.08);
 }
-.home-v2 .area-card-img img{ background:#fff; padding:16px; }
-.home-v2 .area-card-body{ padding:var(--s-3) var(--s-4); }
-.home-v2 .area-card-period{ color:var(--v-emerald-accent); font-weight:600; font-family:var(--f-body); font-size:var(--t-12); }
-.home-v2 .area-card-name{ color:var(--v-emerald); font-size:var(--t-14); line-height:1.3; }
-.home-v2 .area-card-kind{ font-size:var(--t-12); }
-@media (max-width:560px){ .home-v2 .areas-track{ grid-template-columns:repeat(2, 1fr); } }
+.home-v2 .area-card-img img{ background:#fff; padding:12px; }
+.home-v2 .area-card-body{ padding:8px 10px 10px; }
+.home-v2 .area-card-period{ color:var(--v-emerald-accent); font-weight:600; font-family:var(--f-body); font-size:11px; letter-spacing:.04em; margin-bottom:2px; }
+.home-v2 .area-card-name{ color:var(--v-emerald); font-size:13px; line-height:1.25; font-family:var(--f-display); font-weight:600; }
+.home-v2 .area-card-kind{ font-size:11px; color:var(--v-ink-soft); margin-top:2px; }
+/* (responsive column counts handled in the block above) */
 
 /* ==========================================================================
    6 · RECENT POSTS — warm ivory-dark band, blog cards

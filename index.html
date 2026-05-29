@@ -176,24 +176,6 @@
         </div>
       </section>
 
-      <!-- ============ RECENT POSTS ============ -->
-      <section class="section" id="recent-posts">
-        <div class="container">
-          <div class="section-head reveal">
-            <div>
-
-              <div class="section-eyebrow">Latest Updates</div>
-              <h2>Recent Posts</h2>
-            </div>
-            <a href="blog.html" class="btn btn-ghost btn-sm">View all posts <i data-lucide="arrow-right" class="icon-sm"></i></a>
-          </div>
-          <div class="blog-grid reveal" id="homeBlogGrid">
-            <!-- Populated by JS -->
-          </div>
-        </div>
-      </section>
-
-      
       <!-- ============ GET INVOLVED — two-tone split (invite + form) ============ -->
       <section class="join-split reveal" id="contact-join">
         <div class="join-grid">
@@ -270,7 +252,10 @@
         if (!track) return;
         const data = window.SR_DEPTS_CV || [];
         const logos = window.SR_LOGOS || {};
-        track.innerHTML = data.map(d => `
+        // Show most-recent postings first (sort by start year descending)
+        const startYear = p => { const m = (p || '').match(/^(\d{4})/); return m ? +m[1] : 0; };
+        const sorted = data.slice().sort((a, b) => startYear(b.period) - startYear(a.period));
+        track.innerHTML = sorted.map(d => `
           <article>
             <a href="accomplishments.html?dept=${d.slug}" class="area-card">
               <div class="area-card-img">
@@ -284,47 +269,6 @@
             </a>
           </article>
         `).join('');
-
-        // Helper to convert wix image URI or path to CDN URL
-        function getWixImageUrl(wixUrl) {
-          if (!wixUrl) return 'https://images.unsplash.com/photo-1448375240586-882707db888b?w=600&q=80';
-          if (wixUrl.startsWith('wix:image://v1/')) {
-            const parts = wixUrl.replace('wix:image://v1/', '').split('/');
-            if (parts.length > 0) {
-              return 'https://static.wixstatic.com/media/' + parts[0];
-            }
-          }
-          if (wixUrl.startsWith('http://') || wixUrl.startsWith('https://')) {
-            return wixUrl;
-          }
-          return 'https://static.wixstatic.com/media/' + wixUrl;
-        }
-
-        // Fetch recent 3 blog posts from the new API
-        fetch('https://www.srinivasifs.com/_functions/recentPosts?limit=3')
-          .then(res => res.json())
-          .then(data => {
-            const grid = document.getElementById('homeBlogGrid');
-            if (grid && data.posts) {
-              grid.innerHTML = data.posts.map(post => {
-                const imgUrl = getWixImageUrl(post.coverImage);
-                const dateStr = post.publishedDate ? new Date(post.publishedDate).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }) : '';
-                return `
-                  <a href="post.html?slug=${post.slug}" class="b-card">
-                    <div class="b-card-img"><img src="${imgUrl}" alt="${post.title.replace(/"/g, '&quot;')}" loading="lazy"></div>
-                    <div class="b-card-body">
-                      <h3 class="b-card-title">${post.title}</h3>
-                      <div class="b-card-foot">
-                        <div class="b-date">${dateStr}</div>
-                        <span class="b-read-more">Read</span>
-                      </div>
-                    </div>
-                  </a>`;
-              }).join('');
-              window.SrIcons && window.SrIcons();
-            }
-          })
-          .catch(err => console.error('Error fetching recent posts:', err));
 
         window.SrIcons && window.SrIcons();
       });
