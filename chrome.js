@@ -20,9 +20,9 @@
 
   // CV chronological order — earliest
   window.SR_DEPTS_CV = [
-    { slug:'chitradurga',                 name:'Chitradurga',                 code:'F-01', period:'1999-2002', kind:'District Forest' },
-    { slug:'shimoga',                     name:'Shimoga',                     code:'F-02', period:'2002-2005', kind:'District Forest' },
-    { slug:'kalaburagi',                  name:'Kalaburagi',                  code:'F-03', period:'2005-2008', kind:'District Forest' },
+    { slug:'chitradurga',                 name:'Chitradurga Division',                 code:'F-01', period:'1999-2002', kind:'District Forest' },
+    { slug:'shimoga',                     name:'Shimoga Division',                     code:'F-02', period:'2002-2005', kind:'District Forest' },
+    { slug:'kalaburagi',                  name:'Kalaburagi Division',                  code:'F-03', period:'2005-2008', kind:'District Forest' },
     { slug:'academics',                   name:'Academics',                   code:'F-04', period:'2008-2010', kind:'Research & Teaching' },
     { slug:'adcl',                        name:'ADCL',                        code:'F-05', period:'2010-2012', kind:'Welfare Corporation' },
     { slug:'kfcsc',                       name:'KFCSC',                       code:'F-06', period:'2012-2014', kind:'Cooperative Body' },
@@ -43,11 +43,11 @@
     'academics': 'https://static.wixstatic.com/media/f453f3_8affe3ef7ad64ffea272c0980e8981e2~mv2.png',
     'chitradurga': 'https://static.wixstatic.com/media/f453f3_acd8279650af4b8088840c01285ff8a5~mv2.png',
     'kfcsc': 'https://static.wixstatic.com/media/f453f3_e08ab165d103428989198955bb9d62f3~mv2.png',
-    'ecology-environment': 'https://static.wixstatic.com/media/f453f3_aca3d434c40c4d10b761d578c93bcade~mv2.png',
+    'ecology-environment': 'images/feed.png',
     'karnataka-forest-department': 'https://static.wixstatic.com/media/f453f3_aca3d434c40c4d10b761d578c93bcade~mv2.png',
     'adcl': 'https://static.wixstatic.com/media/f453f3_7f56d5d0a9664f56bc7c74743d1a0f55~mv2.png',
-    'nagarhole-national-park': 'https://static.wixstatic.com/media/f453f3_c96fc0f36f1c41d5bf56dbcf33975446~mv2.jpeg',
-    'kali-tiger-reserve': 'https://static.wixstatic.com/media/f453f3_c96fc0f36f1c41d5bf56dbcf33975446~mv2.jpeg'
+    'nagarhole-national-park': 'images/NTRlogo.png',
+    'kali-tiger-reserve': 'images/kalitigerreservelogo.png'
   };
 
   function ddItems(href){
