@@ -8,7 +8,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+Kannada:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="design-system.css">
+  <link rel="stylesheet" href="videos-premium.css" />
   <style>
     .video-grid{ display:grid; grid-template-columns:repeat(5,1fr); gap:var(--s-4); }
     @media (max-width:1024px){ .video-grid{ grid-template-columns:repeat(3,1fr); } }
@@ -51,7 +53,7 @@
 <a class="skip-link" href="#main">Skip to content</a>
 <div id="sr-chrome-top"></div>
 
-<main id="main">
+<main id="main" class="vid-v2">
 
   <section class="page-hero">
     <div class="container reveal">
@@ -125,7 +127,7 @@ fetch('videos.json').then(r => r.json()).then(videos => {
     grid.innerHTML = list.map((v, i) => `
       <button class="video-card" data-i="${videos.indexOf(v)}" aria-label="Play: ${v.title.replace(/"/g,'')}">
         <div class="video-thumb">
-          <img src="https://i.ytimg.com/vi/${v.videoId}/hqdefault.jpg" alt="" loading="lazy">
+          <img src="${v.image || 'https://i.ytimg.com/vi/' + v.videoId + '/hqdefault.jpg'}" alt="" loading="lazy" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/'+'${v.videoId}'+'/hqdefault.jpg';">
           <div class="video-play"><i data-lucide="play"></i></div>
           <span class="video-lang lang-flag ${v.isKannada?'kn':'en'}">${v.isKannada?'KN':'EN'}</span>
         </div>

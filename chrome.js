@@ -57,13 +57,15 @@
 
   // active page
   const path = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
+  // Path prefix back to project root (handles pages inside subfolders like /posts/)
+  const ROOT = '../'.repeat(Math.max(0, location.pathname.split('/').filter(Boolean).length - 1));
   function active(name){ return path === name ? ' class="is-current"' : ''; }
   function mActive(name){ return path === name ? ' class="is-current"' : ''; }
 
   const navbar = `
     <header class="nav-bar" role="navigation" aria-label="Primary">
       <div class="container">
-        <a href="index.html" class="brand">
+        <a href="${ROOT}index.html" class="brand">
           <span class="brand-mark">S</span>
           <span>
             <span class="brand-name">Srinivasulu IFS</span>
@@ -71,25 +73,25 @@
           </span>
         </a>
         <ul class="nav-primary">
-          <li${active('index.html')}><a href="index.html">Home</a></li>
-          <li${active('cv.html')}><a href="cv.html">CV</a></li>
-          <li${active('honours.html')}><a href="honours.html">Honours and awards</a></li>
-          <li${active('accomplishments.html')}><a href="accomplishments.html">Accomplishments <i data-lucide="chevron-down" class="icon-sm"></i></a>
-            <ul class="nav-dropdown" role="menu">${ddItems('accomplishments.html')}</ul>
+          <li${active('index.html')}><a href="${ROOT}index.html">Home</a></li>
+          <li${active('cv.html')}><a href="${ROOT}cv.html">CV</a></li>
+          <li${active('honours.html')}><a href="${ROOT}honours.html">Honours and awards</a></li>
+          <li${active('accomplishments.html')}><a href="${ROOT}accomplishments.html">Accomplishments <i data-lucide="chevron-down" class="icon-sm"></i></a>
+            <ul class="nav-dropdown" role="menu">${ddItems(ROOT + 'accomplishments.html')}</ul>
           </li>
-          <li${active('publications.html')}><a href="publications.html">Publications <i data-lucide="chevron-down" class="icon-sm"></i></a>
-            <ul class="nav-dropdown" role="menu">${ddItems('publications.html')}</ul>
+          <li${active('publications.html')}><a href="${ROOT}publications.html">Publications <i data-lucide="chevron-down" class="icon-sm"></i></a>
+            <ul class="nav-dropdown" role="menu">${ddItems(ROOT + 'publications.html')}</ul>
           </li>
           <li><a href="#">Media <i data-lucide="chevron-down" class="icon-sm"></i></a>
             <ul class="nav-dropdown" role="menu">
-              <li><a href="photos.html">Photos</a></li>
-              <li><a href="videos.html">Videos</a></li>
+              <li><a href="${ROOT}photos.html">Photos</a></li>
+              <li><a href="${ROOT}videos.html">Videos</a></li>
             </ul>
           </li>
-          <li${active('blog.html')}><a href="blog.html">Blog</a></li>
+          <li${active('blog.html')}><a href="${ROOT}blog.html">Blog</a></li>
         </ul>
         <div class="nav-tools">
-          <a href="contact.html" class="btn btn-primary btn-sm ctxt">Contact</a>
+          <a href="${ROOT}contact.html" class="btn btn-primary btn-sm ctxt">Contact</a>
         </div>
         <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileDrawer">
           <span></span><span></span><span></span>
@@ -101,7 +103,7 @@
     <div class="scrim" id="mobileScrim" aria-hidden="true"></div>
     <aside class="mobile-drawer" id="mobileDrawer" role="dialog" aria-modal="true" aria-label="Menu">
       <div class="mobile-drawer-head">
-        <a href="index.html" class="brand">
+        <a href="${ROOT}index.html" class="brand">
           <span class="brand-mark">S</span>
           <span><span class="brand-name">Srinivasulu IFS</span></span>
         </a>
@@ -109,17 +111,17 @@
       </div>
       <nav class="mobile-nav">
         <span class="mobile-nav-section">Browse</span>
-        <a href="index.html"${mActive('index.html')}><i data-lucide="home" class="icon-sm"></i>Home</a>
-        <a href="cv.html"${mActive('cv.html')}><i data-lucide="user" class="icon-sm"></i>CV</a>
-        <a href="honours.html"${mActive('honours.html')}><i data-lucide="award" class="icon-sm"></i>Honours and awards</a>
-        <a href="accomplishments.html"${mActive('accomplishments.html')}><i data-lucide="briefcase" class="icon-sm"></i>Accomplishments</a>
-        <a href="publications.html"${mActive('publications.html')}><i data-lucide="book-open" class="icon-sm"></i>Publications</a>
+        <a href="${ROOT}index.html"${mActive('index.html')}><i data-lucide="home" class="icon-sm"></i>Home</a>
+        <a href="${ROOT}cv.html"${mActive('cv.html')}><i data-lucide="user" class="icon-sm"></i>CV</a>
+        <a href="${ROOT}honours.html"${mActive('honours.html')}><i data-lucide="award" class="icon-sm"></i>Honours and awards</a>
+        <a href="${ROOT}accomplishments.html"${mActive('accomplishments.html')}><i data-lucide="briefcase" class="icon-sm"></i>Accomplishments</a>
+        <a href="${ROOT}publications.html"${mActive('publications.html')}><i data-lucide="book-open" class="icon-sm"></i>Publications</a>
         <span class="mobile-nav-section">Media</span>
-        <a href="photos.html"${mActive('photos.html')}><i data-lucide="image" class="icon-sm"></i>Photos</a>
-        <a href="videos.html"${mActive('videos.html')}><i data-lucide="play-circle" class="icon-sm"></i>Videos</a>
+        <a href="${ROOT}photos.html"${mActive('photos.html')}><i data-lucide="image" class="icon-sm"></i>Photos</a>
+        <a href="${ROOT}videos.html"${mActive('videos.html')}><i data-lucide="play-circle" class="icon-sm"></i>Videos</a>
         <span class="mobile-nav-section">More</span>
-        <a href="blog.html"${mActive('blog.html')}><i data-lucide="newspaper" class="icon-sm"></i>Blog</a>
-        <a href="contact.html"${mActive('contact.html')}><i data-lucide="mail" class="icon-sm"></i>Contact</a>
+        <a href="${ROOT}blog.html"${mActive('blog.html')}><i data-lucide="newspaper" class="icon-sm"></i>Blog</a>
+        <a href="${ROOT}contact.html"${mActive('contact.html')}><i data-lucide="mail" class="icon-sm"></i>Contact</a>
       </nav>
     </aside>`;
 
@@ -146,25 +148,25 @@
           <div class="footer-col">
             <h4>Portfolio</h4>
             <ul>
-              <li><a href="cv.html">CV</a></li>
-              <li><a href="honours.html">Honours and awards</a></li>
-              <li><a href="accomplishments.html">Accomplishments</a></li>
-              <li><a href="publications.html">Publications</a></li>
+              <li><a href="${ROOT}cv.html">CV</a></li>
+              <li><a href="${ROOT}honours.html">Honours and awards</a></li>
+              <li><a href="${ROOT}accomplishments.html">Accomplishments</a></li>
+              <li><a href="${ROOT}publications.html">Publications</a></li>
             </ul>
           </div>
           <div class="footer-col">
             <h4>Media</h4>
             <ul>
-              <li><a href="photos.html">Photos</a></li>
-              <li><a href="videos.html">Videos</a></li>
-              <li><a href="blog.html">Blog</a></li>
-              <li><a href="contact.html">Contact</a></li>
+              <li><a href="${ROOT}photos.html">Photos</a></li>
+              <li><a href="${ROOT}videos.html">Videos</a></li>
+              <li><a href="${ROOT}blog.html">Blog</a></li>
+              <li><a href="${ROOT}contact.html">Contact</a></li>
             </ul>
           </div>
           <div class="footer-col">
             <h4>Government</h4>
             <ul>
-              <li><a href="contact.html#map">Sitemap</a></li>
+              <li><a href="${ROOT}contact.html#map">Sitemap</a></li>
               <li style="display:none;"><a href="#">Accessibility</a></li>
               <li style="display:none;"><a href="#">Privacy &amp; Disclaimer</a></li>
               <li style="display:none;"><a href="#">Help</a></li>

@@ -371,3 +371,222 @@
   .cv-v2 .edu-card:hover,
   .cv-v2 #documents .card:hover{ transform:none; }
 }
+
+/* ==========================================================================
+   9 · MOBILE / RESPONSIVE — appended fixes for small viewports
+   All selectors scoped under .cv-v2 to avoid touching shared infra.
+   ========================================================================== */
+
+/* Prevent horizontal scrolling at any size on the CV page */
+.cv-v2,
+.cv-v2 main{ overflow-x:hidden; }
+
+/* ---------- <= 1024px : tablets ---------- */
+@media (max-width: 1024px){
+  /* Overview panel uses inline 1fr 1fr grid — collapse */
+  .cv-v2 #ov > div[style*="grid-template-columns"]{
+    grid-template-columns:1fr !important;
+    gap:var(--s-6) !important;
+  }
+  /* Tighten panel inner padding */
+  .cv-v2 .tab-panel.is-active{
+    padding:clamp(20px, 3vw, 36px);
+  }
+}
+
+/* ---------- <= 900px : large phone landscape / small tablet ---------- */
+@media (max-width: 900px){
+  /* Hero portrait — center & cap width since grid collapses */
+  .cv-v2 .about-portrait{
+    max-width:300px;
+    margin:0 auto;
+  }
+  /* Hero h1 size trim */
+  .cv-v2 .about-hero h1{
+    font-size:clamp(36px, 7vw, 56px) !important;
+  }
+  /* Sticky tabs — keep sticky but make sure they don't overflow */
+  .cv-v2 .tabs > .container{
+    flex-wrap:wrap !important;
+    row-gap:6px !important;
+  }
+}
+
+/* ---------- <= 768px : phones (portrait) ---------- */
+@media (max-width: 768px){
+  /* Hero padding trim */
+  .cv-v2 .about-hero{
+    padding:clamp(32px, 6vw, 56px) 0 clamp(36px, 6vw, 60px);
+  }
+  /* Tab panel padding trim */
+  .cv-v2 .tab-panel.is-active{
+    padding:24px 18px;
+    margin-bottom:var(--s-8);
+  }
+  /* Tab pills smaller */
+  .cv-v2 .tab{
+    padding:8px 14px;
+    font-size:13px;
+    min-height:40px;
+    display:inline-flex;
+    align-items:center;
+  }
+  /* Hero stats trimmed margins */
+  .cv-v2 .about-quickstats{
+    margin:var(--s-6) 0 !important;
+    padding:var(--s-4) 0;
+  }
+  /* Hero buttons full row, touch-friendly */
+  .cv-v2 .about-hero .btn,
+  .cv-v2 .btn{
+    min-height:44px;
+  }
+  /* Documents/grid-3 — collapse to 1-2 cols */
+  .cv-v2 #documents .grid-3{
+    grid-template-columns:repeat(2, 1fr) !important;
+    gap:var(--s-3) !important;
+  }
+  /* H2 inside tab panels */
+  .cv-v2 .tab-panel h2{
+    font-size:clamp(26px, 6vw, 36px);
+  }
+}
+
+/* ---------- <= 600px : small phones ---------- */
+@media (max-width: 600px){
+  /* Remove portrait offset decoration so it doesn't push width */
+  .cv-v2 .about-portrait::before{
+    transform:translate(8px, 8px);
+  }
+  .cv-v2 .about-portrait{
+    max-width:260px;
+  }
+  /* Hero h1 further trim */
+  .cv-v2 .about-hero h1{
+    font-size:clamp(30px, 8vw, 44px) !important;
+    margin:var(--s-2) 0 var(--s-3) !important;
+  }
+  /* Hero intro paragraph smaller */
+  .cv-v2 .about-hero > .container > .about-hero-grid > div:last-child > p{
+    font-size:15px !important;
+    line-height:1.6 !important;
+  }
+  /* Quickstats stat numbers smaller */
+  .cv-v2 .about-hero .page-hero-stat .num,
+  .cv-v2 .page-hero-stat .num{
+    font-size:clamp(22px, 6vw, 30px);
+  }
+  .cv-v2 .page-hero-stat .lbl{
+    font-size:11px;
+    letter-spacing:.08em;
+  }
+  /* Tab panel sits flush to viewport edges */
+  .cv-v2 .tab-panel.is-active{
+    padding:20px 14px;
+    border-radius:var(--r-md);
+  }
+  /* Career cards — text bigger so it's readable at 3-col on phone */
+  .cv-v2 .career-body{ padding:8px; }
+  .cv-v2 .career-role{ font-size:12px; }
+  .cv-v2 .career-loc{ font-size:10px; }
+  .cv-v2 .career-period{ font-size:9px; }
+  /* Recognition panel padding */
+  .cv-v2 #rec{
+    padding:clamp(24px, 5vw, 40px) !important;
+  }
+}
+
+/* ---------- <= 480px : phones (typical) ---------- */
+@media (max-width: 480px){
+  /* Hero overall padding floor reduced */
+  .cv-v2 .about-hero{
+    padding:28px 0 32px;
+  }
+  /* Hero buttons go full-width side-by-side then wrap */
+  .cv-v2 .about-hero-grid > div:last-child > div[style*="display:flex"]:last-child{
+    flex-direction:column !important;
+    gap:10px !important;
+  }
+  .cv-v2 .about-hero-grid > div:last-child > div[style*="display:flex"]:last-child > .btn{
+    width:100%;
+    justify-content:center;
+  }
+  /* Documents grid: 1 col */
+  .cv-v2 #documents .grid-3{
+    grid-template-columns:1fr !important;
+  }
+  /* Education cards padding trim */
+  .cv-v2 .edu-card{
+    padding:clamp(18px, 4vw, 26px) !important;
+  }
+  .cv-v2 .edu-card .edu-icon{
+    width:48px !important;
+    height:48px !important;
+    margin-bottom:var(--s-3) !important;
+  }
+  .cv-v2 .edu-card h4{ font-size:17px !important; }
+  .cv-v2 .edu-card p{ font-size:13px !important; }
+  /* Container padding floor */
+  .cv-v2 .container,
+  .cv-v2 .tabs > .container{
+    padding-left:16px !important;
+    padding-right:16px !important;
+  }
+  /* Breadcrumb tighter */
+  .cv-v2 .breadcrumb{
+    font-size:12px;
+    padding:5px 10px;
+  }
+  /* Tab panel container vertical rhythm */
+  .cv-v2 > .container{
+    padding-block:24px;
+  }
+  /* Tabs wrap nicely */
+  .cv-v2 .tabs{
+    padding:6px 0;
+  }
+  .cv-v2 .tab{
+    flex:1 1 auto;
+    text-align:center;
+    justify-content:center;
+  }
+  /* Touch targets for links/buttons */
+  .cv-v2 .btn,
+  .cv-v2 .career-node{
+    min-height:44px;
+  }
+}
+
+/* ---------- <= 380px : very small phones ---------- */
+@media (max-width: 380px){
+  /* Quickstats — keep 2 cols but tighten */
+  .cv-v2 .about-quickstats{
+    gap:var(--s-2) !important;
+    margin:var(--s-4) 0 !important;
+    padding:var(--s-3) 0;
+  }
+  /* Career grid: drop to 2 cols already at 420; here ensure readable */
+  .cv-v2 .career-track{
+    gap:8px;
+  }
+  /* Hero h1 floor */
+  .cv-v2 .about-hero h1{
+    font-size:26px !important;
+    line-height:1.1 !important;
+  }
+  /* Tag wraps within container */
+  .cv-v2 .about-hero .tag{
+    font-size:11px;
+    letter-spacing:.06em;
+  }
+  /* H2 floor inside panels */
+  .cv-v2 .tab-panel h2{
+    font-size:22px;
+  }
+  /* Container padding floor */
+  .cv-v2 .container,
+  .cv-v2 .tabs > .container{
+    padding-left:12px !important;
+    padding-right:12px !important;
+  }
+}

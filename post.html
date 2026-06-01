@@ -134,6 +134,96 @@
       a[href^="#"]:after, a[href^="javascript:"]:after{ content:""; }
     }
     .post-cover-img-print{ display:none; } /* only visible in print */
+
+    /* =========================================================
+       MOBILE / RESPONSIVE
+       Append-only block. Targets the existing inline classes.
+       ========================================================= */
+    @media (max-width: 1024px){
+      .post-cover{ min-height:50vh; }
+      .post-cover .container{ padding:var(--s-12) var(--s-5) var(--s-8); }
+      .post-layout{ padding:var(--s-10) var(--s-5) var(--s-12); }
+    }
+
+    @media (max-width: 768px){
+      html, body{ overflow-x:hidden; }
+      .post-cover{ min-height:42vh; }
+      .post-cover .container{ padding:var(--s-10) var(--s-4) var(--s-6); }
+      .post-cover h1{ font-size:clamp(var(--t-24), 6vw, var(--t-40)); max-width:none; }
+      .post-cover .meta,
+      .post-header-plain .meta{ gap:var(--s-3); font-size:var(--t-12); }
+
+      .post-header-plain{ padding:var(--s-7) 0 var(--s-5); }
+      .post-header-plain h1{ font-size:clamp(var(--t-24), 6vw, var(--t-40)); max-width:none; }
+
+      .post-meta-strip{ padding:var(--s-2) 0; }
+      .post-meta-strip .container{ gap:var(--s-2); font-size:var(--t-12); padding-left:var(--s-4); padding-right:var(--s-4); }
+      .post-meta-strip .sticky-title{ max-width:18ch; }
+      .post-meta-strip .actions{ gap:4px; }
+
+      .post-layout{ padding:var(--s-7) var(--s-4) var(--s-10); max-width:none; }
+      .post-content{ font-size:var(--t-16); line-height:1.7; }
+      .post-content h1{ font-size:var(--t-32); }
+      .post-content h2{ font-size:var(--t-24); }
+      .post-content h3{ font-size:var(--t-20); }
+      .post-content h4{ font-size:var(--t-18); }
+      .post-content blockquote{ font-size:var(--t-20); padding-left:var(--s-4); }
+      .post-content pre{ font-size:var(--t-13); padding:var(--s-3); }
+      .post-content figure{ margin:var(--s-5) 0 !important; }
+
+      .post-share{ gap:6px; padding:var(--s-4) 0; }
+      .post-share .btn{ min-height:40px; flex:1 1 auto; }
+
+      .related{ padding:var(--s-8) 0; }
+    }
+
+    @media (max-width: 600px){
+      .post-cover{ min-height:auto; max-height:none; }
+      .post-cover .container{ padding:var(--s-8) var(--s-4) var(--s-5); }
+      .post-cover h1{ margin:var(--s-3) 0 var(--s-2); }
+
+      /* On phone, the sticky title is redundant with the article title above; hide */
+      .post-meta-strip .sticky-title{ display:none; }
+      .post-meta-strip .actions .btn{ min-height:40px; }
+      /* Use shorter labels on phone — kept visible but trimmed */
+      .post-meta-strip .container > a{ font-weight:600; }
+
+      .post-share{ flex-direction:column; }
+      .post-share .btn{ width:100%; justify-content:center; }
+
+      /* Related grid: collapse to one column */
+      #relatedGrid{ grid-template-columns:1fr !important; gap:var(--s-4); }
+    }
+
+    @media (max-width: 480px){
+      .post-cover .container,
+      .post-header-plain .container,
+      .post-meta-strip .container,
+      .related .container{ padding-left:16px; padding-right:16px; }
+      .post-layout{ padding:var(--s-6) 16px var(--s-8); }
+
+      .post-cover h1,
+      .post-header-plain h1{ font-size:clamp(var(--t-20), 7vw, var(--t-32)); }
+      .post-content{ font-size:15px; }
+      .post-content h1{ font-size:var(--t-24); }
+      .post-content h2{ font-size:var(--t-20); }
+      .post-content h3{ font-size:var(--t-18); }
+      .post-content blockquote{ font-size:var(--t-18); margin:var(--s-5) 0 !important; }
+      .post-content ul, .post-content ol{ padding-left:var(--s-5); }
+
+      .post-error{ padding:var(--s-10) var(--s-3); }
+      .post-error [data-lucide]{ width:40px; height:40px; }
+
+      .author img{ width:20px; height:20px; }
+    }
+
+    @media (max-width: 380px){
+      .post-meta-strip .container{ font-size:11px; gap:6px; }
+      .post-meta-strip .actions .btn{ padding-left:8px; padding-right:8px; }
+      .post-cover h1,
+      .post-header-plain h1{ font-size:clamp(var(--t-18), 7.5vw, var(--t-24)); }
+      .post-content{ font-size:14.5px; }
+    }
   </style>
 </head>
 <body>
