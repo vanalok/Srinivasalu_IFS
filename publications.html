@@ -141,6 +141,38 @@ window.addEventListener('load', () => {
   const logos = window.SR_LOGOS || {};
   const grid = document.getElementById('deptGrid');
 
+  const DEPT_CATEGORY_MAP = {
+    'kspcb': ['KSPCB_publications'],
+    'kali-tiger-reserve': ['Kali Tiger Reserve_publications'],
+    'nagarhole-national-park': ['Nagarhole_publications'],
+    'karnataka-forest-department': ['Karnataka Forest Department_publica', 'Wildlife & Forest'],
+    'shimoga': ['Shimoga_Publications'],
+    'chitradurga': ['Chitradurga_publications'],
+    'kalaburagi': ['Gulbarga_publications'],
+    'academics': ['Academics_publications'],
+    'adcl': ['ADCL_publications'],
+    'ayush': [],
+    'kfcsc': [],
+    'general': ['Publications']
+  };
+
+  let publicationsData = null;
+  let postsData = null;
+
+  async function loadData() {
+    if (!publicationsData) {
+      const r = await fetch('./publications.json');
+      publicationsData = await r.json();
+    }
+    if (!postsData) {
+      const r = await fetch('./assets/posts-full.json');
+      postsData = await r.json();
+    }
+  }
+
+  // Pre-load data in the background
+  loadData().catch(err => console.error('Error pre-loading publications data:', err));
+
   function render(filter){
     const q = (filter || '').toLowerCase().trim();
     const list = q ? data.filter(d => d.name.toLowerCase().includes(q) || d.kind.toLowerCase().includes(q)) : data;
@@ -160,80 +192,130 @@ window.addEventListener('load', () => {
   document.getElementById('deptSearch').addEventListener('input', e => render(e.target.value));
   render();
 
-  // Sample publications data per dept (replace with real list later)
-  function getPubs(slug){
-    const base = [
-      { title:'Annual Report 2024',         year:2024, type:'Report',   pages:84,  size:'2.4 MB', lang:'EN', cover:'https://images.unsplash.com/photo-1457369804613-52c61a468e7d?w=400' },
-      { title:'Policy Brief · Wildlife',    year:2023, type:'Policy',   pages:24,  size:'480 KB', lang:'EN', cover:'https://images.unsplash.com/photo-1568992687947-868a62a9f521?w=400' },
-      { title:'ತಾಂತ್ರಿಕ ವರದಿ · ೨೦೨೩',         year:2023, type:'Technical',pages:120, size:'5.1 MB', lang:'KN', cover:'https://images.unsplash.com/photo-1521336575822-6da63fb45455?w=400' },
-      { title:'Research Paper · Biodiversity',year:2022, type:'Research', pages:18, size:'320 KB', lang:'EN', cover:'https://images.unsplash.com/photo-1574482620811-1aa16ffe3c82?w=400' },
-      { title:'Departmental Brochure',      year:2021, type:'Brochure', pages:12,  size:'1.8 MB', lang:'EN', cover:'https://images.unsplash.com/photo-1599689019338-b97a78cd86e9?w=400' }
-    ];
-    return base;
+  // Load publications locally
+  async function getPubs(slug){
+    try {
+      await loadData();
+      if (!publicationsData || !publicationsData.departments) return [];
+
+      const mappedCats = DEPT_CATEGORY_MAP[slug] || [];
+
+      // Collect all items across all departments to handle potential Wix category/department misalignments
+      const allPubs = [];
+      const seenIds = new Set();
+      for (const deptKey in publicationsData.departments) {
+        const list = publicationsData.departments[deptKey] || [];
+        for (const item of list) {
+          if (!seenIds.has(item.id)) {
+            seenIds.add(item.id);
+            allPubs.push(item);
+          }
+        }
+      }
+
+      // Filter publications belonging to this department
+      const filtered = allPubs.filter(p => {
+        if (p.dept === slug) return true;
+        if (p.categories) {
+          const itemCats = p.categories.split(',').map(c => c.trim().toLowerCase());
+          const hasCatMatch = mappedCats.some(mc => itemCats.includes(mc.toLowerCase()));
+          if (hasCatMatch) return true;
+        }
+        return false;
+      });
+
+      // Enrich with detailed metadata from posts-full.json
+      const enriched = filtered.map(p => {
+        const post = (postsData || []).find(post => post.slug === p.slug);
+        return {
+          title: p.title || (post && post.title) || '',
+          slug: p.slug,
+          postPageUrl: `posts/${p.slug}.html`,
+          coverImage: (post && post.image) || '',
+          language: (post && post.language) || 'EN',
+          publishedDate: (post && post.date) || new Date().toISOString(),
+          timeToRead: (post && (post.minutesToRead || post.timeToRead)) || 0
+        };
+      });
+
+      // Sort by publication date descending
+      enriched.sort((a, b) => new Date(b.publishedDate) - new Date(a.publishedDate));
+
+      return enriched;
+    } catch (error) {
+      console.error(`Error filtering publications for ${slug}:`, error);
+      return [];
+    }
   }
 
   function openDept(slug){
     const d = data.find(x => x.slug === slug);
     if (!d) return;
     const logo = logos[slug];
-    const pubs = getPubs(slug).sort((a,b) => b.year - a.year);
 
     const url = new URL(location.href);
     url.searchParams.set('dept', slug);
     history.replaceState(null,'',url);
 
-    const pubHtml = pubs.map(p => `
-      <a class="pub-card" href="#">
-        <div class="pub-cover"><img src="${p.cover}" alt=""></div>
-        <div class="pub-body">
-          <div class="pub-title">${p.title}</div>
-          <div class="pub-meta">
-            <span class="lang-flag ${p.lang.toLowerCase()}">${p.lang}</span>
-            <span>${p.type}</span>
-            <span>·</span>
-            <span>${p.year}</span>
-            <span>·</span>
-            <span>${p.pages}pp</span>
-            <span>·</span>
-            <span>${p.size}</span>
-          </div>
-          <div class="pub-actions">
-            <button class="btn btn-outline btn-sm"><i data-lucide="eye" class="icon-sm"></i> Preview</button>
-            <button class="btn btn-ghost btn-sm"><i data-lucide="download" class="icon-sm"></i> Download</button>
-          </div>
-        </div>
-      </a>`).join('');
-
-    const html = `
+    // Show loading state
+    const drawerHtml = `
       <header class="drawer-head">
         <img class="drawer-head-logo" src="${logo||''}" alt="">
         <div class="drawer-head-text">
           <h2>${d.name}</h2>
-          <div class="meta">${d.period} · ${pubs.length} documents</div>
+          <div class="meta">${d.period}</div>
         </div>
         <button class="drawer-close" aria-label="Close"><i data-lucide="x"></i></button>
       </header>
-      <div class="drawer-tabs">
-        <button class="tab is-active" data-target="dc-${slug}">Documents</button>
-        <button class="tab" data-target="info-${slug}">About</button>
-      </div>
-      <div class="drawer-body">
-        <section class="tab-panel is-active" id="dc-${slug}">
-          <div style="display:flex; gap:6px; flex-wrap:wrap; margin-bottom:var(--s-4);">
-            <button class="chip is-active">All types</button>
-            <button class="chip">Report</button>
-            <button class="chip">Policy</button>
-            <button class="chip">Research</button>
-            <button class="chip">Brochure</button>
-          </div>
-          ${pubHtml}
-        </section>
-        <section class="tab-panel" id="info-${slug}">
-          <p style="color:var(--ink-2);line-height:1.7;">Service period: <strong>${d.period}</strong>. Role: <strong>${d.kind}</strong>. Related posts available on the <a href="accomplishments.html?dept=${slug}" style="color:var(--brand);">Accomplishments page</a>.</p>
-        </section>
+      <div class="drawer-body" style="padding:var(--s-6);text-align:center;">
+        <p>Loading publications...</p>
       </div>
     `;
-    DeptDrawer.open(html);
+    DeptDrawer.open(drawerHtml);
+
+    // Fetch publications
+    getPubs(slug).then(pubs => {
+      const pubHtml = pubs.length ? pubs.map(p => `
+        <a class="pub-card" href="${p.postPageUrl || '#'}" target="_blank" rel="noopener">
+          <div class="pub-cover"><img src="${p.coverImage || 'https://images.unsplash.com/photo-1457369804613-52c61a468e7d?w=400'}" alt="" loading="lazy"></div>
+          <div class="pub-body">
+            <div class="pub-title">${p.title}</div>
+            <div class="pub-meta">
+              <span class="lang-flag ${(p.language || 'EN').toLowerCase()}">${p.language || 'EN'}</span>
+              <span>${new Date(p.publishedDate).getFullYear()}</span>
+              ${p.timeToRead ? `<span>·</span><span>${p.timeToRead} min</span>` : ''}
+            </div>
+            <div class="pub-actions">
+              <a href="${p.postPageUrl || '#'}" target="_blank" class="btn btn-outline btn-sm"><i data-lucide="external-link" class="icon-sm"></i> Open</a>
+            </div>
+          </div>
+        </a>`).join('') :
+        '<div class="empty-state"><i data-lucide="file-text"></i><p>No publications found for this department.</p></div>';
+
+      const html = `
+        <header class="drawer-head">
+          <img class="drawer-head-logo" src="${logo||''}" alt="">
+          <div class="drawer-head-text">
+            <h2>${d.name}</h2>
+            <div class="meta">${d.period} · ${pubs.length} publications</div>
+          </div>
+          <button class="drawer-close" aria-label="Close"><i data-lucide="x"></i></button>
+        </header>
+        <div class="drawer-tabs">
+          <button class="tab is-active" data-target="dc-${slug}">Publications</button>
+          <button class="tab" data-target="info-${slug}">About</button>
+        </div>
+        <div class="drawer-body">
+          <section class="tab-panel is-active" id="dc-${slug}">
+            ${pubHtml}
+          </section>
+          <section class="tab-panel" id="info-${slug}">
+            <p style="color:var(--ink-2);line-height:1.7;">Service period: <strong>${d.period}</strong>. Role: <strong>${d.kind}</strong>. Related posts available on the <a href="accomplishments.html?dept=${slug}" style="color:var(--brand);">Accomplishments page</a>.</p>
+          </section>
+        </div>
+      `;
+      DeptDrawer.open(html);
+    });
   }
 
   const params = new URLSearchParams(location.search);

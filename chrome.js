@@ -86,6 +86,7 @@
             <ul class="nav-dropdown" role="menu">
               <li><a href="${ROOT}photos.html">Photos</a></li>
               <li><a href="${ROOT}videos.html">Videos</a></li>
+              <li><a href="${ROOT}audios.html">Audios</a></li>
             </ul>
           </li>
           <li${active('blog.html')}><a href="${ROOT}blog.html">Blog</a></li>
@@ -119,6 +120,7 @@
         <span class="mobile-nav-section">Media</span>
         <a href="${ROOT}photos.html"${mActive('photos.html')}><i data-lucide="image" class="icon-sm"></i>Photos</a>
         <a href="${ROOT}videos.html"${mActive('videos.html')}><i data-lucide="play-circle" class="icon-sm"></i>Videos</a>
+        <a href="${ROOT}audios.html"${mActive('audios.html')}><i data-lucide="headphones" class="icon-sm"></i>Audios</a>
         <span class="mobile-nav-section">More</span>
         <a href="${ROOT}blog.html"${mActive('blog.html')}><i data-lucide="newspaper" class="icon-sm"></i>Blog</a>
         <a href="${ROOT}contact.html"${mActive('contact.html')}><i data-lucide="mail" class="icon-sm"></i>Contact</a>
@@ -159,6 +161,7 @@
             <ul>
               <li><a href="${ROOT}photos.html">Photos</a></li>
               <li><a href="${ROOT}videos.html">Videos</a></li>
+              <li><a href="${ROOT}audios.html">Audios</a></li>
               <li><a href="${ROOT}blog.html">Blog</a></li>
               <li><a href="${ROOT}contact.html">Contact</a></li>
             </ul>

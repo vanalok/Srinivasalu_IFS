@@ -1013,13 +1013,6 @@ footer{
   align-self:flex-start;
   margin-bottom:var(--s-5);
 }
-.hero-split-text h1{
-  color:#fff;
-  font-size:clamp(var(--t-40), 5vw, var(--t-72));
-  margin-bottom:var(--s-5);
-  max-width:14ch;
-  line-height:1.08;
-}
 .hero-split-text .hero-role{
   font-size:clamp(var(--t-14), 1.2vw, var(--t-16));
   color:rgba(232,228,214,.7);
