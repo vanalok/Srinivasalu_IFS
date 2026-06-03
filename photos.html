@@ -105,14 +105,16 @@ const CAT_NAMES = {
 };
 
 const data = window.SR_DEPTS_CV || [];
+const photosData = [...data, { slug: 'family', name: 'Family', period: 'Personal Gallery', kind: 'Photo Album' }];
 const logos = window.SR_LOGOS || {};
+logos['family'] = logos['family'] || 'images/family/banner_logo.webp'; // family album icon
 
 document.getElementById('pCount').textContent = PHOTOS.length;
-document.getElementById('pAlbums').textContent = data.length;
+document.getElementById('pAlbums').textContent = photosData.length;
 
 function render() {
   const root = document.getElementById('deptGrid');
-  root.innerHTML = data.map(d => {
+  root.innerHTML = photosData.map(d => {
     return `
       <a href="dept.html?dept=${d.slug}&page=photos" class="dept-card" style="text-decoration:none;color:inherit;">
         <img class="dept-logo" src="${logos[d.slug] || ''}" alt="${d.name}" loading="lazy">

@@ -64,7 +64,7 @@
    -------------------------------------------------------------------------- */
 .acc-v2 .page-hero{
   position:relative; overflow:hidden;
-  padding:clamp(56px, 7vw, 96px) 0 clamp(40px, 5vw, 64px) !important;
+  padding: clamp(14px, 2.5vw, 39px) 0 clamp(17px, 1.75vw, 28px) !important;
   background:
     radial-gradient(60% 80% at 100% 0%, rgba(201,168,76,.12), transparent 60%),
     radial-gradient(50% 70% at 0% 100%, rgba(46,148,96,.10), transparent 60%),
@@ -81,7 +81,7 @@
 .acc-v2 .page-hero .breadcrumb{
   display:inline-flex; align-items:center; gap:8px;
   color:var(--v-ink-soft); font-family:var(--f-body); font-size:13px;
-  margin-bottom:var(--s-5) !important;
+  margin-bottom:var(--s-2) !important;
   padding:6px 14px;
   background:rgba(255,255,255,.55);
   border:1px solid rgba(14,46,31,.08);
@@ -461,12 +461,12 @@ body.has-acc-v2 .drawer-body .btn-primary:hover{
   .acc-v2 .page-hero h1{
     font-size:clamp(28px, 6vw, 40px) !important;
     padding-top:14px;
-    margin:0 0 var(--s-3) !important;
+    margin:0 0 var(--s-2) !important;
   }
   /* hero controls: stack search above the stat block */
   .acc-v2 .page-hero .container > div[style*="display:flex"]{
-    gap:var(--s-3) !important;
-    margin-top:var(--s-4) !important;
+    gap:var(--s-2) !important;
+    margin-top:var(--s-2) !important;
   }
   .acc-v2 .page-hero .search-input{
     flex:1 1 100% !important;

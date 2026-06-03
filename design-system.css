@@ -652,8 +652,10 @@ section.bio-section h2 .section-title span { color: #e07b39 !important; }
 .dept-node-loc { font-size: var(--t-13); color: var(--ink-3); margin-top: auto; }
 
 .dept-grid{
-  display:grid; grid-template-columns:repeat(4, 1fr); gap:var(--s-4);
+  display:grid; grid-template-columns:repeat(6, 1fr); gap:var(--s-4);
 }
+@media (max-width:1600px){ .dept-grid{ grid-template-columns:repeat(5, 1fr); } }
+@media (max-width:1300px){ .dept-grid{ grid-template-columns:repeat(4, 1fr); } }
 @media (max-width:1024px){ .dept-grid{ grid-template-columns:repeat(3, 1fr); } }
 @media (max-width:768px){ .dept-grid{ grid-template-columns:repeat(2, 1fr); } }
 @media (max-width:480px){ .dept-grid{ grid-template-columns:1fr; } }

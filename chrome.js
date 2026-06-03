@@ -34,25 +34,32 @@
     { slug:'ecology-environment',         name:'Ecology & Environment',       code:'F-12', period:'2022-Present', kind:'Principal Secretary' }
   ];
 
-  // Logo URLs (preserved from original site)
+  // Logo URLs
   window.SR_LOGOS = {
-    'kspcb': 'https://static.wixstatic.com/media/f453f3_4ff3108d8f634e838fab62ca56fffc96~mv2.png',
-    'ayush': 'https://static.wixstatic.com/media/f453f3_17e9ae17fcef4f208620014a703c4dd0~mv2.png',
-    'kalaburagi': 'https://static.wixstatic.com/media/f453f3_1c1354dbeab64557bcc9d5d6ee0096e6~mv2.png',
-    'shimoga': 'https://static.wixstatic.com/media/f453f3_441ae3bd6cdd4bf2a0e8842c7993c960~mv2.png',
-    'academics': 'https://static.wixstatic.com/media/f453f3_8affe3ef7ad64ffea272c0980e8981e2~mv2.png',
-    'chitradurga': 'https://static.wixstatic.com/media/f453f3_acd8279650af4b8088840c01285ff8a5~mv2.png',
-    'kfcsc': 'https://static.wixstatic.com/media/f453f3_e08ab165d103428989198955bb9d62f3~mv2.png',
-    'ecology-environment': 'images/feed.png',
-    'karnataka-forest-department': 'https://static.wixstatic.com/media/f453f3_aca3d434c40c4d10b761d578c93bcade~mv2.png',
-    'adcl': 'https://static.wixstatic.com/media/f453f3_7f56d5d0a9664f56bc7c74743d1a0f55~mv2.png',
-    'nagarhole-national-park': 'images/NTRlogo.png',
-    'kali-tiger-reserve': 'images/kalitigerreservelogo.png'
+    'kspcb': 'images/kspcb_logo.png',
+    'ayush': 'images/ayush_logo.png',
+    'kalaburagi': 'images/kalaburagi_logo.png',
+    'shimoga': 'images/shimoga_logo.png',
+    'academics': 'images/academics_logo.png',
+    'chitradurga': 'images/chitradurga_logo.png',
+    'kfcsc': 'images/kfcsc_logo.png',
+    'ecology-environment': 'images/gok_logo.png"',
+    'karnataka-forest-department': 'images/karnataka_forest_department_logo.png',
+    'adcl': 'images/adcl_logo.png',
+    'nagarhole-national-park': 'images/nagarhole-national-park_logo.png',
+    'kali-tiger-reserve': 'images/kali-tiger-reserve_logo.png',
+    'family': 'images/family/banner_logo.webp'
   };
 
-  function ddItems(href){
-    return DEPTS_ALPHA.map(d => `<li><a href="${href}?dept=${d.slug}">${d.name}</a></li>`).join('')
-      + `<li><a href="${href}" class="dd-all">View all departments →</a></li>`;
+  function ddItems(page){
+    return DEPTS_ALPHA.map(d => `<li><a href="${ROOT}dept.html?dept=${d.slug}&page=${page}">${d.name}</a></li>`).join('')
+      + `<li><a href="${ROOT}${page}.html" class="dd-all">View all departments →</a></li>`;
+  }
+
+  function ddItemsPhotos(){
+    return DEPTS_ALPHA.map(d => `<li><a href="${ROOT}dept.html?dept=${d.slug}&page=photos">${d.name}</a></li>`).join('')
+      + `<li><a href="${ROOT}dept.html?dept=family&page=photos">Family</a></li>`
+      + `<li><a href="${ROOT}photos.html" class="dd-all">View all departments →</a></li>`;
   }
 
   // active page
@@ -76,9 +83,15 @@
           <li${active('index.html')}><a href="${ROOT}index.html">Home</a></li>
           <li${active('cv.html')}><a href="${ROOT}cv.html">CV</a></li>
           <li${active('honours.html')}><a href="${ROOT}honours.html">Honours and awards</a></li>
-          <li${active('accomplishments.html')}><a href="${ROOT}accomplishments.html">Accomplishments</a></li>
-          <li${active('publications.html')}><a href="${ROOT}publications.html">Publications</a></li>
-          <li${active('photos.html')}><a href="${ROOT}photos.html">Photos</a></li>
+          <li${active('accomplishments.html')}><a href="${ROOT}accomplishments.html">Accomplishments <i data-lucide="chevron-down" class="icon-sm"></i></a>
+            <ul class="nav-dropdown" role="menu">${ddItems('accomplishments')}</ul>
+          </li>
+          <li${active('publications.html')}><a href="${ROOT}publications.html">Publications <i data-lucide="chevron-down" class="icon-sm"></i></a>
+            <ul class="nav-dropdown" role="menu">${ddItems('publications')}</ul>
+          </li>
+          <li${active('photos.html')}><a href="${ROOT}photos.html">Photos <i data-lucide="chevron-down" class="icon-sm"></i></a>
+            <ul class="nav-dropdown" role="menu">${ddItemsPhotos()}</ul>
+          </li>
           <li${active('videos.html')}><a href="${ROOT}videos.html">Videos</a></li>
           <li${active('audios.html')}><a href="${ROOT}audios.html">Audios</a></li>
           <li${active('blog.html')}><a href="${ROOT}blog.html">Blog</a></li>

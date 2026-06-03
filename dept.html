@@ -157,7 +157,13 @@ window.addEventListener('load', async () => {
 
   const data = window.SR_DEPTS_CV || [];
   const logos = window.SR_LOGOS || {};
-  const dept = data.find(x => x.slug === slug);
+
+  // Support the special 'family' slug which isn't in SR_DEPTS_CV
+  const EXTRA_DEPTS = {
+    'family': { slug: 'family', name: 'Family', code: 'FAM', period: 'Personal Gallery', kind: 'Photo Album' }
+  };
+
+  const dept = data.find(x => x.slug === slug) || EXTRA_DEPTS[slug];
 
   if (!dept) {
     location.href = 'accomplishments.html';
@@ -211,27 +217,40 @@ window.addEventListener('load', async () => {
   };
 
   const PHOTO_CAT_NAMES = {
-    'kspcb-photos':'kspcb',
-    'family':'family',
-    'academics':'academics',
-    'shimoga':'shimoga',
-    'honours':'honours',
-    'ayush-photos':'ayush',
-    'adcl':'adcl',
-    'forestdeptphotos':'karnataka-forest-department',
-    'kali':'kali-tiger-reserve',
-    'chitradurga':'chitradurga'
+    'kspcb-photos': 'kspcb',
+    'family':       'family',
+    'academics':    'academics',
+    'shimoga':      'shimoga',
+    'honours':      'honours',
+    'ayush-photos': 'ayush',
+    'adcl':         'adcl',
+    'forestdeptphotos': 'karnataka-forest-department',
+    'kali':         'kali-tiger-reserve',
+    'chitradurga':  'chitradurga'
   };
 
-  // Fetch all required data
-  const postsRes = await fetch('./assets/posts-full.json');
-  const postsData = await postsRes.json();
-  
-  const accRes = await fetch('./accomplishments.json');
-  const accomplishmentsData = await accRes.json();
-  
-  const pubRes = await fetch('./publications.json');
-  const publicationsData = await pubRes.json();
+  // For family slug, skip data fetches and just show photos tab
+  const isFamilyOnly = (slug === 'family');
+  if (isFamilyOnly) {
+    logos['family'] = logos['family'] || '';
+    activeTab = 'photos';
+  }
+
+  // Hide Acc/Pub tabs for family
+  if (isFamilyOnly) {
+    document.querySelectorAll('.tab[data-target="accomplishments"], .tab[data-target="publications"]').forEach(t => t.style.display = 'none');
+  }
+
+  // Fetch all required data (skip for family)
+  let postsData = [], accomplishmentsData = { departments: {} }, publicationsData = { departments: {} };
+  if (!isFamilyOnly) {
+    const postsRes = await fetch('./assets/posts-full.json');
+    postsData = await postsRes.json();
+    const accRes = await fetch('./accomplishments.json');
+    accomplishmentsData = await accRes.json();
+    const pubRes = await fetch('./publications.json');
+    publicationsData = await pubRes.json();
+  }
 
   // 1. Process Accomplishments
   let accList = [];
