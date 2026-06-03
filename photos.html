@@ -78,22 +78,9 @@
     </div>
   </section>
 
-  <div class="filter-bar">
-    <div class="container" style="display:flex;gap:var(--s-4);align-items:center;width:100%;flex-wrap:wrap;">
-      <div class="view-toggle" id="viewToggle">
-        <button class="is-active" data-view="albums"><i data-lucide="layout-grid" class="icon-sm"></i> Albums</button>
-        <button data-view="all"><i data-lucide="image" class="icon-sm"></i> All photos</button>
-      </div>
-      <div class="filter-chips" id="catChips" style="display:none;">
-        <button class="chip is-active" data-cat="all">All</button>
-      </div>
-    </div>
-  </div>
-
   <section class="section">
     <div class="container">
-      <div id="albumsView" class="album-grid"></div>
-      <div id="allView" class="masonry" style="display:none;"></div>
+      <div class="dept-grid" id="deptGrid"></div>
     </div>
   </section>
 
@@ -117,91 +104,24 @@ const CAT_NAMES = {
   'kali':'Kali Tiger Reserve','chitradurga':'Chitradurga'
 };
 
-// Group by category
-const ALBUMS = {};
-PHOTOS.forEach(p => {
-  ALBUMS[p.category] = ALBUMS[p.category] || [];
-  ALBUMS[p.category].push(p);
-});
+const data = window.SR_DEPTS_CV || [];
+const logos = window.SR_LOGOS || {};
 
 document.getElementById('pCount').textContent = PHOTOS.length;
-document.getElementById('pAlbums').textContent = Object.keys(ALBUMS).length;
+document.getElementById('pAlbums').textContent = data.length;
 
-// Render albums view
-function renderAlbums(){
-  const root = document.getElementById('albumsView');
-  // Sort albums by count desc
-  const cats = Object.keys(ALBUMS).sort((a,b) => ALBUMS[b].length - ALBUMS[a].length);
-  root.innerHTML = cats.map(cat => {
-    const list = ALBUMS[cat];
-    const cover = list[0].src;
+function render() {
+  const root = document.getElementById('deptGrid');
+  root.innerHTML = data.map(d => {
     return `
-      <button class="album-card" data-cat="${cat}" aria-label="Open album: ${CAT_NAMES[cat] || cat}">
-        <img src="${cover}" alt="" loading="lazy">
-        <div class="album-cap">
-          <h3>${CAT_NAMES[cat] || cat}</h3>
-          <div class="count">${list.length} photo${list.length>1?'s':''}</div>
-        </div>
-      </button>`;
+      <a href="dept.html?dept=${d.slug}&page=photos" class="dept-card" style="text-decoration:none;color:inherit;">
+        <img class="dept-logo" src="${logos[d.slug] || ''}" alt="${d.name}" loading="lazy">
+        <h3>${d.name}</h3>
+      </a>`;
   }).join('');
-
-  root.querySelectorAll('.album-card').forEach(c => {
-    c.addEventListener('click', () => {
-      const cat = c.dataset.cat;
-      const list = ALBUMS[cat].map(p => ({ src:p.src, alt:CAT_NAMES[cat] || cat, category:CAT_NAMES[cat] || cat }));
-      PhotoViewer.open(list, 0);
-    });
-  });
 }
 
-// Render all photos masonry
-function renderAll(cat){
-  const root = document.getElementById('allView');
-  const list = (cat && cat !== 'all') ? ALBUMS[cat] : PHOTOS;
-  root.innerHTML = list.map((p, i) => `
-    <button class="photo-tile" data-i="${i}" aria-label="Open photo">
-      <img src="${p.src}" alt="${CAT_NAMES[p.category] || p.category}" loading="lazy">
-    </button>
-  `).join('');
-
-  root.querySelectorAll('.photo-tile').forEach(t => {
-    t.addEventListener('click', () => {
-      const items = list.map(p => ({ src:p.src, alt:CAT_NAMES[p.category] || p.category, category:CAT_NAMES[p.category] || p.category }));
-      PhotoViewer.open(items, parseInt(t.dataset.i, 10));
-    });
-  });
-}
-
-// Build category chips for "All photos" view
-function buildChips(){
-  const chips = document.getElementById('catChips');
-  const cats = Object.keys(ALBUMS).sort();
-  chips.innerHTML = '<button class="chip is-active" data-cat="all">All</button>' +
-    cats.map(c => `<button class="chip" data-cat="${c}">${CAT_NAMES[c] || c} (${ALBUMS[c].length})</button>`).join('');
-  chips.querySelectorAll('.chip').forEach(ch => {
-    ch.addEventListener('click', () => {
-      chips.querySelectorAll('.chip').forEach(x => x.classList.remove('is-active'));
-      ch.classList.add('is-active');
-      renderAll(ch.dataset.cat);
-    });
-  });
-}
-
-// View toggle
-document.querySelectorAll('#viewToggle button').forEach(b => {
-  b.addEventListener('click', () => {
-    document.querySelectorAll('#viewToggle button').forEach(x => x.classList.remove('is-active'));
-    b.classList.add('is-active');
-    const view = b.dataset.view;
-    document.getElementById('albumsView').style.display = view === 'albums' ? '' : 'none';
-    document.getElementById('allView').style.display = view === 'all' ? '' : 'none';
-    document.getElementById('catChips').style.display = view === 'all' ? '' : 'none';
-    if (view === 'all') renderAll('all');
-  });
-});
-
-renderAlbums();
-buildChips();
+render();
 </script>
 </body>
 </html>

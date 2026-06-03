@@ -125,93 +125,6 @@ window.addEventListener('load', () => {
   const logos = window.SR_LOGOS || {};
   const grid = document.getElementById('deptGrid');
 
-  const DEPT_CATEGORY_MAP = {
-    'kspcb': ['KSPCB', 'KSPCB photos'],
-    'kali-tiger-reserve': ['Kali Tiger Reserve'],
-    'nagarhole-national-park': [],
-    'karnataka-forest-department': ['KFD - Wildlife'],
-    'shimoga': ['Forest Department - Shimogga'],
-    'chitradurga': ['Forest Department - Chitradurga'],
-    'kalaburagi': [],
-    'academics': [],
-    'adcl': ['Dr B R Ambedkar Development Corp.'],
-    'ayush': ['Ayush', 'Ayush Accomplishments'],
-    'kfcsc': [],
-    'general': ['Accomplishments']
-  };
-
-  let accomplishmentsData = null;
-  let postsData = null;
-
-  async function loadData() {
-    if (!accomplishmentsData) {
-      const r = await fetch('./accomplishments.json');
-      accomplishmentsData = await r.json();
-    }
-    if (!postsData) {
-      const r = await fetch('./assets/posts-full.json');
-      postsData = await r.json();
-    }
-  }
-
-  // Pre-load data in the background
-  loadData().catch(err => console.error('Error pre-loading accomplishments data:', err));
-
-  async function getAccomplishments(slug){
-    try {
-      await loadData();
-      if (!accomplishmentsData || !accomplishmentsData.departments) return [];
-
-      const mappedCats = DEPT_CATEGORY_MAP[slug] || [];
-
-      // Collect all items across all departments to handle potential Wix category/department misalignments
-      const allAccs = [];
-      const seenIds = new Set();
-      for (const deptKey in accomplishmentsData.departments) {
-        const list = accomplishmentsData.departments[deptKey] || [];
-        for (const item of list) {
-          if (!seenIds.has(item.id)) {
-            seenIds.add(item.id);
-            allAccs.push(item);
-          }
-        }
-      }
-
-      // Filter accomplishments belonging to this department
-      const filtered = allAccs.filter(p => {
-        if (p.dept === slug) return true;
-        if (p.categories) {
-          const itemCats = p.categories.split(',').map(c => c.trim().toLowerCase());
-          const hasCatMatch = mappedCats.some(mc => itemCats.includes(mc.toLowerCase()));
-          if (hasCatMatch) return true;
-        }
-        return false;
-      });
-
-      // Enrich with detailed metadata from posts-full.json
-      const enriched = filtered.map(p => {
-        const post = (postsData || []).find(post => post.slug === p.slug);
-        return {
-          title: p.title || (post && post.title) || '',
-          slug: p.slug,
-          postPageUrl: `posts/${p.slug}.html`,
-          coverImage: (post && post.image) || '',
-          publishedDate: (post && post.date) || new Date().toISOString(),
-          timeToRead: (post && (post.minutesToRead || post.timeToRead)) || 0,
-          viewCount: (post && post.viewCount) || 0
-        };
-      });
-
-      // Sort by publication date descending
-      enriched.sort((a, b) => new Date(b.publishedDate) - new Date(a.publishedDate));
-
-      return enriched;
-    } catch (error) {
-      console.error(`Error filtering accomplishments for ${slug}:`, error);
-      return [];
-    }
-  }
-
   function render(filter){
     const q = (filter || '').toLowerCase().trim();
     const list = q ? data.filter(d => d.name.toLowerCase().includes(q) || d.kind.toLowerCase().includes(q)) : data;
@@ -221,99 +134,17 @@ window.addEventListener('load', () => {
       return;
     }
     grid.innerHTML = list.map(d => `
-      <button class="dept-card" data-slug="${d.slug}" aria-label="${d.name}">
-        <img class="dept-logo" src="${logos[d.slug] || ''}" alt="" loading="lazy">
+      <a href="dept.html?dept=${d.slug}&page=accomplishments" class="dept-card" style="text-decoration:none;color:inherit;">
+        <img class="dept-logo" src="${logos[d.slug] || ''}" alt="${d.name}" loading="lazy">
         <h3>${d.name}</h3>
-      </button>
+      </a>
     `).join('');
     window.SrIcons && window.SrIcons();
-
-    grid.querySelectorAll('.dept-card').forEach(c => {
-      c.addEventListener('click', () => openDept(c.dataset.slug));
-    });
   }
 
   document.getElementById('deptSearch').addEventListener('input', e => render(e.target.value));
   render();
 
-  // Open dept drawer
-  function openDept(slug){
-    const d = data.find(x => x.slug === slug);
-    if (!d) return;
-    const logo = logos[slug];
-
-    // Update URL
-    const url = new URL(location.href);
-    url.searchParams.set('dept', slug);
-    history.replaceState(null,'',url);
-
-    // Show loading state
-    const loadingHtml = `
-      <header class="drawer-head">
-        <img class="drawer-head-logo" src="${logo||''}" alt="">
-        <div class="drawer-head-text">
-          <h2>${d.name}</h2>
-          <div class="meta">${d.code} · ${d.period} · ${d.kind}</div>
-        </div>
-        <button class="drawer-close" aria-label="Close"><i data-lucide="x"></i></button>
-      </header>
-      <div class="drawer-body" style="padding:var(--s-6);text-align:center;">
-        <p>Loading accomplishments...</p>
-      </div>
-    `;
-    DeptDrawer.open(loadingHtml);
-
-    // Fetch accomplishments from Wix API
-    getAccomplishments(slug).then(accomplishments => {
-      const accHtml = accomplishments.length ? accomplishments.map(p => `
-        <a class="item-card" href="${p.postPageUrl || '#'}" target="_blank" rel="noopener">
-          <div class="item-card-img">${p.coverImage ? `<img src="${p.coverImage}" alt="" loading="lazy">` : ''}</div>
-          <div class="item-card-body">
-            <div class="item-card-title">${p.title}</div>
-            <div class="item-card-meta">
-              <span><i data-lucide="calendar" class="icon-sm"></i> ${new Date(p.publishedDate).toLocaleDateString('en-IN', {day:'numeric',month:'short',year:'numeric'})}</span>
-              ${p.timeToRead ? `<span><i data-lucide="clock" class="icon-sm"></i> ${p.timeToRead} min</span>` : ''}
-              ${p.viewCount ? `<span><i data-lucide="eye" class="icon-sm"></i> ${p.viewCount}</span>` : ''}
-            </div>
-          </div>
-        </a>`).join('') :
-        '<div class="empty">No accomplishments yet for this department.</div>';
-
-      // Render drawer content
-      const html = `
-        <header class="drawer-head">
-          <img class="drawer-head-logo" src="${logo||''}" alt="">
-          <div class="drawer-head-text">
-            <h2>${d.name}</h2>
-            <div class="meta">${d.code} · ${d.period} · ${d.kind}</div>
-          </div>
-          <button class="drawer-close" aria-label="Close"><i data-lucide="x"></i></button>
-        </header>
-        <div class="drawer-tabs">
-          <button class="tab is-active" data-target="ov-${slug}">Overview</button>
-          <button class="tab" data-target="po-${slug}">Accomplishments</button>
-        </div>
-        <div class="drawer-body">
-          <section class="tab-panel is-active" id="ov-${slug}">
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--s-3);margin-bottom:var(--s-5);">
-              <div class="card" style="padding:var(--s-4);"><div class="page-hero-stat"><div class="num">${accomplishments.length}</div><div class="lbl">Accomplishments</div></div></div>
-            </div>
-            <p style="color:var(--ink-2); line-height:1.7;">Service: <strong>${d.period}</strong> · Role: <strong>${d.kind}</strong>. Browse the related accomplishments and updates in the next tab.</p>
-            <a class="btn btn-primary btn-sm" href="publications.html?dept=${slug}" style="margin-top:var(--s-4);">View publications <i data-lucide="arrow-right" class="icon-sm"></i></a>
-          </section>
-          <section class="tab-panel" id="po-${slug}">
-            ${accHtml}
-          </section>
-        </div>
-      `;
-      DeptDrawer.open(html);
-    });
-  }
-
-  // Open from URL param
-  const params = new URLSearchParams(location.search);
-  const depParam = params.get('dept');
-  if (depParam) setTimeout(() => openDept(depParam), 200);
 });
 </script>
 </body>

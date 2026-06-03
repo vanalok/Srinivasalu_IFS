@@ -76,19 +76,11 @@
           <li${active('index.html')}><a href="${ROOT}index.html">Home</a></li>
           <li${active('cv.html')}><a href="${ROOT}cv.html">CV</a></li>
           <li${active('honours.html')}><a href="${ROOT}honours.html">Honours and awards</a></li>
-          <li${active('accomplishments.html')}><a href="${ROOT}accomplishments.html">Accomplishments <i data-lucide="chevron-down" class="icon-sm"></i></a>
-            <ul class="nav-dropdown" role="menu">${ddItems(ROOT + 'accomplishments.html')}</ul>
-          </li>
-          <li${active('publications.html')}><a href="${ROOT}publications.html">Publications <i data-lucide="chevron-down" class="icon-sm"></i></a>
-            <ul class="nav-dropdown" role="menu">${ddItems(ROOT + 'publications.html')}</ul>
-          </li>
-          <li><a href="#">Media <i data-lucide="chevron-down" class="icon-sm"></i></a>
-            <ul class="nav-dropdown" role="menu">
-              <li><a href="${ROOT}photos.html">Photos</a></li>
-              <li><a href="${ROOT}videos.html">Videos</a></li>
-              <li><a href="${ROOT}audios.html">Audios</a></li>
-            </ul>
-          </li>
+          <li${active('accomplishments.html')}><a href="${ROOT}accomplishments.html">Accomplishments</a></li>
+          <li${active('publications.html')}><a href="${ROOT}publications.html">Publications</a></li>
+          <li${active('photos.html')}><a href="${ROOT}photos.html">Photos</a></li>
+          <li${active('videos.html')}><a href="${ROOT}videos.html">Videos</a></li>
+          <li${active('audios.html')}><a href="${ROOT}audios.html">Audios</a></li>
           <li${active('blog.html')}><a href="${ROOT}blog.html">Blog</a></li>
         </ul>
         <div class="nav-tools">

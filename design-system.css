@@ -237,7 +237,7 @@ h4{ font-size:var(--t-20); }
 }
 .hamburger span{ display:block; width:20px; height:2px; background:var(--ink); margin:3px 0; transition:transform var(--d), opacity var(--d); }
 
-@media (max-width:1024px){
+@media (max-width:1200px){
   .nav-primary, .nav-tools .ctxt{ display:none; }
   .hamburger{ display:flex; margin-left:auto; }
 }
@@ -631,6 +631,26 @@ section.bio-section h2 .section-title span { color: #e07b39 !important; }
 .page-btn[disabled]{ opacity:.4; cursor:not-allowed; }
 
 /* ---------- 16. DEPARTMENT GRID & DRAWER -------------------------------- */
+.dept-track {
+  display: flex; gap: var(--s-4); overflow-x: auto;
+  padding: var(--s-4) 0 var(--s-6); scroll-snap-type: x mandatory;
+  scrollbar-width: thin;
+}
+.dept-track > article { flex: 0 0 320px; scroll-snap-align: start; }
+.dept-node {
+  background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-md);
+  overflow: hidden; height: 100%; display: flex; flex-direction: column;
+  transition: transform var(--d), box-shadow var(--d);
+  text-decoration: none; color: inherit; cursor: pointer;
+}
+.dept-node:hover { transform: translateY(-3px); box-shadow: var(--e2); }
+.dept-node-img { aspect-ratio: 4/3; background: var(--paper-2); overflow: hidden; }
+.dept-node-img img { width: 100%; height: 100%; object-fit: contain; padding: 24px; }
+.dept-node-body { padding: var(--s-4); display: flex; flex-direction: column; flex: 1; }
+.dept-node-period { font-family: var(--f-mono); font-size: var(--t-12); color: var(--ink-3); margin-bottom: 6px; }
+.dept-node-role { font-family: var(--f-display); font-size: var(--t-18); line-height: 1.3; margin-bottom: 6px; color: var(--ink); }
+.dept-node-loc { font-size: var(--t-13); color: var(--ink-3); margin-top: auto; }
+
 .dept-grid{
   display:grid; grid-template-columns:repeat(4, 1fr); gap:var(--s-4);
 }
