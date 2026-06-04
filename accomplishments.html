@@ -12,16 +12,6 @@
   <link rel="stylesheet" href="design-system.css">
   <link rel="stylesheet" href="accomplishments-premium.css" />
   <style>
-    .page-hero {
-      padding: var(--s-3) 0 !important;
-    }
-    .page-hero h1 {
-      font-size: var(--t-24) !important;
-      margin-bottom: var(--s-1) !important;
-    }
-    .page-hero .breadcrumb {
-      margin-bottom: var(--s-1) !important;
-    }
     .page-hero-stat {
       display: flex;
       align-items: baseline;
@@ -95,13 +85,22 @@
   <section class="page-hero">
     <div class="container reveal">
       <div class="breadcrumb"><a href="index.html">Home</a> <i data-lucide="chevron-right" class="icon-sm"></i> <span>Accomplishments</span></div>
-      <h1>Accomplishments</h1>
-      <div style="display:flex; gap:var(--s-3); flex-wrap:wrap;">
-        <div class="search-input" style="flex:1; max-width:420px;">
-          <i data-lucide="search" class="icon-sm"></i>
-          <input id="deptSearch" type="search" placeholder="Search across all departments…">
+      <div style="display:grid; grid-template-columns:auto 1fr; gap:var(--s-8); align-items:center;">
+        <!-- LEFT: title -->
+        <h1 style="margin:0 !important; white-space:nowrap;">Accomplishments</h1>
+        <!-- RIGHT: divider + meta -->
+        <div style="display:flex; flex-direction:column; gap:var(--s-3); border-left:2px solid rgba(255,255,255,.18); padding-left:var(--s-8);">
+          <p style="font-family:'DM Sans',system-ui,sans-serif; font-size:clamp(13px,1.1vw,15px); color:rgb(255, 255, 255); margin:0; line-height:1.6;">
+            Key milestones and initiatives across 12 departments — Karnataka Forest Department, KSPCB, AYUSH, Kali Tiger Reserve and more.
+          </p>
+          <div style="display:flex; gap:var(--s-4); flex-wrap:wrap; align-items:center;">
+            <div class="search-input" style="flex:1; max-width:360px;display: none;" >
+              <i data-lucide="search" class="icon-sm"></i>
+              <input id="deptSearch" type="search" placeholder="Search departments…" >
+            </div>
+            <div class="page-hero-stat"><div class="num">12</div><div class="lbl">Postings on record</div></div>
+          </div>
         </div>
-        <div class="page-hero-stat" style="margin-left:auto;"><div class="num">12</div><div class="lbl">Postings on record</div></div>
       </div>
     </div>
   </section>

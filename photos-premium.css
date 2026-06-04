@@ -56,24 +56,23 @@
    -------------------------------------------------------------------------- */
 .pho-v2 .page-hero{
   position:relative; overflow:hidden;
-  padding: clamp(14px, 2.5vw, 39px) 0 clamp(17px, 1.75vw, 28px) !important;
+  padding: clamp(28px, 4vw, 52px) 0 clamp(24px, 3.5vw, 44px) !important;
   background:
-    radial-gradient(60% 70% at 100% 0%, rgba(201,168,76,.22), transparent 55%),
-    radial-gradient(55% 65% at 0% 100%, rgba(46,148,96,.18), transparent 55%),
-    linear-gradient(135deg, rgba(20,32,24,.96) 0%, rgba(10,16,12,.90) 50%, rgba(28,22,16,.94) 100%);
+    linear-gradient(135deg, rgba(14,46,31,.72) 0%, rgba(14,46,31,.52) 50%, rgba(14,46,31,.68) 100%),
+    url('./images/hero_bgs/photo_bg.jpg') center center / cover no-repeat;
   border-bottom:1px solid rgba(201,168,76,.4);
   color:#F4F0E2;
 }
+/* shimmer overlay */
 .pho-v2 .page-hero::before{
   content:''; position:absolute; inset:0; z-index:0; pointer-events:none;
-  background-image:radial-gradient(rgba(201,168,76,.09) 1.2px, transparent 1.6px);
-  background-size:26px 26px;
-  -webkit-mask-image:radial-gradient(120% 90% at 50% 40%, #000, transparent 80%);
-          mask-image:radial-gradient(120% 90% at 50% 40%, #000, transparent 80%);
+  background:
+    radial-gradient(60% 70% at 100% 0%, rgba(201,168,76,.22), transparent 55%),
+    radial-gradient(55% 65% at 0% 100%, rgba(46,148,96,.18), transparent 55%);
 }
 .pho-v2 .page-hero::after{
-  content:''; position:absolute; left:0; right:0; bottom:0; height:2px;
-  background:linear-gradient(90deg, transparent, var(--v-gold), transparent);
+  content:''; position:absolute; left:0; right:0; bottom:0; height:3px;
+  background:linear-gradient(90deg, transparent, var(--v-gold), var(--v-gold-light), var(--v-gold), transparent);
   opacity:.75;
 }
 .pho-v2 .page-hero > .container{ position:relative; z-index:1; }
@@ -95,26 +94,22 @@
 /* hero title + lede */
 .pho-v2 .page-hero h1{
   font-family:var(--f-display); font-weight:600;
-  font-size:clamp(48px, 6vw, 88px); line-height:1.04; letter-spacing:-.01em;
-  color:#fdfaf0; margin:var(--s-3) 0 var(--s-4);
+  font-size:clamp(40px, 6vw, 80px); line-height:1.04; letter-spacing:-.01em;
+  color:#ffffff; margin:0;
   text-shadow:0 2px 18px rgba(0,0,0,.35);
+  white-space:nowrap;
 }
-.pho-v2 .page-hero h1::before{
-  content:''; display:block; width:60px; height:2px; margin-bottom:18px;
-  background:linear-gradient(90deg, var(--v-gold), var(--v-emerald-accent));
-}
+.pho-v2 .page-hero h1::before{ display:none; }
 .pho-v2 .page-hero .lede{
-  font-family:var(--f-display); font-style:italic; font-weight:400;
-  font-size:clamp(20px, 2vw, 26px); line-height:1.55;
-  color:#EFE7CE; max-width:60ch; margin-bottom:var(--s-7);
+  font-size:clamp(15px,1.4vw,18px);
+  line-height:1.55;
+  color:#ffffff; margin:0;
 }
 
 /* hero stats — refined gold accent */
 .pho-v2 .page-hero-stats{
-  display:flex; flex-wrap:wrap; gap:clamp(28px, 4vw, 56px);
-  border-top:1px solid rgba(201,168,76,.35);
-  border-bottom:1px solid rgba(201,168,76,.35);
-  padding:var(--s-6) 0; margin-top:var(--s-6);
+  display:flex; flex-wrap:wrap; gap:clamp(20px, 3vw, 40px);
+  margin:0;
 }
 .pho-v2 .page-hero-stat{ position:relative; text-align:left; }
 .pho-v2 .page-hero-stat::before{

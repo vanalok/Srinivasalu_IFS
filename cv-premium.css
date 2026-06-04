@@ -106,7 +106,7 @@
 }
 .cv-v2 .about-hero h1{ color:#fdfaf0 !important; text-shadow:0 2px 18px rgba(0,0,0,.35); }
 .cv-v2 .about-hero > .container > .about-hero-grid > div:last-child > p{
-  color:#EFE7CE !important;
+  color:#ffffff !important;
 }
 .cv-v2 .about-hero .about-quickstats{
   border-top-color:rgba(201,168,76,.35) !important;
@@ -160,7 +160,7 @@
   margin:var(--s-3) 0 var(--s-4) !important;
 }
 .cv-v2 .about-hero > .container > .about-hero-grid > div:last-child > p{
-  color:var(--v-ink-soft) !important; font-family:var(--f-body); line-height:1.7;
+  color:#ffffffcb !important; font-family:var(--f-body); line-height:1.7;
   max-width:60ch;
 }
 

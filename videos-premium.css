@@ -43,100 +43,81 @@
    -------------------------------------------------------------------------- */
 .vid-v2 .page-hero{
   position:relative; overflow:hidden;
-  padding: clamp(14px, 2.5vw, 39px) 0 clamp(17px, 1.75vw, 28px) !important;
+  padding: clamp(28px, 4vw, 52px) 0 clamp(24px, 3.5vw, 44px) !important;
   background:
-    radial-gradient(60% 70% at 100% 0%, rgba(201,168,76,.16), transparent 55%),
-    radial-gradient(60% 70% at 0% 100%, rgba(46,148,96,.14), transparent 55%),
-    linear-gradient(160deg, var(--v-paper) 0%, var(--v-ivory) 60%, var(--v-ivory-dark) 100%);
-  border-bottom:1px solid rgba(14,46,31,.08);
+    linear-gradient(135deg, rgba(14,46,31,.72) 0%, rgba(14,46,31,.52) 50%, rgba(14,46,31,.68) 100%),
+    url('./images/header_bg.webp') center center / cover no-repeat;
+  border-bottom:1px solid rgba(14,46,31,.12);
 }
-/* subtle gold dotted texture */
+/* shimmer overlay */
 .vid-v2 .page-hero::before{
   content:''; position:absolute; inset:0; z-index:0; pointer-events:none;
-  background-image:radial-gradient(rgba(201,168,76,.13) 1.1px, transparent 1.5px);
-  background-size:26px 26px;
-  -webkit-mask-image:radial-gradient(120% 90% at 50% 40%, #000, transparent 80%);
-          mask-image:radial-gradient(120% 90% at 50% 40%, #000, transparent 80%);
+  background:
+    radial-gradient(60% 70% at 100% 0%, rgba(201,168,76,.18), transparent 55%),
+    radial-gradient(55% 65% at 0% 100%, rgba(46,148,96,.12), transparent 55%);
 }
 .vid-v2 .page-hero::after{
-  content:''; position:absolute; left:0; right:0; bottom:0; height:2px;
-  background:linear-gradient(90deg, transparent, var(--v-gold), transparent);
-  opacity:.7;
+  content:''; position:absolute; left:0; right:0; bottom:0; height:3px;
+  background:linear-gradient(90deg, transparent, var(--v-gold), var(--v-gold-light), var(--v-gold), transparent);
+  opacity:.75;
 }
 .vid-v2 .page-hero > .container{ position:relative; z-index:1; }
 
 /* glass breadcrumb pill */
 .vid-v2 .page-hero .breadcrumb{
   display:inline-flex; align-items:center; gap:8px;
-  color:var(--v-ink-soft); font-family:var(--f-body); font-size:13px;
-  margin-bottom:var(--s-5); padding:6px 14px;
-  background:rgba(255,255,255,.55); border:1px solid rgba(14,46,31,.08);
+  color:rgba(247,243,236,.75); font-family:var(--f-body); font-size:13px;
+  margin-bottom:var(--s-4); padding:6px 14px;
+  background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.22);
   border-radius:var(--r-pill);
-  -webkit-backdrop-filter:blur(6px); backdrop-filter:blur(6px);
+  -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px);
 }
-.vid-v2 .page-hero .breadcrumb a{ color:var(--v-emerald-accent); }
-.vid-v2 .page-hero .breadcrumb a:hover{ color:var(--v-emerald); }
+.vid-v2 .page-hero .breadcrumb a{ color:var(--v-gold-light); }
+.vid-v2 .page-hero .breadcrumb a:hover{ color:#fff; }
 .vid-v2 .page-hero .breadcrumb [data-lucide],
 .vid-v2 .page-hero .breadcrumb svg{ width:14px; height:14px; }
 
 /* eyebrow rule (we synthesize the eyebrow visual ABOVE h1 via h1::before) */
 .vid-v2 .page-hero h1{
-  position:relative;
   font-family:var(--f-display); font-weight:600;
-  font-size:clamp(46px, 6.4vw, 88px);
+  font-size:clamp(40px, 6vw, 80px);
   line-height:1.04; letter-spacing:-.005em;
-  color:var(--v-emerald);
-  margin:var(--s-4) 0 var(--s-3);
-  padding-top:var(--s-5);
+  color:#fff;
+  text-shadow:0 2px 24px rgba(14,46,31,.4);
+  margin:0;
+  white-space:nowrap;
 }
-.vid-v2 .page-hero h1::before{
-  content:'Media Archive';
-  display:block;
-  position:absolute; top:0; left:0;
-  font-family:var(--f-body);
-  font-size:12px; font-weight:600;
-  letter-spacing:.18em; text-transform:uppercase;
-  color:var(--v-emerald-accent);
-  padding-left:42px;
-  line-height:1;
-}
-.vid-v2 .page-hero h1::after{
-  content:''; position:absolute; top:5px; left:0;
-  width:30px; height:2px; border-radius:1px;
-  background:linear-gradient(90deg, var(--v-gold), var(--v-emerald-accent));
-}
+.vid-v2 .page-hero h1::before{ display:none; }
+.vid-v2 .page-hero h1::after{ display:none; }
 
 /* italic Cormorant lede */
 .vid-v2 .page-hero p.lede{
-  font-family:var(--f-display); font-style:italic; font-weight:400;
-  font-size:clamp(20px, 1.8vw, 26px); line-height:1.55;
-  color:var(--v-ink-soft);
-  max-width:62ch;
-  margin-bottom:var(--s-7);
+  font-size:clamp(15px, 1.4vw, 18px); 
+  line-height:1.55;
+  color:#ffffff;
+  margin:0;
 }
 
 /* hero stats — refined gold-rule + emerald serif numerals */
 .vid-v2 .page-hero-stats{
-  display:flex; flex-wrap:wrap; gap:clamp(28px, 4vw, 64px);
-  margin-top:var(--s-6);
-  border-top:1px solid rgba(14,46,31,.12);
-  border-bottom:1px solid rgba(14,46,31,.12);
-  padding:var(--s-5) 0;
+  display:flex; flex-wrap:wrap; gap:clamp(20px, 3vw, 40px);
+  margin:0;
 }
-.vid-v2 .page-hero-stat{ position:relative; text-align:left; }
+.vid-v2 .page-hero-stat{ position:relative; padding-left:14px; text-align:left; }
 .vid-v2 .page-hero-stat::before{
-  content:''; display:block; width:24px; height:2px; margin-bottom:8px;
-  background:linear-gradient(90deg, var(--v-gold), transparent);
+  content:''; position:absolute; left:0; top:4px;
+  width:3px; height:calc(100% - 8px); border-radius:2px;
+  background:linear-gradient(180deg, var(--v-gold), var(--v-gold-light));
 }
 .vid-v2 .page-hero-stat .num{
   font-family:var(--f-display); font-weight:600;
-  font-size:clamp(30px, 3vw, 42px); line-height:1;
-  color:var(--v-emerald);
+  font-size:clamp(26px, 2.8vw, 38px); line-height:1;
+  color:var(--v-gold-light);
   background:none; -webkit-text-fill-color:currentColor;
   margin-bottom:4px;
 }
 .vid-v2 .page-hero-stat .lbl{
-  font-family:var(--f-body); font-size:12px; color:var(--v-ink-soft);
+  font-family:var(--f-body); font-size:12px; color:rgba(247,243,236,.65);
   text-transform:uppercase; letter-spacing:.14em;
 }
 

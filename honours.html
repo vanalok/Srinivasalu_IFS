@@ -17,7 +17,40 @@
     <link rel="stylesheet" href="design-system.css" />
     <style>
       /* tighter vertical rhythm — less dead space top/bottom */
-      .page-hero{ padding-top:clamp(40px,5vw,64px); padding-bottom:clamp(24px,3vw,36px); }
+      .page-hero{
+        padding-top:clamp(28px,4vw,48px);
+        padding-bottom:clamp(20px,3vw,36px);
+        background:
+          linear-gradient(135deg, rgba(14,46,31,.75) 0%, rgba(14,46,31,.55) 50%, rgba(14,46,31,.70) 100%),
+          url('./images/hero_bgs/AC4.jpg') center center / cover no-repeat;
+      }
+
+      .page-hero p.lede{ font-size:var(--t-18); color:#fff; max-width:60ch; }
+      .page-hero-stat .lbl{ font-size:var(--t-13); color:#fff; margin-top:4px; }
+      .page-hero-stat .num{ font-family:var(--f-display); font-size:var(--t-32); font-weight:700; color:#fcad36; line-height:1; }
+
+
+      /* two-column hero layout */
+      .hero-cols{
+        display:grid;
+        grid-template-columns:auto 1fr;
+        gap:clamp(24px,4vw,56px);
+        align-items:center;
+      }
+      .hero-cols h1{
+        color: #fff;
+        margin:0;
+        white-space:nowrap;
+      }
+      .hero-right{
+        display:flex;
+        flex-direction:column;
+        gap:var(--s-5);
+        border-left:2px solid var(--line-2);
+        padding-left:clamp(20px,3vw,44px);
+      }
+      .hero-right .lede{ margin:0; }
+      .page-hero-stats{ display:flex; gap:var(--s-6); flex-wrap:wrap; }
       main #main, main section.section{ padding-top:clamp(24px,3vw,40px); padding-bottom:clamp(40px,5vw,64px); }
       .filter-bar{ padding:var(--s-3) 0; }
 
@@ -122,11 +155,14 @@
       @media (max-width: 768px){
         html, body { overflow-x: hidden; }
         .container{ padding-left:20px; padding-right:20px; }
-        .page-hero h1{ font-size:clamp(1.6rem, 5vw, 2.2rem); line-height:1.2; }
+        .page-hero h1{ font-size:clamp(1.6rem, 5vw, 2.2rem); line-height:1.2; white-space:normal; }
         .page-hero .lede{ font-size:1rem; }
         .page-hero-stats{ flex-wrap:wrap; gap:16px; }
         .page-hero-stat{ flex:1 1 calc(50% - 16px); min-width:120px; }
         .page-hero-stat .num{ font-size:1.4rem; }
+        /* collapse two-column to single column */
+        .hero-cols{ grid-template-columns:1fr !important; gap:var(--s-4) !important; }
+        .hero-right{ border-left:none; border-top:1px solid var(--line-2); padding-left:0; padding-top:var(--s-4); }
         .filter-bar .container{ gap:12px !important; }
         .filter-chips{ display:flex; flex-wrap:wrap; gap:8px; }
         .filter-chips .chip,
@@ -183,25 +219,30 @@
             <i data-lucide="chevron-right" class="icon-sm"></i>
             <span>Honours &amp; Awards</span>
           </div>
-          <h1>Honours and Awards</h1>
-          <p class="lede">
-            International, national and state recognition for forest
-            conservation, wildlife management, environmental policy and
-            academic distinction.
-          </p>
-
-          <div class="page-hero-stats">
-            <div class="page-hero-stat">
-              <div class="num">25</div>
-              <div class="lbl">Total honours</div>
-            </div>
-            <div class="page-hero-stat">
-              <div class="num">2002–2025</div>
-              <div class="lbl">Span</div>
-            </div>
-            <div class="page-hero-stat">
-              <div class="num">4</div>
-              <div class="lbl">International</div>
+          <div class="hero-cols">
+            <!-- LEFT: title -->
+            <h1>Honours<br>and Awards</h1>
+            <!-- RIGHT: lede + stats -->
+            <div class="hero-right">
+              <p class="lede">
+                International, national and state recognition for forest
+                conservation, wildlife management, environmental policy and
+                academic distinction.
+              </p>
+              <div class="page-hero-stats">
+                <div class="page-hero-stat">
+                  <div class="num">25</div>
+                  <div class="lbl">Total honours</div>
+                </div>
+                <div class="page-hero-stat">
+                  <div class="num">2002–2025</div>
+                  <div class="lbl">Span</div>
+                </div>
+                <div class="page-hero-stat">
+                  <div class="num">4</div>
+                  <div class="lbl">International</div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

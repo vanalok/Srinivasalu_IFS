@@ -47,6 +47,65 @@
       display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;
     }
     .audio-meta{ font-size:var(--t-12); color:var(--ink-3); display:flex; gap:8px; margin-top:auto; }
+
+    /* ── Hero background image ── */
+    .page-hero{
+      position:relative; overflow:hidden;
+      padding: clamp(28px,4vw,52px) 0 clamp(24px,3.5vw,44px) !important;
+      background:
+        linear-gradient(135deg, rgba(14,46,31,.72) 0%, rgba(14,46,31,.52) 50%, rgba(14,46,31,.68) 100%),
+        url('./images/header_bg.webp') center center / cover no-repeat;
+      border-bottom:3px solid #c9a84c;
+    }
+    .page-hero::before{
+      content:''; position:absolute; inset:0; pointer-events:none;
+      background: radial-gradient(60% 70% at 100% 0%, rgba(201,168,76,.18), transparent 55%),
+                  radial-gradient(55% 65% at 0% 100%, rgba(46,148,96,.12), transparent 55%);
+    }
+    .page-hero > .container{ position:relative; z-index:1; }
+    /* breadcrumb */
+    .page-hero .breadcrumb{
+      display:inline-flex; align-items:center; gap:8px;
+      color:rgba(247,243,236,.75); font-size:13px;
+      margin-bottom:16px; padding:6px 14px;
+      background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.22);
+      border-radius:999px; backdrop-filter:blur(8px);
+    }
+    .page-hero .breadcrumb a{ color:#e8cc7a; text-decoration:none; }
+    .page-hero .breadcrumb a:hover{ color:#fff; }
+    /* h1 */
+    .page-hero h1{
+      font-size:clamp(40px,6vw,80px) !important;
+      color:#fff !important;
+      text-shadow:0 2px 24px rgba(14,46,31,.4);
+      margin:0 !important;
+      white-space:nowrap;
+    }
+    /* lede */
+    .lede{
+      font-size:clamp(15px,1.4vw,18px);
+      color:#fff;
+      margin:0;
+      line-height:1.55;
+    }
+    /* stats */
+    .page-hero-stats{ display:flex; flex-wrap:wrap; gap:clamp(20px,3vw,40px); margin:0; }
+    .page-hero-stat{ position:relative; padding-left:14px; }
+    .page-hero-stat::before{
+      content:''; position:absolute; left:0; top:4px;
+      width:3px; height:calc(100% - 8px); border-radius:2px;
+      background:linear-gradient(180deg, #c9a84c, #e8cc7a);
+    }
+    .page-hero-stat .num{ font-size:clamp(26px,2.8vw,38px) !important; color:#e8cc7a !important; line-height:1; margin-bottom:4px; }
+    .page-hero-stat .lbl{ font-size:12px !important; color:rgba(247,243,236,.65) !important; text-transform:uppercase; letter-spacing:.14em; }
+    /* two-column layout */
+    .hero-cols{ display:grid; grid-template-columns:auto 1fr; gap:clamp(24px,4vw,56px); align-items:center; }
+    .hero-right{ display:flex; flex-direction:column; gap:20px; border-left:2px solid rgba(255,255,255,.18); padding-left:clamp(20px,3vw,44px); }
+    @media (max-width:768px){
+      .hero-cols{ grid-template-columns:1fr !important; gap:16px !important; }
+      .page-hero h1{ white-space:normal !important; }
+      .hero-right{ border-left:none !important; border-top:1px solid rgba(255,255,255,.18) !important; padding-left:0 !important; padding-top:16px !important; }
+    }
   </style>
 </head>
 <body>
@@ -59,11 +118,15 @@
   <section class="page-hero">
     <div class="container reveal">
       <div class="breadcrumb"><a href="index.html">Home</a> <i data-lucide="chevron-right" class="icon-sm"></i> <a href="#">Media</a> <i data-lucide="chevron-right" class="icon-sm"></i> <span>Audios</span></div>
-      <h1>Audios</h1>
-      <p class="lede">Audio talks, interviews, speeches and public-service recordings — across English and Kannada.</p>
-      <div class="page-hero-stats">
-        <div class="page-hero-stat"><div class="num" id="aCount">—</div><div class="lbl">Total audios</div></div>
-        <div class="page-hero-stat"><div class="num" id="aYears">—</div><div class="lbl">Span</div></div>
+      <div class="hero-cols">
+        <h1>Audios</h1>
+        <div class="hero-right">
+          <p class="lede">Audio talks, interviews, speeches and public-service recordings — across English and Kannada.</p>
+          <div class="page-hero-stats">
+            <div class="page-hero-stat"><div class="num" id="aCount">—</div><div class="lbl">Total audios</div></div>
+            <div class="page-hero-stat"><div class="num" id="aYears">—</div><div class="lbl">Span</div></div>
+          </div>
+        </div>
       </div>
     </div>
   </section>

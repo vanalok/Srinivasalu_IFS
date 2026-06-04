@@ -79,91 +79,92 @@
    -------------------------------------------------------------------------- */
 .pub-v2 .page-hero{
   position:relative; overflow:hidden;
-  padding: clamp(14px, 2.5vw, 39px) 0 clamp(17px, 1.75vw, 28px) !important;
+  padding: clamp(28px, 4vw, 52px) 0 clamp(24px, 3.5vw, 44px) !important;
   background:
-    radial-gradient(60% 80% at 100% 0%, rgba(201,168,76,.18), transparent 55%),
-    radial-gradient(55% 70% at 0% 100%, rgba(46,148,96,.16), transparent 55%),
-    linear-gradient(160deg, var(--v-paper) 0%, var(--v-ivory) 55%, var(--v-ivory-dark) 100%);
-  border-bottom:1px solid rgba(14,46,31,.08);
+    linear-gradient(135deg, rgba(14,46,31,.72) 0%, rgba(14,46,31,.52) 50%, rgba(14,46,31,.68) 100%),
+    url('./images/hero_bgs/IMG_2364-min.jpg') center center / cover no-repeat;
+  border-bottom:1px solid rgba(14,46,31,.12);
 }
+/* warm shimmer overlay */
 .pub-v2 .page-hero::before{
   content:''; position:absolute; inset:0; z-index:0; pointer-events:none;
-  background-image:radial-gradient(rgba(201,168,76,.08) 1.1px, transparent 1.4px);
-  background-size:24px 24px;
-  -webkit-mask-image:radial-gradient(120% 90% at 50% 30%, #000, transparent 78%);
-          mask-image:radial-gradient(120% 90% at 50% 30%, #000, transparent 78%);
+  background:
+    radial-gradient(55% 60% at 100% 0%, rgba(201,168,76,.18), transparent 55%),
+    radial-gradient(40% 50% at 0% 100%, rgba(46,148,96,.12), transparent 55%);
 }
 .pub-v2 .page-hero::after{
-  content:''; position:absolute; left:0; right:0; bottom:0; height:2px;
-  background:linear-gradient(90deg, transparent, var(--v-gold), transparent);
-  opacity:.7;
+  content:''; position:absolute; left:0; right:0; bottom:0; height:3px;
+  background:linear-gradient(90deg, transparent, var(--v-gold), var(--v-gold-light), var(--v-gold), transparent);
+  opacity:.75;
 }
 .pub-v2 .page-hero > .container{ position:relative; z-index:1; }
 
 /* glass breadcrumb pill */
 .pub-v2 .breadcrumb{
   display:inline-flex; align-items:center; gap:8px;
-  color:var(--v-ink-soft); font-family:var(--f-body); font-size:13px;
-  margin-bottom:var(--s-5) !important;
+  color:rgba(247,243,236,.75); font-family:var(--f-body); font-size:13px;
+  margin-bottom:var(--s-4) !important;
   padding:6px 14px;
-  background:rgba(255,255,255,.55);
-  border:1px solid rgba(14,46,31,.08);
+  background:rgba(255,255,255,.12);
+  border:1px solid rgba(255,255,255,.22);
   border-radius:var(--r-pill);
-  -webkit-backdrop-filter:blur(6px); backdrop-filter:blur(6px);
+  -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px);
 }
-.pub-v2 .breadcrumb a{ color:var(--v-emerald-accent); text-decoration:none; }
-.pub-v2 .breadcrumb a:hover{ color:var(--v-emerald); }
+.pub-v2 .breadcrumb a{ color:var(--v-gold-light); text-decoration:none; }
+.pub-v2 .breadcrumb a:hover{ color:#fff; }
 .pub-v2 .breadcrumb [data-lucide],
 .pub-v2 .breadcrumb svg{ width:14px; height:14px; }
 
 /* hero title */
 .pub-v2 .page-hero h1{
   font-family:var(--f-display) !important;
-  font-size:clamp(44px, 6vw, 80px) !important;
+  font-size:clamp(40px, 6vw, 72px) !important;
   line-height:1.04;
   letter-spacing:-.005em;
-  color:var(--v-emerald);
-  margin:var(--s-2) 0 var(--s-3) !important;
+  color:#fff;
+  text-shadow:0 2px 24px rgba(14,46,31,.4);
+  margin:0 !important;
   position:relative; padding-bottom:18px;
+  white-space:nowrap;
 }
 .pub-v2 .page-hero h1::after{
   content:''; position:absolute; left:0; bottom:0;
   width:54px; height:3px; border-radius:2px;
-  background:linear-gradient(90deg, var(--v-gold), var(--v-emerald-accent));
+  background:linear-gradient(90deg, var(--v-gold), var(--v-gold-light));
 }
 
 /* optional italic lede look (page does not yet have one but ready) */
-.pub-v2 .page-hero p.lede{
-  font-family:var(--f-display); font-style:italic; font-weight:400;
-  font-size:clamp(18px, 1.7vw, 22px); color:var(--v-ink-soft);
+.pub-v2 .page-hero .lede{
+  font-size:clamp(18px, 1.7vw, 22px); color:#fff;
   max-width:60ch; line-height:1.55;
 }
 
-/* search input — premium ivory-paper pill */
+/* search input — dark glass pill */
 .pub-v2 .search-input{
   position:relative; display:flex; align-items:center;
-  background:var(--v-paper);
-  border:1px solid rgba(14,46,31,.12);
+  background:rgba(255,255,255,.12);
+  border:1px solid rgba(255,255,255,.25);
   border-radius:var(--r-pill);
-  box-shadow:0 6px 18px rgba(14,46,31,.06);
-  transition:border-color .25s ease, box-shadow .25s ease;
+  -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px);
+  transition:border-color .25s ease, box-shadow .25s ease, background .25s ease;
 }
 .pub-v2 .search-input:focus-within{
-  border-color:var(--v-gold);
-  box-shadow:0 0 0 3px rgba(201,168,76,.18), 0 6px 18px rgba(14,46,31,.08);
+  border-color:var(--v-gold-light);
+  box-shadow:0 0 0 3px rgba(201,168,76,.22);
+  background:rgba(255,255,255,.18);
 }
 .pub-v2 .search-input [data-lucide],
 .pub-v2 .search-input svg{
-  position:absolute; left:16px; color:var(--v-emerald-accent);
+  position:absolute; left:16px; color:var(--v-gold-light);
   width:16px; height:16px; pointer-events:none;
 }
 .pub-v2 .search-input input{
   flex:1; height:46px; padding:0 18px 0 42px;
   background:transparent; border:none; outline:none;
-  font-family:var(--f-body); font-size:14px; color:var(--v-ink);
+  font-family:var(--f-body); font-size:14px; color:#fff;
   border-radius:var(--r-pill);
 }
-.pub-v2 .search-input input::placeholder{ color:var(--v-ink-soft); }
+.pub-v2 .search-input input::placeholder{ color:rgba(247,243,236,.55); }
 
 /* hero stat */
 .pub-v2 .page-hero-stat{
@@ -179,12 +180,12 @@
 .pub-v2 .page-hero-stat .num{
   font-family:var(--f-display) !important; font-weight:600;
   font-size:clamp(28px, 3vw, 42px) !important; line-height:1;
-  color:var(--v-emerald) !important;
+  color:var(--v-gold-light) !important;
   background:none !important; -webkit-text-fill-color:currentColor;
 }
 .pub-v2 .page-hero-stat .lbl{
   font-family:var(--f-body) !important; font-size:12px !important;
-  color:var(--v-ink-soft); text-transform:uppercase; letter-spacing:.12em;
+  color:rgb(255, 255, 255); text-transform:uppercase; letter-spacing:.12em;
   margin-top:0 !important;
 }
 
