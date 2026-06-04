@@ -80,21 +80,21 @@
           </span>
         </a>
         <ul class="nav-primary">
-          <li${active('index.html')}><a href="${ROOT}index.html"><i data-lucide="home" class="icon-sm"></i>Home</a></li>
-          <li${active('cv.html')}><a href="${ROOT}cv.html"><i data-lucide="user" class="icon-sm"></i>CV</a></li>
-          <li${active('honours.html')}><a href="${ROOT}honours.html"><i data-lucide="award" class="icon-sm"></i>Honours and awards</a></li>
-          <li${active('accomplishments.html')}><a href="${ROOT}accomplishments.html"><i data-lucide="briefcase" class="icon-sm"></i>Accomplishments <i data-lucide="chevron-down" class="icon-sm"></i></a>
+          <li${active('index.html')}><a href="${ROOT}index.html"><i data-lucide="home" class="icon-sm"></i></a></li>
+          <li${active('cv.html')}><a href="${ROOT}cv.html"><i data-lucide="user" class="icon-sm"></i></a></li>
+          <li${active('honours.html')}><a href="${ROOT}honours.html"><i data-lucide="award" class="icon-sm"></i></a></li>
+          <li${active('accomplishments.html')}><a href="${ROOT}accomplishments.html"><i data-lucide="briefcase" class="icon-sm"></i> <i data-lucide="chevron-down" class="icon-sm"></i></a>
             <ul class="nav-dropdown" role="menu">${ddItems('accomplishments')}</ul>
           </li>
-          <li${active('publications.html')}><a href="${ROOT}publications.html"><i data-lucide="book-open" class="icon-sm"></i>Publications <i data-lucide="chevron-down" class="icon-sm"></i></a>
+          <li${active('publications.html')}><a href="${ROOT}publications.html"><i data-lucide="book-open" class="icon-sm"></i> <i data-lucide="chevron-down" class="icon-sm"></i></a>
             <ul class="nav-dropdown" role="menu">${ddItems('publications')}</ul>
           </li>
           <li${active('photos.html')}><a href="${ROOT}photos.html"><i data-lucide="image" class="icon-sm"></i>Photos <i data-lucide="chevron-down" class="icon-sm"></i></a>
             <ul class="nav-dropdown" role="menu">${ddItemsPhotos()}</ul>
           </li>
-          <li${active('videos.html')}><a href="${ROOT}videos.html"><i data-lucide="play-circle" class="icon-sm"></i>Videos</a></li>
-          <li${active('audios.html')}><a href="${ROOT}audios.html"><i data-lucide="headphones" class="icon-sm"></i>Audios</a></li>
-          <li${active('blog.html')}><a href="${ROOT}blog.html"><i data-lucide="newspaper" class="icon-sm"></i>Blog</a></li>
+          <li${active('videos.html')}><a href="${ROOT}videos.html"><i data-lucide="play-circle" class="icon-sm"></i></a></li>
+          <li${active('audios.html')}><a href="${ROOT}audios.html"><i data-lucide="headphones" class="icon-sm"></i></a></li>
+          <li${active('blog.html')}><a href="${ROOT}blog.html"><i data-lucide="newspaper" class="icon-sm"></i></a></li>
         </ul>
         <div class="nav-tools">
           <a href="${ROOT}contact.html" class="btn btn-primary btn-sm ctxt">Contact</a>
