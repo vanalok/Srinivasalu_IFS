@@ -187,7 +187,6 @@
 /* --------------------------------------------------------------------------
    2 · TABS — pill-style on ivory-dark band
    -------------------------------------------------------------------------- */
-.cv-v2 + #sr-chrome-footer{}     /* placeholder, no-op */
 .cv-v2 .tabs{
   background:var(--v-ivory-dark);
   border-bottom:1px solid rgba(14,46,31,.08);
