@@ -89,7 +89,7 @@
           <li${active('publications.html')}><a href="${ROOT}publications.html"><i data-lucide="book-open" class="icon-sm"></i> <i data-lucide="chevron-down" class="icon-sm"></i></a>
             <ul class="nav-dropdown" role="menu">${ddItems('publications')}</ul>
           </li>
-          <li${active('photos.html')}><a href="${ROOT}photos.html"><i data-lucide="image" class="icon-sm"></i>Photos <i data-lucide="chevron-down" class="icon-sm"></i></a>
+          <li${active('photos.html')}><a href="${ROOT}photos.html"><i data-lucide="image" class="icon-sm"></i><i data-lucide="chevron-down" class="icon-sm"></i></a>
             <ul class="nav-dropdown" role="menu">${ddItemsPhotos()}</ul>
           </li>
           <li${active('videos.html')}><a href="${ROOT}videos.html"><i data-lucide="play-circle" class="icon-sm"></i></a></li>
