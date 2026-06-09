@@ -1,5 +1,5 @@
 /**
- * Blog Engine - Handles fetching, filtering, and pagination for blog posts.
+ * Blog Engine - Handles fetching, filtering and pagination for blog posts.
  */
 const API_BASE = 'https://www.srinivasifs.com/_functions';
 

@@ -1,5 +1,68 @@
 [
   {
+    "slug": "empri-circular-economy-karnataka",
+    "title": "Turning Waste into Wealth: Karnataka's ₹20,000-Crore Circular Economy Opportunity",
+    "excerpt": "Karnataka's waste streams — MSW, e-waste, construction debris, sewage — represent an untapped circular economy worth ₹15,000–20,000 crore annually and 1–2 lakh new jobs. By Srinivasulu IFS, Principal Secretary (Ecology & Environment) and Director General, EMPRI.",
+    "date": "2026-06-11T09:00:00.000Z",
+    "minutesToRead": 4,
+    "viewCount": 0,
+    "language": "en",
+    "categories": [
+      "EMPRI",
+      "Ecology & Environment"
+    ],
+    "image": "https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?w=600&q=80",
+    "localUrl": "posts/empri-circular-economy-karnataka.html",
+    "pdfUrl": "assets/pdf/EMPRI-Final_Print__1_.pdf"
+  },
+  {
+    "slug": "sustainable-industrialisation-the-path-forward",
+    "title": "Sustainable Industrialisation: The Path Forward — Guest Editorial, Current Science",
+    "excerpt": "Economic growth and environmental protection are not opposing goals — they are complementary responsibilities. Guest editorial in Current Science, Vol. 130, No. 4, 25 February 2026.",
+    "date": "2026-02-25T09:00:00.000Z",
+    "minutesToRead": 5,
+    "viewCount": 0,
+    "language": "en",
+    "categories": [
+      "Ecology & Environment",
+      "EMPRI"
+    ],
+    "image": "https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=600&q=80",
+    "localUrl": "posts/sustainable-industrialisation-the-path-forward.html",
+    "pdfUrl": "assets/pdf/Guest_Editorial_25_Feb_2026.pdf"
+  },
+  {
+    "slug": "where-conservation-meets-innovation-srinivasulu-ifs",
+    "title": "Where Conservation Meets Innovation: Srinivasulu, IFS — Outlook India",
+    "excerpt": "Outlook India's Celebrating the Nation Builders series profiles Srinivasulu IFS — a rare administrator who has married science with sensitivity, technology with trust, and conservation with community participation.",
+    "date": "2026-01-01T09:00:00.000Z",
+    "minutesToRead": 3,
+    "viewCount": 0,
+    "language": "en",
+    "categories": [
+      "General",
+      "Ecology & Environment"
+    ],
+    "image": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=600&q=80",
+    "localUrl": "posts/where-conservation-meets-innovation-srinivasulu-ifs.html",
+    "pdfUrl": "assets/pdf/Srinivasulu__IFS.pdf"
+  },
+  {
+    "slug": "ayush4u-online-journal-karnataka-dept-ayush",
+    "title": "Ayush4U — Inaugural Online Journal of the Karnataka Department of Ayush",
+    "excerpt": "Volume 1, Issue 1 of Ayush4U — the Karnataka Department of Ayush's first dedicated online journal, published by Government Ayurveda Research Centre, Mysuru. June 2024.",
+    "date": "2024-06-01T09:00:00.000Z",
+    "minutesToRead": 2,
+    "viewCount": 0,
+    "language": "en",
+    "categories": [
+      "Ayush"
+    ],
+    "image": "https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?w=600&q=80",
+    "localUrl": "posts/ayush4u-online-journal-karnataka-dept-ayush.html",
+    "pdfUrl": "assets/pdf/Ayush_Journal_new.pdf"
+  },
+  {
     "slug": "srinivasulu-indian-forest-service-ifs-to-the-tedxabbs-stage",
     "title": "Srinivasulu, IFS to the TEDxABBS stage.",
     "excerpt": "Srinivasulu, Indian Forest Service (IFS) to the TEDxABBS stage. He plays a pivotal role in Forest & Wildlife Conservation, policy making,...",

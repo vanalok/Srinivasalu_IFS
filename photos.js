@@ -43,6 +43,7 @@ const photos = [
 { category: 'ayush-photos', src: 'images/ayush-photos/Screenshot 2024-01-11 124146.webp', alt: 'ayush-photos' },
 { category: 'ayush-photos', src: 'images/ayush-photos/WhatsApp Image 2024-01-21 at 10.44.59.webp', alt: 'ayush-photos' },
 { category: 'ayush-photos', src: 'images/ayush-photos/WhatsApp Image 2024-01-21 at 10.45.41.webp', alt: 'ayush-photos' },
+{ category: 'ayush-photos', src: 'images/ayush-photos/ayush4u.jpeg', alt: 'ayush-photos' },
 { category: 'family', src: 'images/family/image_10.webp', alt: 'family' },
 { category: 'family', src: 'images/family/image_11.webp', alt: 'family' },
 { category: 'family', src: 'images/family/image_12.webp', alt: 'family' },
