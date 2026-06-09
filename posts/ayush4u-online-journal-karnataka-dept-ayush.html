@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Ayush4U Online Journal — Karnataka Department of Ayush — Srinivasulu IFS</title>
+  <meta name="description" content="Ayush4U — the inaugural online journal of the Karnataka Department of Ayush, Volume 1, Issue 1, June 2024. Published by Government Ayurveda Research Centre, Mysuru.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+Kannada:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../design-system.css">
+  <style>
+    .post-hero {
+      padding: clamp(40px,6vw,80px) 0 clamp(32px,4vw,56px);
+      background: linear-gradient(160deg, #2a1a0e 0%, #4a2e10 60%, #2a1a0e 100%);
+      color: #fff;
+    }
+    .post-meta-row {
+      display: flex; flex-wrap: wrap; align-items: center; gap: 10px;
+      margin-bottom: 18px;
+    }
+    .post-tag {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 5px 13px; border-radius: 999px;
+      background: rgba(201,140,60,.22); border: 1px solid rgba(201,140,60,.5);
+      color: #f0c080;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 11px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase;
+    }
+    .post-source {
+      font-family: 'DM Sans', sans-serif; font-size: 13px;
+      color: rgba(255,255,255,.6); letter-spacing: .02em;
+    }
+    .post-hero h1 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(28px,4.5vw,54px); font-weight: 600; line-height: 1.15;
+      color: #fff; margin: 0 0 20px; max-width: 820px;
+    }
+    .post-hero .lede {
+      font-family: 'DM Sans', sans-serif;
+      font-size: clamp(15px,1.6vw,18px); line-height: 1.65;
+      color: rgba(255,255,255,.75); max-width: 680px; margin: 0 0 28px;
+    }
+    .post-byline {
+      display: flex; align-items: center; gap: 14px;
+      padding-top: 20px; border-top: 1px solid rgba(255,255,255,.12);
+    }
+    .post-byline-avatar {
+      width: 46px; height: 46px; border-radius: 50%;
+      background: rgba(201,140,60,.25); border: 2px solid rgba(201,140,60,.5);
+      display: grid; place-items: center;
+      font-family: 'DM Sans', sans-serif; font-size: 17px; font-weight: 700; color: #f0c080;
+      flex-shrink: 0;
+    }
+    .post-byline-info { display: flex; flex-direction: column; gap: 2px; }
+    .post-byline-name { font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 600; color: #fff; }
+    .post-byline-role { font-family: 'DM Sans', sans-serif; font-size: 12px; color: rgba(255,255,255,.55); }
+
+    .pdf-strip {
+      background: #f7f3ec; border-top: 1px solid rgba(14,46,31,.08);
+      border-bottom: 1px solid rgba(14,46,31,.08); padding: 0;
+    }
+    .pdf-embed-wrapper { width: 100%; max-width: 900px; margin: 0 auto; }
+    .pdf-embed-wrapper iframe {
+      display: block; width: 100%;
+      height: clamp(520px, 75vh, 900px); border: none;
+    }
+
+    .post-body {
+      max-width: 760px; margin: 0 auto;
+      padding: clamp(32px,5vw,64px) 0;
+      font-family: 'DM Sans', sans-serif;
+      font-size: clamp(15px,1.5vw,17px); line-height: 1.8; color: #2a3628;
+    }
+    .post-body h2 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(22px,2.4vw,30px); font-weight: 600;
+      color: #2a1a0e; margin: 2.4em 0 .7em; line-height: 1.25;
+    }
+    .post-body p { margin: 0 0 1.4em; }
+    .post-body strong { font-weight: 600; color: #2a1a0e; }
+
+    .journal-meta {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(150px,1fr));
+      gap: 14px; margin: 1.8em 0;
+      padding: 20px; background: #faf6ef; border-radius: 12px;
+      border: 1px solid rgba(180,130,60,.2);
+    }
+    .jm-item { font-family: 'DM Sans', sans-serif; }
+    .jm-label { font-size: 11px; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; color: #c97c30; margin-bottom: 3px; }
+    .jm-value { font-size: 14px; color: #2a1a0e; font-weight: 500; }
+
+    .source-box {
+      margin: 2.4em 0; padding: 18px 22px;
+      background: #f7f3ec; border-radius: 10px; border-left: 4px solid #c97c30;
+      font-size: 13.5px; color: #4a3020; font-family: 'DM Sans', sans-serif;
+    }
+    .download-btn {
+      display: inline-flex; align-items: center; gap: 9px;
+      padding: 12px 26px; border-radius: 10px;
+      background: #2a1a0e; color: #f0c080;
+      font-family: 'DM Sans', sans-serif; font-weight: 600; font-size: 14px;
+      text-decoration: none; transition: opacity .2s, transform .2s;
+    }
+    .download-btn:hover { opacity: .88; transform: translateY(-1px); }
+    @media (max-width:600px){ .post-body { padding-left:0; padding-right:0; } }
+  </style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<div id="sr-chrome-top"></div>
+
+<main id="main">
+
+  <section class="post-hero">
+    <div class="container reveal">
+      <div class="breadcrumb" style="margin-bottom:20px;">
+        <a href="../index.html" style="color:rgba(255,255,255,.6)">Home</a>
+        <i data-lucide="chevron-right" class="icon-sm" style="color:rgba(255,255,255,.4)"></i>
+        <a href="../blog.html" style="color:rgba(255,255,255,.6)">Blog</a>
+        <i data-lucide="chevron-right" class="icon-sm" style="color:rgba(255,255,255,.4)"></i>
+        <span style="color:rgba(255,255,255,.9)">Ayush</span>
+      </div>
+      <div class="post-meta-row">
+        <span class="post-tag">Ayush</span>
+        <span class="post-tag" style="background:rgba(150,200,120,.12);border-color:rgba(150,200,120,.4);color:#a8e888;">Department Publication</span>
+        <span class="post-source">Karnataka Dept. of Ayush &nbsp;·&nbsp; June 2024</span>
+      </div>
+      <h1>Ayush4U — Inaugural Online Journal of the Karnataka Department of Ayush</h1>
+      <p class="lede">Volume 1, Issue 1 of the Ayush4U online journal, published by the Government Ayurveda Research Centre, Mysuru — advancing Ayurveda research and traditional medicine in Karnataka.</p>
+      <div class="post-byline">
+        <div class="post-byline-avatar">A</div>
+        <div class="post-byline-info">
+          <div class="post-byline-name">Dept. of Ayush, Govt. of Karnataka</div>
+          <div class="post-byline-role">Government Ayurveda Research Centre, Mysuru · June 2024</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PDF embed -->
+  <div class="pdf-strip">
+    <div class="pdf-embed-wrapper">
+      <iframe
+        src="../assets/pdf/Ayush_Journal_new.pdf"
+        title="Ayush4U Online Journal — Karnataka Dept of Ayush, June 2024"
+        loading="lazy"
+        allowfullscreen>
+      </iframe>
+    </div>
+  </div>
+
+  <!-- Article body -->
+  <section class="section">
+    <div class="container">
+      <div class="post-body">
+
+        <p>The inaugural issue of <strong>Ayush4U</strong> marks a significant milestone for the Karnataka Department of Ayush — the launch of the department's first dedicated online journal, bringing together research, practice, and policy in traditional medicine across the state.</p>
+
+        <div class="journal-meta">
+          <div class="jm-item">
+            <div class="jm-label">Volume</div>
+            <div class="jm-value">1, Issue 1</div>
+          </div>
+          <div class="jm-item">
+            <div class="jm-label">Published</div>
+            <div class="jm-value">June 2024</div>
+          </div>
+          <div class="jm-item">
+            <div class="jm-label">Publisher</div>
+            <div class="jm-value">Govt. Ayurveda Research Centre, Mysuru</div>
+          </div>
+          <div class="jm-item">
+            <div class="jm-label">Department</div>
+            <div class="jm-value">Dept. of Ayush, Govt. of Karnataka</div>
+          </div>
+        </div>
+
+        <h2>About Ayush4U</h2>
+        <p>The Ayush4U online journal was established to serve as a platform for documenting research outcomes, clinical findings, and departmental initiatives in Ayurveda, Yoga, Unani, Siddha, and Homeopathy across Karnataka. The journal aims to bridge traditional knowledge with modern documentation standards.</p>
+
+        <h2>Karnataka's Ayush Footprint</h2>
+        <p>Karnataka has a robust network of government Ayurveda hospitals, dispensaries, and research centres. The Government Ayurveda Research Centre in Mysuru — which publishes this journal — has been at the forefront of classical Ayurvedic research and classical formulation studies.</p>
+
+        <div class="source-box">
+          <strong>Ayush4U Online Journal</strong>, Volume 1, Issue 1, June 2024. Published by the Government Ayurveda Research Centre, Mysuru, under the Karnataka Department of Ayush, Government of Karnataka.
+        </div>
+
+        <a class="download-btn" href="../assets/pdf/Ayush_Journal_new.pdf" download>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Download Journal PDF
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<div id="sr-chrome-footer"></div>
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+<script src="../chrome.js"></script>
+<script src="../app.js"></script>
+</body>
+</html>
