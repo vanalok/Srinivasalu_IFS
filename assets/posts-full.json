@@ -8,7 +8,7 @@
     "viewCount": 0,
     "language": "kn",
     "categories": ["Ayush"],
-    "image": "assets/pdf-covers/7_Mane_Maddu_cover.jpg",
+    "image": "/assets/pdf-covers/7_Mane_Maddu_cover.jpg",
     "localUrl": "posts/7-mane-maddu-ayush-karnataka.html",
     "pdfUrl": "assets/pdf/7_Mane_Maddu_26.8.2024.pdf",
     "pdfCover": "assets/pdf-covers/7_Mane_Maddu_cover.jpg"
@@ -22,7 +22,7 @@
     "viewCount": 0,
     "language": "kn",
     "categories": ["Ayush"],
-    "image": "assets/pdf-covers/2_Hennina_Arogya_cover.jpg",
+    "image": "/assets/pdf-covers/2_Hennina_Arogya_cover.jpg",
     "localUrl": "posts/2-hennina-arogya-ayush-karnataka.html",
     "pdfUrl": "assets/pdf/2_Hennina_Arogya_26.8.2024.pdf",
     "pdfCover": "assets/pdf-covers/2_Hennina_Arogya_cover.jpg"
@@ -36,7 +36,7 @@
     "viewCount": 0,
     "language": "kn",
     "categories": ["Ayush"],
-    "image": "assets/pdf-covers/3_Samanya_Rogagalige_Unani_cover.jpg",
+    "image": "/assets/pdf-covers/3_Samanya_Rogagalige_Unani_cover.jpg",
     "localUrl": "posts/3-samanya-rogagalige-unani-ayush-karnataka.html",
     "pdfUrl": "assets/pdf/3_Samanya_Rogagalige_Unani_28.8.2024.pdf",
     "pdfCover": "assets/pdf-covers/3_Samanya_Rogagalige_Unani_cover.jpg"
@@ -50,21 +50,21 @@
     "viewCount": 0,
     "language": "kn",
     "categories": ["Ayush"],
-    "image": "assets/pdf-covers/8_Gruhavaidya_Pradeepike_cover.jpg",
+    "image": "/assets/pdf-covers/8_Gruhavaidya_Pradeepike_cover.jpg",
     "localUrl": "posts/8-gruhavaidya-pradeepike-ayush-karnataka.html",
     "pdfUrl": "assets/pdf/8_Gruhavaidya_Pradeepike_26.8.2024.pdf",
     "pdfCover": "assets/pdf-covers/8_Gruhavaidya_Pradeepike_cover.jpg"
   },
   {
     "slug": "6-sampoorna-homeopathy-ayush-karnataka",
-    "title": "6 Sampoorna Homeopathy — ಸಂಪೂರ್ಣ ಹೋಮಿಯೋಪತಿ",
-    "excerpt": "ಸಂಪೂರ್ಣ ಹೋಮಿಯೋಪತಿ — a comprehensive Kannada guide to Homeopathy for common ailments, covering principles, remedies, and self-care. Published by Karnataka Department of Ayush, August 2024.",
+    "title": "6 Sampoorna Arogyakke Homeopathy — ಸಂಪೂರ್ಣ ಆರೋಗ್ಯಕ್ಕೆ ಹೋಮಿಯೋಪತಿ",
+    "excerpt": "ಸಂಪೂರ್ಣ ಆರೋಗ್ಯಕ್ಕೆ ಹೋಮಿಯೋಪತಿ — a comprehensive Kannada guide to Homeopathy for common ailments, covering principles, remedies, and self-care. Published by Karnataka Department of Ayush, August 2024.",
     "date": "2024-08-26T09:00:00.000Z",
     "minutesToRead": 5,
     "viewCount": 0,
     "language": "kn",
     "categories": ["Ayush"],
-    "image": "assets/pdf-covers/6_Sampoorna_Homeopathy_cover.jpg",
+    "image": "/assets/pdf-covers/6_Sampoorna_Homeopathy_cover.jpg",
     "localUrl": "posts/6-sampoorna-homeopathy-ayush-karnataka.html",
     "pdfUrl": "assets/pdf/6_Sampoorna_Homeopathy_26.8.2024.pdf",
     "pdfCover": "assets/pdf-covers/6_Sampoorna_Homeopathy_cover.jpg"
@@ -97,7 +97,7 @@
       "Ecology & Environment",
       "EMPRI"
     ],
-    "image": "assets/pdf-covers/Guest_Editorial_cover.jpg",
+    "image": "/assets/pdf-covers/Guest_Editorial_cover.jpg",
     "localUrl": "posts/sustainable-industrialisation-the-path-forward.html",
     "pdfUrl": "assets/pdf/Guest_Editorial_25_Feb_2026.pdf"
   },
@@ -128,7 +128,7 @@
     "categories": [
       "Ayush"
     ],
-    "image": "assets/pdf-covers/Ayush_Journal_cover.jpg",
+    "image": "/assets/pdf-covers/Ayush_Journal_cover.jpg",
     "localUrl": "posts/ayush4u-online-journal-karnataka-dept-ayush.html",
     "pdfUrl": "assets/pdf/Ayush_Journal_new.pdf"
   },
