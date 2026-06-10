@@ -1,5 +1,75 @@
 [
   {
+    "slug": "7-mane-maddu-ayush-karnataka",
+    "title": "7 Mane Maddu — ಮನೆ ಮದ್ದು (Home Remedies)",
+    "excerpt": "A comprehensive Kannada guide to traditional home remedies — Ayurvedic treatments using everyday household ingredients for common ailments. Published by Karnataka Department of Ayush, August 2024.",
+    "date": "2024-08-26T09:00:00.000Z",
+    "minutesToRead": 5,
+    "viewCount": 0,
+    "language": "kn",
+    "categories": ["Ayush"],
+    "image": "assets/pdf-covers/7_Mane_Maddu_cover.jpg",
+    "localUrl": "posts/7-mane-maddu-ayush-karnataka.html",
+    "pdfUrl": "assets/pdf/7_Mane_Maddu_26.8.2024.pdf",
+    "pdfCover": "assets/pdf-covers/7_Mane_Maddu_cover.jpg"
+  },
+  {
+    "slug": "2-hennina-arogya-ayush-karnataka",
+    "title": "2 Hennina Arogya — ಹೆಣ್ಣಿನ ಆರೋಗ್ಯ (Women's Health)",
+    "excerpt": "A dedicated Kannada guide on women's health from an Ayurvedic perspective — covering nutrition, lifecycle wellness, and traditional remedies. Published by Karnataka Department of Ayush, August 2024.",
+    "date": "2024-08-26T09:00:00.000Z",
+    "minutesToRead": 5,
+    "viewCount": 0,
+    "language": "kn",
+    "categories": ["Ayush"],
+    "image": "assets/pdf-covers/2_Hennina_Arogya_cover.jpg",
+    "localUrl": "posts/2-hennina-arogya-ayush-karnataka.html",
+    "pdfUrl": "assets/pdf/2_Hennina_Arogya_26.8.2024.pdf",
+    "pdfCover": "assets/pdf-covers/2_Hennina_Arogya_cover.jpg"
+  },
+  {
+    "slug": "3-samanya-rogagalige-unani-ayush-karnataka",
+    "title": "3 Samanya Rogagalige Unani — ಸಾಮಾನ್ಯ ರೋಗಗಳಿಗೆ ಉನಾನಿ",
+    "excerpt": "A Kannada guide to Unani treatments for common ailments — traditional Greco-Arabic medicine adapted for everyday health needs in Karnataka. Published by Karnataka Department of Ayush, August 2024.",
+    "date": "2024-08-28T09:00:00.000Z",
+    "minutesToRead": 5,
+    "viewCount": 0,
+    "language": "kn",
+    "categories": ["Ayush"],
+    "image": "assets/pdf-covers/3_Samanya_Rogagalige_Unani_cover.jpg",
+    "localUrl": "posts/3-samanya-rogagalige-unani-ayush-karnataka.html",
+    "pdfUrl": "assets/pdf/3_Samanya_Rogagalige_Unani_28.8.2024.pdf",
+    "pdfCover": "assets/pdf-covers/3_Samanya_Rogagalige_Unani_cover.jpg"
+  },
+  {
+    "slug": "8-gruhavaidya-pradeepike-ayush-karnataka",
+    "title": "8 Gruhavaidya Pradeepike — ಗೃಹವೈದ್ಯ ಪ್ರದೀಪಿಕೆ (Home Health Guide)",
+    "excerpt": "ಗೃಹವೈದ್ಯ ಪ್ರದೀಪಿಕೆ — a Kannada household health encyclopedia covering Ayurvedic self-care, preventive medicine, and first-aid using natural remedies. Published by Karnataka Department of Ayush, August 2024.",
+    "date": "2024-08-26T09:00:00.000Z",
+    "minutesToRead": 6,
+    "viewCount": 0,
+    "language": "kn",
+    "categories": ["Ayush"],
+    "image": "assets/pdf-covers/8_Gruhavaidya_Pradeepike_cover.jpg",
+    "localUrl": "posts/8-gruhavaidya-pradeepike-ayush-karnataka.html",
+    "pdfUrl": "assets/pdf/8_Gruhavaidya_Pradeepike_26.8.2024.pdf",
+    "pdfCover": "assets/pdf-covers/8_Gruhavaidya_Pradeepike_cover.jpg"
+  },
+  {
+    "slug": "6-sampoorna-homeopathy-ayush-karnataka",
+    "title": "6 Sampoorna Homeopathy — ಸಂಪೂರ್ಣ ಹೋಮಿಯೋಪತಿ",
+    "excerpt": "ಸಂಪೂರ್ಣ ಹೋಮಿಯೋಪತಿ — a comprehensive Kannada guide to Homeopathy for common ailments, covering principles, remedies, and self-care. Published by Karnataka Department of Ayush, August 2024.",
+    "date": "2024-08-26T09:00:00.000Z",
+    "minutesToRead": 5,
+    "viewCount": 0,
+    "language": "kn",
+    "categories": ["Ayush"],
+    "image": "assets/pdf-covers/6_Sampoorna_Homeopathy_cover.jpg",
+    "localUrl": "posts/6-sampoorna-homeopathy-ayush-karnataka.html",
+    "pdfUrl": "assets/pdf/6_Sampoorna_Homeopathy_26.8.2024.pdf",
+    "pdfCover": "assets/pdf-covers/6_Sampoorna_Homeopathy_cover.jpg"
+  },
+  {
     "slug": "empri-circular-economy-karnataka",
     "title": "Turning Waste into Wealth: Karnataka's ₹20,000-Crore Circular Economy Opportunity",
     "excerpt": "Karnataka's waste streams — MSW, e-waste, construction debris, sewage — represent an untapped circular economy worth ₹15,000–20,000 crore annually and 1–2 lakh new jobs. By Srinivasulu IFS, Principal Secretary (Ecology & Environment) and Director General, EMPRI.",
@@ -11,7 +81,7 @@
       "EMPRI",
       "Ecology & Environment"
     ],
-    "image": "https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?w=600&q=80",
+    "image": "assets/pdf-covers/EMPRI-cover.jpg",
     "localUrl": "posts/empri-circular-economy-karnataka.html",
     "pdfUrl": "assets/pdf/EMPRI-Final_Print__1_.pdf"
   },
@@ -27,7 +97,7 @@
       "Ecology & Environment",
       "EMPRI"
     ],
-    "image": "https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=600&q=80",
+    "image": "assets/pdf-covers/Guest_Editorial_cover.jpg",
     "localUrl": "posts/sustainable-industrialisation-the-path-forward.html",
     "pdfUrl": "assets/pdf/Guest_Editorial_25_Feb_2026.pdf"
   },
@@ -43,7 +113,7 @@
       "General",
       "Ecology & Environment"
     ],
-    "image": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=600&q=80",
+    "image": "assets/pdf-covers/Srinivasulu_IFS_cover.jpg",
     "localUrl": "posts/where-conservation-meets-innovation-srinivasulu-ifs.html",
     "pdfUrl": "assets/pdf/Srinivasulu__IFS.pdf"
   },
@@ -58,7 +128,7 @@
     "categories": [
       "Ayush"
     ],
-    "image": "https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?w=600&q=80",
+    "image": "assets/pdf-covers/Ayush_Journal_cover.jpg",
     "localUrl": "posts/ayush4u-online-journal-karnataka-dept-ayush.html",
     "pdfUrl": "assets/pdf/Ayush_Journal_new.pdf"
   },
