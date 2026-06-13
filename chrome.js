@@ -3,35 +3,35 @@
 (function(){
   // Alphabetized dropdowns
   const DEPTS_ALPHA = [
-    { slug:'academics',                  name:'Academics' },
-    { slug:'adcl',                       name:'ADCL' },
-    { slug:'ayush',                      name:'AYUSH' },
-    { slug:'chitradurga',                name:'Chitradurga' },
-    { slug:'ecology-environment',        name:'Ecology & Environment' },
-    { slug:'kalaburagi',                 name:'Kalaburagi' },
-    { slug:'kali-tiger-reserve',         name:'Kali Tiger Reserve' },
+    { slug:'academics', name:'Academics' },
+    { slug:'adcl', name:'ADCL' },
+    { slug:'ayush', name:'AYUSH' },
+    { slug:'chitradurga', name:'Chitradurga' },
+    { slug:'ecology-environment', name:'Ecology & Environment' },
+    { slug:'kalaburagi', name:'Kalaburagi' },
+    { slug:'kali-tiger-reserve', name:'Kali Tiger Reserve' },
     { slug:'karnataka-forest-department',name:'Karnataka Forest Department' },
-    { slug:'kfcsc',                      name:'KFCSC' },
-    { slug:'kspcb',                      name:'KSPCB' },
-    { slug:'nagarhole-national-park',    name:'Nagarhole National Park' },
-    { slug:'shimoga',                    name:'Shimoga' }
+    { slug:'kfcsc', name:'KFCSC' },
+    { slug:'kspcb', name:'KSPCB' },
+    { slug:'nagarhole-national-park', name:'Nagarhole National Park' },
+    { slug:'shimoga', name:'Shimoga' }
   ];
   window.SR_DEPTS_ALPHA = DEPTS_ALPHA;
 
-  // CV chronological order — earliest
+  // CV chronological order
   window.SR_DEPTS_CV = [
-    { slug:'chitradurga',                 name:'Chitradurga Division',                 code:'F-01', period:'1999-2002', kind:'District Forest' },
-    { slug:'shimoga',                     name:'Shimoga Division',                     code:'F-02', period:'2002-2005', kind:'District Forest' },
-    { slug:'kalaburagi',                  name:'Kalaburagi Division',                  code:'F-03', period:'2005-2008', kind:'District Forest' },
-    { slug:'academics',                   name:'Academics',                   code:'F-04', period:'2008-2010', kind:'Research & Teaching' },
-    { slug:'adcl',                        name:'ADCL',                        code:'F-05', period:'2010-2012', kind:'Welfare Corporation' },
-    { slug:'kfcsc',                       name:'KFCSC',                       code:'F-06', period:'2012-2014', kind:'Cooperative Body' },
-    { slug:'kspcb',                       name:'KSPCB',                       code:'F-07', period:'2014-2017', kind:'Pollution Board' },
-    { slug:'kali-tiger-reserve',          name:'Kali Tiger Reserve',          code:'F-08', period:'2013-2015', kind:'Tiger Reserve' },
-    { slug:'nagarhole-national-park',     name:'Nagarhole National Park',     code:'F-09', period:'2015-2017', kind:'National Park' },
+    { slug:'ecology-environment', name:'Ecology & Environment', code:'F-12', period:'2022-Present', kind:'Principal Secretary' },
     { slug:'karnataka-forest-department', name:'Karnataka Forest Department', code:'F-10', period:'2017-2020', kind:'Wildlife Wing' },
-    { slug:'ayush',                       name:'AYUSH',                       code:'F-11', period:'2020-2022', kind:'Traditional Medicine' },
-    { slug:'ecology-environment',         name:'Ecology & Environment',       code:'F-12', period:'2022-Present', kind:'Principal Secretary' }
+    { slug:'ayush', name:'AYUSH', code:'F-11', period:'2020-2022', kind:'Traditional Medicine' },
+    { slug:'kfcsc', name:'KFCSC', code:'F-06', period:'2012-2014', kind:'Cooperative Body' },
+    { slug:'shimoga', name:'Shimoga Division', code:'F-02', period:'2002-2005', kind:'District Forest' },
+    { slug:'adcl', name:'ADCL', code:'F-05', period:'2010-2012', kind:'Welfare Corporation' },
+    { slug:'kspcb', name:'KSPCB', code:'F-07', period:'2014-2017', kind:'Pollution Board' },
+    { slug:'chitradurga', name:'Chitradurga Division', code:'F-01', period:'1999-2002', kind:'District Forest' },
+    { slug:'kali-tiger-reserve', name:'Kali Tiger Reserve', code:'F-08', period:'2013-2015', kind:'Tiger Reserve' },
+    { slug:'kalaburagi', name:'Kalaburagi Division', code:'F-03', period:'2005-2008', kind:'District Forest' },
+    { slug:'nagarhole-national-park', name:'Nagarhole National Park', code:'F-09', period:'2015-2017', kind:'National Park' },
+    { slug:'academics', name:'Academics', code:'F-04', period:'2008-2010', kind:'Research & Teaching' },
   ];
 
   // Logo URLs
