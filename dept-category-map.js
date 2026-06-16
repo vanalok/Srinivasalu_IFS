@@ -21,7 +21,7 @@ const DEPT_CATEGORY_MAP = {
     'general': ['Publications']
   },
 
-  // ACCOMPLISHMENTS - Department → Wix Accomplishment Categories
+  // ACCOMPLISHMENTS - Department
   accomplishments: {
     'kspcb': ['KSPCB', 'KSPCB photos'],
     'kali-tiger-reserve': ['Kali Tiger Reserve'],
