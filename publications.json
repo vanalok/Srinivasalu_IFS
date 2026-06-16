@@ -588,6 +588,18 @@
         "hasPDF": true,
         "type": "publication",
         "dept": "karnataka-forest-department"
+      },
+      {
+        "id": "5b13da97-30d4-40a6-be55-d44e8c25520e",
+        "title": "Deccan Herald; Living forests, shared futures - Srinivasulu",
+        "slug": "living-forests-shared-futures-srinivasulu",
+        "link": "https://www.srinivasifs.com/post/living-forests-shared-futures-srinivasulu",
+        "categories": "Karnataka Forest Department_publica, Publications",
+        "broadCategory": "Karnataka Forest Department_publica",
+        "hasYouTube": false,
+        "hasPDF": false,
+        "type": "publication",
+        "dept": "karnataka-forest-department"
       }
     ],
     "chitradurga": [
@@ -642,6 +654,32 @@
         "hasPDF": true,
         "type": "publication",
         "dept": "academics"
+      }
+    ],
+    "ecology-environment": [
+      {
+        "id": "where-conservation-meets-innovation",
+        "title": "Where Conservation Meets Innovation: Srinivasulu, IFS — Outlook India",
+        "slug": "where-conservation-meets-innovation-srinivasulu-ifs",
+        "link": "https://www.srinivasifs.com/post/where-conservation-meets-innovation-srinivasulu-ifs",
+        "categories": "General, Ecology & Environment",
+        "broadCategory": "Ecology & Environment",
+        "hasYouTube": false,
+        "hasPDF": true,
+        "type": "publication",
+        "dept": "ecology-environment"
+      },
+      {
+        "id": "sustainable-industrialisation-the-path-forward",
+        "title": "Sustainable Industrialisation: The Path Forward — Guest Editorial, Current Science",
+        "slug": "sustainable-industrialisation-the-path-forward",
+        "link": "https://www.srinivasifs.com/post/sustainable-industrialisation-the-path-forward",
+        "categories": "Ecology & Environment, EMPRI",
+        "broadCategory": "Ecology & Environment",
+        "hasYouTube": false,
+        "hasPDF": true,
+        "type": "publication",
+        "dept": "ecology-environment"
       }
     ]
   }

@@ -1,6 +1,6 @@
 {
   "lastUpdated": "2026-06-02T07:52:09.757Z",
-  "source": "Wix Blog (Excel export)",
+  "source": "Blog",
   "departments": {
     "karnataka-forest-department": [
       {
@@ -16,13 +16,13 @@
         "dept": "karnataka-forest-department"
       },
       {
-        "id": "5b13da97-30d4-40a6-be55-d44e8c25520e",
-        "title": "Deccan Herald; Living forests, shared futures - Srinivasulu",
-        "slug": "living-forests-shared-futures-srinivasulu",
-        "link": "https://www.srinivasifs.com/post/living-forests-shared-futures-srinivasulu",
+        "id": "timeless-flux-the-paradox-tedxruas",
+        "title": "Timeless Flux — The Paradox | Mr Srinivasulu IFS | TEDxRUAS",
+        "slug": "timeless-flux-the-paradox-tedxruas",
+        "link": "https://www.srinivasifs.com/post/timeless-flux-the-paradox-tedxruas",
         "categories": "KFD - Wildlife",
         "broadCategory": "KFD - Wildlife",
-        "hasYouTube": false,
+        "hasYouTube": true,
         "hasPDF": false,
         "type": "accomplishment",
         "dept": "karnataka-forest-department"
@@ -790,6 +790,32 @@
         "hasPDF": false,
         "type": "accomplishment",
         "dept": "shimoga"
+      }
+    ],
+    "ecology-environment": [
+      {
+        "id": "where-conservation-meets-innovation",
+        "title": "Where Conservation Meets Innovation: Srinivasulu, IFS — Outlook India",
+        "slug": "where-conservation-meets-innovation-srinivasulu-ifs",
+        "link": "https://www.srinivasifs.com/post/where-conservation-meets-innovation-srinivasulu-ifs",
+        "categories": "Ecology & Environment",
+        "broadCategory": "Ecology & Environment",
+        "hasYouTube": false,
+        "hasPDF": true,
+        "type": "accomplishment",
+        "dept": "ecology-environment"
+      },
+      {
+        "id": "sustainable-industrialisation-the-path-forward",
+        "title": "Sustainable Industrialisation: The Path Forward — Guest Editorial, Current Science",
+        "slug": "sustainable-industrialisation-the-path-forward",
+        "link": "https://www.srinivasifs.com/post/sustainable-industrialisation-the-path-forward",
+        "categories": "Ecology & Environment, EMPRI",
+        "broadCategory": "Ecology & Environment",
+        "hasYouTube": false,
+        "hasPDF": true,
+        "type": "accomplishment",
+        "dept": "ecology-environment"
       }
     ]
   }
