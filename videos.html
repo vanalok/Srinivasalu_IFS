@@ -78,14 +78,8 @@
 
   <div class="filter-bar">
     <div class="container" style="display:flex;gap:var(--s-4);align-items:center;width:100%;flex-wrap:wrap;">
-      <div class="filter-chips" id="vFilter">
-        <button class="chip is-active" data-filter="all">All</button>
-        <button class="chip" data-filter="documentary">Documentaries</button>
-        <button class="chip" data-filter="talk">Talks</button>
-        <button class="chip" data-filter="interview">Interviews</button>
-        <button class="chip" data-filter="tedx">TEDx</button>
-        <button class="chip" data-filter="kn">ಕನ್ನಡ</button>
-        <button class="chip" data-filter="en">English</button>
+      <div class="filter-chips" id="deptFilter">
+        <button class="chip is-active" data-filter="all">All Depts</button>
       </div>
     </div>
   </div>
@@ -119,15 +113,45 @@ fetch('videos.json').then(r => r.json()).then(videos => {
   document.getElementById('vYears').textContent = '2018–2025';
 
   const grid = document.getElementById('videoGrid');
-  const chips = document.querySelectorAll('#vFilter .chip');
-  let filter = 'all';
+  let deptFilter = 'all';
+  const deptContainer = document.getElementById('deptFilter');
+
+  if (window.SR_DEPTS_CV) {
+    const startYear = (p) => { const m = (p || "").match(/^(\d{4})/); return m ? +m[1] : 0; };
+    const sorted = window.SR_DEPTS_CV.slice().sort((a,b) => startYear(b.period) - startYear(a.period));
+    const first5 = sorted.slice(0, 5);
+    const rest = sorted.slice(5);
+    
+    deptContainer.innerHTML += first5.map(d => `<button class="chip" data-filter="${d.slug}">${d.name}</button>`).join('');
+    deptContainer.innerHTML += rest.map(d => `<button class="chip is-hidden" data-filter="${d.slug}" style="display:none;">${d.name}</button>`).join('');
+    if(rest.length > 0) {
+      deptContainer.innerHTML += `<button class="chip view-more-btn" id="viewMoreDepts">View more...</button>`;
+    }
+  }
+
+  const deptChips = document.querySelectorAll('#deptFilter .chip:not(.view-more-btn)');
+  const viewMoreBtn = document.getElementById('viewMoreDepts');
+  
+  if(viewMoreBtn) {
+    viewMoreBtn.addEventListener('click', () => {
+      const hidden = document.querySelectorAll('#deptFilter .is-hidden');
+      if(hidden.length > 0) {
+        hidden.forEach(el => { el.style.display = 'inline-flex'; el.classList.remove('is-hidden'); });
+        viewMoreBtn.textContent = 'View less';
+      } else {
+        const rest = Array.from(deptChips).slice(6); // 1 for "All Depts" + 5
+        rest.forEach(el => { el.style.display = 'none'; el.classList.add('is-hidden'); });
+        viewMoreBtn.textContent = 'View more...';
+      }
+    });
+  }
 
   function render(){
     const list = videos.filter(v => {
-      if (filter === 'all') return true;
-      if (filter === 'kn') return v.isKannada;
-      if (filter === 'en') return !v.isKannada;
-      return v.kind === filter;
+      if (deptFilter !== 'all') {
+        return v.dept === deptFilter || (v.departments && v.departments.includes(deptFilter));
+      }
+      return true;
     });
     if (!list.length){
       grid.innerHTML = '<div class="empty-state" style="grid-column:1/-1;"><i data-lucide="film"></i><p>No videos in this category.</p></div>';
@@ -154,11 +178,10 @@ fetch('videos.json').then(r => r.json()).then(videos => {
       });
     });
   }
-
-  chips.forEach(c => c.addEventListener('click', () => {
-    chips.forEach(x => x.classList.remove('is-active'));
+  deptChips.forEach(c => c.addEventListener('click', () => {
+    deptChips.forEach(x => x.classList.remove('is-active'));
     c.classList.add('is-active');
-    filter = c.dataset.filter; render();
+    deptFilter = c.dataset.filter; render();
   }));
 
   render();

@@ -12,11 +12,27 @@
   <link rel="stylesheet" href="design-system.css">
   <link rel="stylesheet" href="photos-premium.css" />
   <style>
-    .dept-grid {
-      grid-template-columns: repeat(6, 1fr) !important;
-      gap: var(--s-3) !important;
+    /* Career grid */
+    .career-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: var(--s-3);
+      padding: 0;
     }
-    .dept-card {
+    @media (max-width: 768px) { .career-grid { grid-template-columns: repeat(3, 1fr); } }
+    @media (max-width: 480px) { .career-grid { grid-template-columns: repeat(2, 1fr); } }
+    .career-node {
+      background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-md);
+      overflow: hidden; height: 100%; display: flex; flex-direction: column;
+      transition: transform var(--d), box-shadow var(--d);
+    }
+    .career-node:hover { transform: translateY(-3px); box-shadow: var(--e2); }
+    .career-img { aspect-ratio: 4/3; background: var(--paper-2); overflow: hidden; }
+    .career-img img { width: 100%; height: 100%; object-fit: cover; }
+    .career-body { padding: var(--s-3); display: flex; flex-direction: column; flex: 1; text-align: left; }
+    .career-period { font-family: var(--f-mono); font-size: var(--t-12); color: var(--ink-3); margin-bottom: 6px; }
+    .career-role { font-family: var(--f-display); font-size: var(--t-13); line-height: 1.3; margin-bottom: 4px; }
+    .career-loc { font-size: var(--t-12); color: var(--ink-3); margin-top: auto; }
       padding: var(--s-2) !important;
       min-height: 180px !important;
       justify-content: center !important;
@@ -145,9 +161,9 @@
     </div>
   </section>
 
-  <section class="section">
+  <section class="section" style="padding-top:var(--s-4); padding-bottom:var(--s-4);">
     <div class="container">
-      <div class="dept-grid" id="deptGrid"></div>
+      <div class="career-grid" id="deptGrid"></div>
     </div>
   </section>
 
@@ -183,9 +199,13 @@ function render() {
   const root = document.getElementById('deptGrid');
   root.innerHTML = photosData.map(d => {
     return `
-      <a href="dept.html?dept=${d.slug}&page=photos" class="dept-card" style="text-decoration:none;color:inherit;">
-        <img class="dept-logo" src="${logos[d.slug] || ''}" alt="${d.name}" loading="lazy">
-        <h3>${d.name}</h3>
+      <a href="dept.html?dept=${d.slug}&page=photos" class="career-node" style="text-decoration:none;color:inherit;">
+        <div class="career-img"><img src="${logos[d.slug] || ''}" alt="${d.name}" loading="lazy" style="object-fit:contain;padding:12px;background:var(--paper-2);"></div>
+        <div class="career-body">
+          <div class="career-period" style="display:none;">${d.period || ''}</div>
+          <div class="career-role">${d.name}</div>
+          <div class="career-loc">${d.kind || ''}</div>
+        </div>
       </a>`;
   }).join('');
 }

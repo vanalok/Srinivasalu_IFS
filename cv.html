@@ -40,7 +40,7 @@
     .career-img img{ width:100%; height:100%; object-fit:cover; }
     .career-body{ padding:var(--s-4); display:flex; flex-direction:column; flex:1; }
     .career-period{ font-family:var(--f-mono); font-size:var(--t-12); color:var(--ink-3); margin-bottom:6px; }
-    .career-role{ font-family:var(--f-display); font-size:var(--t-18); line-height:1.3; margin-bottom:6px; }
+    .career-role{ font-family:var(--f-display); font-size:var(--t-14); line-height:1.3; margin-bottom:6px; }
     .career-loc{ font-size:var(--t-13); color:var(--ink-3); margin-top:auto; }
 
     .edu-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:var(--s-4); }
@@ -93,7 +93,6 @@
       <button class="tab is-active" role="tab" aria-selected="true" data-target="ov">Overview</button>
       <button class="tab" role="tab" data-target="career">Experience</button>
       <button class="tab" role="tab" data-target="edu">Education</button>
-      <button class="tab" role="tab" data-target="rec">Recognition</button>
       <button class="tab" role="tab" data-target="documents" style="display: none;">Documents</button>
     </div>
   </div>
@@ -137,13 +136,7 @@
       </div>
     </section>
 
-    <!-- Recognition -->
-    <section class="tab-panel" id="rec" role="tabpanel">
-      <div class="section-eyebrow">Honours &amp; Recognition</div>
-      <h2 style="margin-bottom:var(--s-4);">Full record on the Honours page</h2>
-      <p style="color:var(--ink-2); margin-bottom:var(--s-6); max-width:60ch;">Awards, citations and recognitions are organised in reverse-chronological order with image-led cards.</p>
-      <a class="btn btn-primary" href="honours.html">View Honours &amp; Awards <i data-lucide="arrow-right" class="icon-sm"></i></a>
-    </section>
+
 
     <!-- Documents -->
     <section class="tab-panel" id="documents" role="tabpanel" style="display: none;">
@@ -225,7 +218,7 @@ window.addEventListener('load', () => {
       <a href="accomplishments.html?dept=${d.slug}" class="career-node" style="text-decoration:none;color:inherit;">
         <div class="career-img"><img src="${logos[d.slug] || ''}" alt="${d.role}" loading="lazy" style="object-fit:contain;padding:24px;background:var(--paper-2);"></div>
         <div class="career-body">
-          <div class="career-period">${d.period}</div>
+          <div class="career-period" style="display:none;">${d.period}</div>
           <div class="career-role">${d.role}</div>
           <div class="career-loc">${d.location}</div>
         </div>

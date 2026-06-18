@@ -442,10 +442,8 @@
               const elem = isLink ? 'a' : 'button';
               const linkAttr = isLink ? `href="${a.link}"` : `data-i="${AWARDS.indexOf(a)}"`;
               return `
-    <${elem} class="award-tile" ${linkAttr} aria-label="${a.title}, ${a.year}"${isLink ? '' : ''}>
+    <${elem} class="award-tile" ${linkAttr} aria-label="${a.title}"${isLink ? '' : ''}>
       <img src="${a.img}" alt="${a.title}" loading="lazy">
-      <span class="award-year">${a.year}</span>
-      <span class="award-tag tag tag-dark">${tag}</span>
       <div class="award-overlay">
         <h4>${a.title}</h4>
         <div class="meta">${a.body}</div>

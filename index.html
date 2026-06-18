@@ -24,19 +24,15 @@
     <link rel="stylesheet" href="design-system.css" />
     <link rel="stylesheet" href="index-premium.css" />
     <style>
-      /* Career horizontal timeline */
-      .career-track {
-        display: flex;
-        gap: var(--s-4);
-        overflow-x: auto;
-        padding: var(--s-4) 0 var(--s-6);
-        scroll-snap-type: x mandatory;
-        scrollbar-width: thin;
+      /* Career grid */
+      .career-grid {
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        gap: var(--s-3);
+        padding: 0;
       }
-      .career-track > article {
-        flex: 0 0 320px;
-        scroll-snap-align: start;
-      }
+      @media (max-width: 768px) { .career-grid { grid-template-columns: repeat(3, 1fr); } }
+      @media (max-width: 480px) { .career-grid { grid-template-columns: repeat(2, 1fr); } }
       .career-node {
         background: var(--surface);
         border: 1px solid var(--line);
@@ -64,7 +60,7 @@
         object-fit: cover;
       }
       .career-body {
-        padding: var(--s-4);
+        padding: var(--s-3);
         display: flex;
         flex-direction: column;
         flex: 1;
@@ -77,12 +73,12 @@
       }
       .career-role {
         font-family: var(--f-display);
-        font-size: var(--t-18);
+        font-size: var(--t-13);
         line-height: 1.3;
-        margin-bottom: 6px;
+        margin-bottom: 4px;
       }
       .career-loc {
-        font-size: var(--t-13);
+        font-size: var(--t-12);
         color: var(--ink-3);
         margin-top: auto;
       }
@@ -383,7 +379,7 @@
       </section>
 
       <!-- ============ AREAS OF WORK — Horizontal Scrolling Cards ============ -->
-      <section class="areas-section" id="areas-section">
+      <section class="areas-section" id="areas-section" style="padding-top:var(--s-4); padding-bottom:var(--s-4);">
         <div class="container">
           <div class="section-head reveal">
             <div>
@@ -394,7 +390,7 @@
               >Full Timeline <i data-lucide="arrow-right" class="icon-sm"></i
             ></a>
           </div>
-          <div class="career-track" id="careerTrack"></div>
+          <div class="career-grid" id="careerTrack"></div>
         </div>
       </section>
 
@@ -497,12 +493,13 @@
     <script src="chrome.js"></script>
     <script src="app.js"></script>
     <script>
-      // Areas of Work — built from CV chronological order (same data as cv.html career timeline)
+      // Areas of Work
       window.addEventListener("load", () => {
-        const track = document.getElementById("areasTrack");
+        const track = document.getElementById("careerTrack");
         if (!track) return;
         const data = window.SR_DEPTS_CV || [];
         const logos = window.SR_LOGOS || {};
+        
         // Show most-recent postings first (sort by start year descending)
         const startYear = (p) => {
           const m = (p || "").match(/^(\d{4})/);
@@ -511,149 +508,23 @@
         const sorted = data
           .slice()
           .sort((a, b) => startYear(b.period) - startYear(a.period));
+          
         track.innerHTML = sorted
           .map(
             (d) => `
-          <article>
-            <a href="accomplishments.html?dept=${d.slug}" class="area-card">
-              <div class="area-card-img">
-                <img src="${logos[d.slug] || ""}" alt="${d.name}" loading="lazy">
-              </div>
-              <div class="area-card-body">
-                <div class="area-card-period">${d.period}</div>
-                <div class="area-card-name">${d.name}</div>
-                <div class="area-card-kind">${d.kind}</div>
+            <a href="accomplishments.html?dept=${d.slug}" class="career-node" style="text-decoration:none;color:inherit;">
+              <div class="career-img"><img src="${logos[d.slug] || ""}" alt="${d.name}" loading="lazy" style="object-fit:contain;padding:12px;background:var(--paper-2);"></div>
+              <div class="career-body">
+                <div class="career-period" style="display:none;">${d.period || ''}</div>
+                <div class="career-role">${d.name}</div>
+                <div class="career-loc">${d.kind || ''}</div>
               </div>
             </a>
-          </article>
         `,
           )
           .join("");
 
         window.SrIcons && window.SrIcons();
-      });
-
-      // Experience timeline — built from CV chronological order
-      window.addEventListener("load", () => {
-        const track = document.getElementById("careerTrack");
-        const data = [
-          {
-            period: "2001 – 2002",
-            role: "Assistant Conservator of Forest (ACF)",
-            location: "Nagarahole National Park, Mysore",
-            slug: "nagarhole-national-park",
-          },
-          {
-            period: "2002 - 2003",
-            role: "Deputy Conservator of Forests",
-            location: "Bangalore Rural",
-            slug: "karnataka-forest-department",
-          },
-          {
-            period: "2003 - 2006",
-            role: "District Conservator of Forest (DCF)",
-            location: "Mysore",
-            slug: "nagarhole-national-park",
-          },
-          {
-            period: "2006 - 2007",
-            role: "District Conservator of Forest (DCF)",
-            location: "Gulbarga Region",
-            slug: "kalaburagi",
-          },
-          {
-            period: "2007 - 2008",
-            role: "District Conservator of Forest (DCF)",
-            location: "Koppal region",
-            slug: "karnataka-forest-department",
-          },
-          {
-            period: "2008 - 2012",
-            role: "Deputy Conservator of Forest",
-            location: "Chitradurga Division",
-            slug: "chitradurga",
-          },
-          {
-            period: "2012 - 2014",
-            role: "Conservator of Forests Project Formulation & Planning",
-            location: "Bangalore",
-            slug: "ecology-environment",
-          },
-          {
-            period: "2014 - 2016",
-            role: "Field Director",
-            location: "Kali Tiger Reserve | Dandeli",
-            slug: "kali-tiger-reserve",
-          },
-          {
-            period: "2016 - 2019",
-            role: "Managing Director",
-            location:
-              "Dr. B.R. Ambedkar Development Corporation Limited | Bangalore",
-            slug: "adcl",
-          },
-          {
-            period: "2019 - 2020",
-            role: "Chief Conservator of Forests Shivamogga",
-            location: "Shivamogga",
-            slug: "shimoga",
-          },
-          {
-            period: "2020 - 2023",
-            role: "Member Secretary, KSPCB",
-            location: "Bangalore",
-            slug: "kspcb",
-          },
-          {
-            period: "2023 - 2023",
-            role: "Managing Director, KSFC",
-            location: "Bangalore",
-            slug: "kfcsc",
-          },
-          {
-            period: "2024",
-            role: "Commissioner, AYUSH Karnataka",
-            location: "Bangalore",
-            slug: "ayush",
-          },
-          {
-            period: "2025",
-            role: "APCCF, Wildlife",
-            location: "Bangalore",
-            slug: "karnataka-forest-department",
-          },
-          {
-            period: "2025 - Present",
-            role: "Principal Secretary, Ecology and Environment",
-            location: "Bangalore",
-            slug: "ecology-environment",
-          },
-        ];
-        const logos = window.SR_LOGOS || {};
-        // Show most-recent postings first (sort by start year descending)
-        const startYear = (p) => {
-          const m = (p || "").match(/^(\d{4})/);
-          return m ? +m[1] : 0;
-        };
-        const sorted = data
-          .slice()
-          .sort((a, b) => startYear(b.period) - startYear(a.period));
-        track.innerHTML = sorted
-          .map(
-            (d) => `
-          <article>
-            <a href="accomplishments.html?dept=${d.slug}" class="career-node" style="text-decoration:none;color:inherit;">
-              <div class="career-img"><img src="${logos[d.slug] || ""}" alt="${d.role}" loading="lazy" style="object-fit:contain;padding:24px;background:var(--paper-2);"></div>
-              <div class="career-body">
-                <div class="career-period">${d.period}</div>
-                <div class="career-role">${d.role}</div>
-                <div class="career-loc">${d.location}</div>
-              </div>
-            </a>
-          </article>
-        `,
-          )
-          .join("");
       });
       // Wix Studio Form Submission Placeholder
       function submitWixForm() {
