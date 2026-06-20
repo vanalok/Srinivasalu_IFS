@@ -80,15 +80,15 @@
           </span>
         </a>
         <ul class="nav-primary">
-          <li${active('index.html')}><a href="${ROOT}index.html" title="Home"><i data-lucide="home" class="icon-sm"></i></a></li>
-          <li${active('cv.html')}><a href="${ROOT}cv.html" title="CV"><i data-lucide="user" class="icon-sm"></i></a></li>
-          <li${active('honours.html')}><a href="${ROOT}honours.html" title="Honours"><i data-lucide="award" class="icon-sm"></i></a></li>
-          <li${active('accomplishments.html')}><a href="${ROOT}accomplishments.html" title="Accomplishments"><i data-lucide="briefcase" class="icon-sm"></i></a></li>
-          <li${active('publications.html')}><a href="${ROOT}publications.html" title="Publications"><i data-lucide="book-open" class="icon-sm"></i></a></li>
-          <li${active('photos.html')}><a href="${ROOT}photos.html" title="Photos"><i data-lucide="image" class="icon-sm"></i></a></li>
-          <li${active('videos.html')}><a href="${ROOT}videos.html" title="Videos"><i data-lucide="play-circle" class="icon-sm"></i></a></li>
-          <li${active('audios.html')}><a href="${ROOT}audios.html" title="Audios"><i data-lucide="headphones" class="icon-sm"></i></a></li>
-          <li${active('blog.html')}><a href="${ROOT}blog.html" title="Blog"><i data-lucide="newspaper" class="icon-sm"></i></a></li>
+          <li${active('index.html')}><a href="${ROOT}index.html" title="Home"><i data-lucide="home"></i></a></li>
+          <li${active('cv.html')}><a href="${ROOT}cv.html" title="CV"><i data-lucide="user"></i></a></li>
+          <li${active('honours.html')}><a href="${ROOT}honours.html" title="Honours"><i data-lucide="award"></i></a></li>
+          <li${active('accomplishments.html')}><a href="${ROOT}accomplishments.html" title="Accomplishments"><i data-lucide="briefcase"></i></a></li>
+          <li${active('publications.html')}><a href="${ROOT}publications.html" title="Publications"><i data-lucide="book-open"></i></a></li>
+          <li${active('photos.html')}><a href="${ROOT}photos.html" title="Photos"><i data-lucide="image"></i></a></li>
+          <li${active('videos.html')}><a href="${ROOT}videos.html" title="Videos"><i data-lucide="play-circle"></i></a></li>
+          <li${active('audios.html')}><a href="${ROOT}audios.html" title="Audios"><i data-lucide="headphones"></i></a></li>
+          <li${active('blog.html')}><a href="${ROOT}blog.html" title="Blog"><i data-lucide="newspaper"></i></a></li>
         </ul>
         <div class="nav-tools">
           <a href="${ROOT}contact.html" class="btn btn-primary btn-sm ctxt">Contact</a>
@@ -111,18 +111,18 @@
       </div>
       <nav class="mobile-nav">
         <span class="mobile-nav-section">Browse</span>
-        <a href="${ROOT}index.html"${mActive('index.html')}><i data-lucide="home" class="icon-sm"></i>Home</a>
-        <a href="${ROOT}cv.html"${mActive('cv.html')}><i data-lucide="user" class="icon-sm"></i>CV</a>
-        <a href="${ROOT}honours.html"${mActive('honours.html')}><i data-lucide="award" class="icon-sm"></i>Honours and awards</a>
-        <a href="${ROOT}accomplishments.html"${mActive('accomplishments.html')}><i data-lucide="briefcase" class="icon-sm"></i>Accomplishments</a>
-        <a href="${ROOT}publications.html"${mActive('publications.html')}><i data-lucide="book-open" class="icon-sm"></i>Publications</a>
+        <a href="${ROOT}index.html"${mActive('index.html')}><i data-lucide="home"></i>Home</a>
+        <a href="${ROOT}cv.html"${mActive('cv.html')}><i data-lucide="user"></i>CV</a>
+        <a href="${ROOT}honours.html"${mActive('honours.html')}><i data-lucide="award"></i>Honours and awards</a>
+        <a href="${ROOT}accomplishments.html"${mActive('accomplishments.html')}><i data-lucide="briefcase"></i>Accomplishments</a>
+        <a href="${ROOT}publications.html"${mActive('publications.html')}><i data-lucide="book-open"></i>Publications</a>
         <span class="mobile-nav-section">Media</span>
-        <a href="${ROOT}photos.html"${mActive('photos.html')}><i data-lucide="image" class="icon-sm"></i>Photos</a>
-        <a href="${ROOT}videos.html"${mActive('videos.html')}><i data-lucide="play-circle" class="icon-sm"></i>Videos</a>
-        <a href="${ROOT}audios.html"${mActive('audios.html')}><i data-lucide="headphones" class="icon-sm"></i>Audios</a>
+        <a href="${ROOT}photos.html"${mActive('photos.html')}><i data-lucide="image"></i>Photos</a>
+        <a href="${ROOT}videos.html"${mActive('videos.html')}><i data-lucide="play-circle"></i>Videos</a>
+        <a href="${ROOT}audios.html"${mActive('audios.html')}><i data-lucide="headphones"></i>Audios</a>
         <span class="mobile-nav-section">More</span>
-        <a href="${ROOT}blog.html"${mActive('blog.html')}><i data-lucide="newspaper" class="icon-sm"></i>Blog</a>
-        <a href="${ROOT}contact.html"${mActive('contact.html')}><i data-lucide="mail" class="icon-sm"></i>Contact</a>
+        <a href="${ROOT}blog.html"${mActive('blog.html')}><i data-lucide="newspaper"></i>Blog</a>
+        <a href="${ROOT}contact.html"${mActive('contact.html')}><i data-lucide="mail"></i>Contact</a>
       </nav>
     </aside>`;
 
